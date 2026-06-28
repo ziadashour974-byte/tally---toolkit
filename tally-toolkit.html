@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tally — A Toolkit of Everyday Instruments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2430;
+    --ink-deep:#141B24;
+    --ink-panel:#212B38;
+    --paper:#F6F1E7;
+    --paper-line:#E3DCC9;
+    --paper-shadow: rgba(20,27,36,0.35);
+    --accent:#D97D42;
+    --accent-soft: rgba(217,125,66,0.16);
+    --sage:#5C7A66;
+    --sage-soft: rgba(92,122,102,0.16);
+    --text-ink:#232A33;
+    --text-ink-soft:#5B6470;
+    --text-cream:#F1ECE0;
+    --text-cream-soft:#A9B3BF;
+    --radius:14px;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--ink);
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color:var(--text-cream);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ===== Layout shell ===== */
+  .shell{
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ===== Sidebar ===== */
+  .sidebar{
+    width: 250px;
+    flex-shrink:0;
+    background:var(--ink-deep);
+    border-right:1px solid rgba(255,255,255,0.06);
+    padding: 28px 0 28px 0;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+
+  .brand{
+    padding: 0 24px 22px 24px;
+    border-bottom:1px solid rgba(255,255,255,0.07);
+    margin-bottom: 10px;
+  }
+  .brand-mark{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.7rem;
+    letter-spacing:0.01em;
+    color:var(--text-cream);
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+  }
+  .brand-mark span{
+    color:var(--accent);
+    font-style:italic;
+  }
+  .brand-tag{
+    font-size:0.72rem;
+    color:var(--text-cream-soft);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin-top:6px;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  .nav-list{
+    list-style:none;
+    margin:0;
+    padding: 8px 10px;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .nav-item button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:transparent;
+    border:none;
+    border-left: 2px solid transparent;
+    color:var(--text-cream-soft);
+    font-family:'Inter', sans-serif;
+    font-size:0.92rem;
+    font-weight:500;
+    text-align:left;
+    padding:10px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .nav-item button:hover{
+    background: rgba(255,255,255,0.04);
+    color:var(--text-cream);
+  }
+  .nav-item button.active{
+    background: var(--accent-soft);
+    color: var(--text-cream);
+    border-left-color: var(--accent);
+  }
+  .nav-item svg{
+    width:18px; height:18px;
+    flex-shrink:0;
+    stroke: currentColor;
+    fill:none;
+    stroke-width:1.6;
+  }
+
+  /* ===== Mobile tab bar ===== */
+  .mobile-tabs{
+    display:none;
+  }
+
+  /* ===== Main ===== */
+  main{
+    flex:1;
+    padding: 56px 40px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+  }
+
+  .panel-wrap{
+    width:100%;
+    max-width: 660px;
+  }
+
+  .stamp{
+    position:absolute;
+    top: -16px;
+    right: -10px;
+    width:78px;
+    height:78px;
+    border-radius:50%;
+    border: 1.5px dashed var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform: rotate(8deg);
+    background: var(--paper);
+  }
+  .stamp span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.56rem;
+    letter-spacing:0.04em;
+    text-align:center;
+    color:var(--accent);
+    text-transform:uppercase;
+    line-height:1.25;
+  }
+
+  .card{
+    position:relative;
+    background:var(--paper);
+    color:var(--text-ink);
+    border-radius:var(--radius);
+    box-shadow: 0 24px 60px -20px var(--paper-shadow), 0 2px 0 rgba(0,0,0,0.04);
+    padding: 34px 36px 38px;
+    border: 1px solid var(--paper-line);
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:24px; right:24px;
+    height:0;
+    border-top: 2px dotted var(--paper-line);
+  }
+
+  .plate{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--text-ink-soft);
+    margin-bottom: 6px;
+  }
+  .plate span{ color:var(--accent); }
+
+  h1.tool-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: 1.9rem;
+    margin: 0 0 6px 0;
+    color:var(--text-ink);
+  }
+  .tool-sub{
+    font-size:0.92rem;
+    color:var(--text-ink-soft);
+    margin: 0 0 26px 0;
+    max-width: 480px;
+    line-height:1.5;
+  }
+
+  .field-row{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:16px;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    flex:1;
+    min-width:140px;
+  }
+  .field label{
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--text-ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  input[type="number"], input[type="date"], input[type="text"], select{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.98rem;
+    padding: 10px 12px;
+    border-radius:8px;
+    border:1px solid var(--paper-line);
+    background:#fff;
+    color:var(--text-ink);
+    width:100%;
+  }
+  select{ font-family:'Inter', sans-serif; cursor:pointer; }
+
+  .check-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.86rem;
+    color:var(--text-ink-soft);
+    margin-bottom:16px;
+  }
+  .check-row input{ width:16px; height:16px; accent-color:var(--accent); }
+
+  .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin: 4px 0 22px 0; }
+  button.action{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.88rem;
+    background: var(--accent);
+    color:#fff;
+    border:none;
+    padding: 11px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+  button.action:hover{ background:#C66A33; }
+  button.action:active{ transform: translateY(1px); }
+  button.ghost{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.88rem;
+    background: transparent;
+    color: var(--text-ink-soft);
+    border:1px solid var(--paper-line);
+    padding: 11px 18px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  button.ghost:hover{ background: rgba(0,0,0,0.03); }
+
+  .segmented{
+    display:flex;
+    background:#fff;
+    border:1px solid var(--paper-line);
+    border-radius:8px;
+    padding:3px;
+    margin-bottom:18px;
+    gap:3px;
+    flex-wrap:wrap;
+  }
+  .segmented button{
+    flex:1;
+    min-width:120px;
+    font-family:'Inter',sans-serif;
+    font-size:0.82rem;
+    font-weight:600;
+    border:none;
+    background:transparent;
+    color:var(--text-ink-soft);
+    padding:8px 10px;
+    border-radius:6px;
+    cursor:pointer;
+  }
+  .segmented button.active{
+    background: var(--ink);
+    color: var(--text-cream);
+  }
+
+  /* readout window — the signature element */
+  .readout{
+    background: var(--ink);
+    border-radius:10px;
+    padding: 18px 20px;
+    margin-top: 4px;
+    position:relative;
+    overflow:hidden;
+  }
+  .readout::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  .readout-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color: var(--text-cream-soft);
+    margin-bottom:8px;
+  }
+  .readout-value{
+    font-family:'JetBrains Mono', monospace;
+    font-size:1.9rem;
+    font-weight:600;
+    color: var(--text-cream);
+    line-height:1.25;
+    word-break:break-word;
+  }
+  .readout-value small{
+    font-size:0.95rem;
+    color: var(--text-cream-soft);
+    font-weight:400;
+  }
+  .readout-sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    color: var(--accent);
+    margin-top:8px;
+  }
+  .readout-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px,1fr));
+    gap:14px;
+  }
+  .readout-grid .cell .num{
+    font-size:1.6rem;
+  }
+  .readout-grid .cell .lab{
+    font-size:0.66rem;
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .chip{
+    background: var(--ink-panel);
+    color: var(--text-cream);
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.95rem;
+    padding:6px 12px;
+    border-radius:6px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .note{
+    font-size:0.78rem;
+    color: var(--text-ink-soft);
+    margin-top:14px;
+    line-height:1.5;
+  }
+
+  .swap-btn{
+    align-self:flex-end;
+    margin-bottom: 16px;
+    background:#fff;
+    border:1px solid var(--paper-line);
+    width:38px; height:38px;
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    color:var(--text-ink-soft);
+  }
+  .swap-btn:hover{ color:var(--accent); border-color:var(--accent); }
+  .swap-btn svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.8; }
+
+  /* timer ring */
+  .timer-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    padding: 10px 0 4px;
+  }
+  .ring-box{ position:relative; width:200px; height:200px; }
+  .ring-box svg{ width:200px; height:200px; transform: rotate(-90deg); }
+  .ring-bg{ fill:none; stroke: var(--paper-line); stroke-width:8; }
+  .ring-fg{ fill:none; stroke: var(--accent); stroke-width:8; stroke-linecap:round; transition: stroke-dashoffset 0.25s linear; }
+  .ring-time{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:1.7rem;
+    font-weight:600;
+    color: var(--text-ink);
+  }
+  .ring-time.done{ color: var(--accent); }
+
+  footer.page-footer{
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    color: var(--text-cream-soft);
+    padding: 0 0 36px;
+    letter-spacing:0.04em;
+  }
+
+  @media (max-width: 880px){
+    .shell{ flex-direction:column; }
+    .sidebar{ display:none; }
+    .mobile-tabs{
+      display:flex;
+      overflow-x:auto;
+      gap:6px;
+      padding: 16px 14px;
+      background: var(--ink-deep);
+      position:sticky;
+      top:0;
+      z-index:10;
+      border-bottom:1px solid rgba(255,255,255,0.07);
+    }
+    .mobile-tabs button{
+      flex-shrink:0;
+      font-family:'Inter', sans-serif;
+      font-size:0.82rem;
+      font-weight:600;
+      background: transparent;
+      border:1px solid rgba(255,255,255,0.1);
+      color: var(--text-cream-soft);
+      padding:8px 14px;
+      border-radius:20px;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .mobile-tabs button.active{
+      background: var(--accent);
+      color:#fff;
+      border-color: var(--accent);
+    }
+    main{ padding: 30px 16px 50px; }
+    .card{ padding: 26px 20px 30px; }
+    .stamp{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  .tool-panel{ display:none; }
+  .tool-panel.active{ display:block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform: translateY(4px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- Desktop sidebar -->
+  <nav class="sidebar" aria-label="Instrument selection">
+    <div class="brand">
+      <div class="brand-mark">Tally<span>.</span></div>
+      <div class="brand-tag">Eight Small Instruments</div>
+    </div>
+    <ul class="nav-list" id="navList"></ul>
+  </nav>
+
+  <!-- Mobile tabs -->
+  <div class="mobile-tabs" id="mobileTabs" aria-label="Instrument selection"></div>
+
+  <main>
+    <div class="panel-wrap" id="panelWrap">
+      <!-- panels injected below, kept as static markup for clarity -->
+
+      <!-- AGE CALCULATOR -->
+      <section class="tool-panel" data-panel="age">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 01</span></div>
+          <div class="plate">Instrument <span>—</span> Age Reckoner</div>
+          <h1 class="tool-title">Age Calculator</h1>
+          <p class="tool-sub">Enter a birth date to find an exact age, in years, months and days, measured against any reference date.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="age-birth">Date of birth</label>
+              <input type="date" id="age-birth">
+            </div>
+            <div class="field">
+              <label for="age-asof">As of</label>
+              <input type="date" id="age-asof">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="action" id="age-calc">Calculate age</button>
+          </div>
+
+          <div class="readout" id="age-readout" style="display:none">
+            <div class="readout-label">Exact age</div>
+            <div class="readout-value" id="age-main">—</div>
+            <div class="readout-grid" style="margin-top:16px">
+              <div class="cell"><div class="num" id="age-days">—</div><div class="lab readout-label">Total days lived</div></div>
+              <div class="cell"><div class="num" id="age-weeks">—</div><div class="lab readout-label">Total weeks</div></div>
+              <div class="cell"><div class="num" id="age-next">—</div><div class="lab readout-label">Days to next birthday</div></div>
+            </div>
+            <div class="readout-sub" id="age-dow"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UNIT CONVERTER -->
+      <section class="tool-panel" data-panel="unit">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 02</span></div>
+          <div class="plate">Instrument <span>—</span> Unit Converter</div>
+          <h1 class="tool-title">Unit Converter</h1>
+          <p class="tool-sub">Convert between length, weight, volume and temperature units. Results update as you type.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="unit-category">Category</label>
+              <select id="unit-category">
+                <option value="length">Length</option>
+                <option value="weight">Weight / Mass</option>
+                <option value="volume">Volume</option>
+                <option value="temperature">Temperature</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="unit-value">Amount</label>
+              <input type="number" id="unit-value" value="1">
+            </div>
+            <div class="field">
+              <label for="unit-from">From</label>
+              <select id="unit-from"></select>
+            </div>
+            <button class="swap-btn" id="unit-swap" title="Swap units" aria-label="Swap units">
+              <svg viewBox="0 0 24 24"><path d="M7 7h11M14 3l4 4-4 4M17 17H6M10 21l-4-4 4-4"/></svg>
+            </button>
+            <div class="field">
+              <label for="unit-to">To</label>
+              <select id="unit-to"></select>
+            </div>
+          </div>
+
+          <div class="readout">
+            <div class="readout-label">Result</div>
+            <div class="readout-value" id="unit-result">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RANDOM NUMBER GENERATOR -->
+      <section class="tool-panel" data-panel="random">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 03</span></div>
+          <div class="plate">Instrument <span>—</span> Random Draw</div>
+          <h1 class="tool-title">Random Number Generator</h1>
+          <p class="tool-sub">Draw one or more random whole numbers from a range you set.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="rand-min">Minimum</label>
+              <input type="number" id="rand-min" value="1">
+            </div>
+            <div class="field">
+              <label for="rand-max">Maximum</label>
+              <input type="number" id="rand-max" value="100">
+            </div>
+            <div class="field">
+              <label for="rand-count">How many</label>
+              <input type="number" id="rand-count" value="1" min="1" max="200">
+            </div>
+          </div>
+          <label class="check-row"><input type="checkbox" id="rand-unique"> No repeated numbers</label>
+          <div class="btn-row">
+            <button class="action" id="rand-generate">Generate</button>
+          </div>
+
+          <div class="readout">
+            <div class="readout-label">Drawn numbers</div>
+            <div class="chips" id="rand-result"><span class="chip">—</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BMI CALCULATOR -->
+      <section class="tool-panel" data-panel="bmi">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 04</span></div>
+          <div class="plate">Instrument <span>—</span> Body Mass Index</div>
+          <h1 class="tool-title">BMI Calculator</h1>
+          <p class="tool-sub">A general screening measure based on height and weight. It does not diagnose health status.</p>
+
+          <div class="segmented">
+            <button class="active" data-bmi-units="metric">Metric (cm / kg)</button>
+            <button data-bmi-units="imperial">Imperial (ft+in / lb)</button>
+          </div>
+
+          <div id="bmi-metric-fields" class="field-row">
+            <div class="field">
+              <label for="bmi-height-cm">Height (cm)</label>
+              <input type="number" id="bmi-height-cm" value="170">
+            </div>
+            <div class="field">
+              <label for="bmi-weight-kg">Weight (kg)</label>
+              <input type="number" id="bmi-weight-kg" value="68">
+            </div>
+          </div>
+
+          <div id="bmi-imperial-fields" class="field-row" style="display:none">
+            <div class="field">
+              <label for="bmi-height-ft">Height (ft)</label>
+              <input type="number" id="bmi-height-ft" value="5">
+            </div>
+            <div class="field">
+              <label for="bmi-height-in">+ inches</label>
+              <input type="number" id="bmi-height-in" value="7">
+            </div>
+            <div class="field">
+              <label for="bmi-weight-lb">Weight (lb)</label>
+              <input type="number" id="bmi-weight-lb" value="150">
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="action" id="bmi-calc">Calculate BMI</button>
+          </div>
+
+          <div class="readout" id="bmi-readout" style="display:none">
+            <div class="readout-label">Body Mass Index</div>
+            <div class="readout-value" id="bmi-value">—</div>
+            <div class="readout-sub" id="bmi-category"></div>
+          </div>
+          <p class="note">Categories shown follow the standard WHO reference ranges: under 18.5 underweight, 18.5–24.9 typical, 25–29.9 above typical, 30+ well above typical. For personal health guidance, talk with a doctor.</p>
+        </div>
+      </section>
+
+      <!-- TIMER -->
+      <section class="tool-panel" data-panel="timer">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 05</span></div>
+          <div class="plate">Instrument <span>—</span> Countdown</div>
+          <h1 class="tool-title">Timer</h1>
+          <p class="tool-sub">Set minutes and seconds, then start the countdown.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="timer-min">Minutes</label>
+              <input type="number" id="timer-min" value="5" min="0">
+            </div>
+            <div class="field">
+              <label for="timer-sec">Seconds</label>
+              <input type="number" id="timer-sec" value="0" min="0" max="59">
+            </div>
+          </div>
+
+          <div class="timer-wrap">
+            <div class="ring-box">
+              <svg viewBox="0 0 200 200">
+                <circle class="ring-bg" cx="100" cy="100" r="88"></circle>
+                <circle class="ring-fg" id="timer-ring" cx="100" cy="100" r="88" stroke-dasharray="553" stroke-dashoffset="0"></circle>
+              </svg>
+              <div class="ring-time" id="timer-display" aria-live="polite">05:00</div>
+            </div>
+            <div class="btn-row">
+              <button class="action" id="timer-start">Start</button>
+              <button class="ghost" id="timer-pause">Pause</button>
+              <button class="ghost" id="timer-reset">Reset</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERCENTAGE CALCULATOR -->
+      <section class="tool-panel" data-panel="percent">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 06</span></div>
+          <div class="plate">Instrument <span>—</span> Percentage</div>
+          <h1 class="tool-title">Percentage Calculator</h1>
+          <p class="tool-sub">Three common percentage questions, answered directly.</p>
+
+          <div class="segmented">
+            <button class="active" data-pct-mode="of">X% of Y</button>
+            <button data-pct-mode="is">X is what % of Y</button>
+            <button data-pct-mode="change">Change from X to Y</button>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label id="pct-label-x" for="pct-x">X</label>
+              <input type="number" id="pct-x" value="20">
+            </div>
+            <div class="field">
+              <label id="pct-label-y" for="pct-y">Y</label>
+              <input type="number" id="pct-y" value="80">
+            </div>
+          </div>
+
+          <div class="readout">
+            <div class="readout-label">Result</div>
+            <div class="readout-value" id="pct-result">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CURRENCY CONVERTER -->
+      <section class="tool-panel" data-panel="currency">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 07</span></div>
+          <div class="plate">Instrument <span>—</span> Exchange</div>
+          <h1 class="tool-title">Currency Converter</h1>
+          <p class="tool-sub">Converts using live exchange rates where a connection is available, with an offline approximate table as a fallback.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="cur-amount">Amount</label>
+              <input type="number" id="cur-amount" value="100">
+            </div>
+            <div class="field">
+              <label for="cur-from">From</label>
+              <select id="cur-from"></select>
+            </div>
+            <button class="swap-btn" id="cur-swap" title="Swap currencies" aria-label="Swap currencies">
+              <svg viewBox="0 0 24 24"><path d="M7 7h11M14 3l4 4-4 4M17 17H6M10 21l-4-4 4-4"/></svg>
+            </button>
+            <div class="field">
+              <label for="cur-to">To</label>
+              <select id="cur-to"></select>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="action" id="cur-convert">Convert</button>
+          </div>
+
+          <div class="readout">
+            <div class="readout-label">Converted amount</div>
+            <div class="readout-value" id="cur-result">—</div>
+            <div class="readout-sub" id="cur-meta"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DISCOUNT CALCULATOR -->
+      <section class="tool-panel" data-panel="discount">
+        <div class="card">
+          <div class="stamp"><span>TALLY<br>NO. 08</span></div>
+          <div class="plate">Instrument <span>—</span> Markdown</div>
+          <h1 class="tool-title">Discount Calculator</h1>
+          <p class="tool-sub">Find the sale price and total savings on one item, or a whole quantity of them.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="disc-price">Original price</label>
+              <input type="number" id="disc-price" value="80">
+            </div>
+            <div class="field">
+              <label for="disc-pct">Discount (%)</label>
+              <input type="number" id="disc-pct" value="25">
+            </div>
+            <div class="field">
+              <label for="disc-qty">Quantity</label>
+              <input type="number" id="disc-qty" value="1" min="1">
+            </div>
+          </div>
+
+          <div class="readout">
+            <div class="readout-label">Sale price (each)</div>
+            <div class="readout-value" id="disc-sale">—</div>
+            <div class="readout-grid" style="margin-top:16px">
+              <div class="cell"><div class="num" id="disc-saved-each">—</div><div class="lab readout-label">Saved (each)</div></div>
+              <div class="cell"><div class="num" id="disc-total">—</div><div class="lab readout-label">Total for order</div></div>
+              <div class="cell"><div class="num" id="disc-saved-total">—</div><div class="lab readout-label">Total saved</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<footer class="page-footer">TALLY — eight instruments, precisely tuned</footer>
+
+<script>
+/* ===================== NAVIGATION ===================== */
+const tools = [
+  { id:'age', label:'Age Calculator', icon:'<path d="M8 7V3M16 7V3M4 11h16M5 5h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/>' },
+  { id:'unit', label:'Unit Converter', icon:'<path d="M7 7h11M14 3l4 4-4 4M17 17H6M10 21l-4-4 4-4"/>' },
+  { id:'random', label:'Random Number', icon:'<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="15" cy="9" r="1"/><circle cx="9" cy="15" r="1"/>' },
+  { id:'bmi', label:'BMI Calculator', icon:'<path d="M12 3v18M7 7l-3 3 3 3M17 7l3 3-3 3"/>' },
+  { id:'timer', label:'Timer', icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/>' },
+  { id:'percent', label:'Percentage', icon:'<circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M19 5L5 19"/>' },
+  { id:'currency', label:'Currency Converter', icon:'<circle cx="12" cy="12" r="9"/><path d="M9 9.5c0-1 1-2 3-2s3 .8 3 1.8-1 1.5-3 1.7-3 .9-3 2 1.2 1.8 3 1.8 3-1 3-2"/>' },
+  { id:'discount', label:'Discount Calculator', icon:'<path d="M20 12L12 4 4 12v8h8z" transform="rotate(45 12 12)"/><circle cx="9" cy="9" r="1.4"/>' }
+];
+
+const navList = document.getElementById('navList');
+const mobileTabs = document.getElementById('mobileTabs');
+
+tools.forEach(t=>{
+  const li = document.createElement('li');
+  li.className = 'nav-item';
+  li.innerHTML = `<button data-tool="${t.id}"><svg viewBox="0 0 24 24">${t.icon}</svg><span>${t.label}</span></button>`;
+  navList.appendChild(li);
+
+  const mb = document.createElement('button');
+  mb.dataset.tool = t.id;
+  mb.textContent = t.label;
+  mobileTabs.appendChild(mb);
+});
+
+function activateTool(id){
+  document.querySelectorAll('.nav-item button, .mobile-tabs button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.tool === id);
+  });
+  document.querySelectorAll('.tool-panel').forEach(p=>{
+    p.classList.toggle('active', p.dataset.panel === id);
+  });
+  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+}
+
+document.querySelectorAll('.nav-item button, .mobile-tabs button').forEach(b=>{
+  b.addEventListener('click', ()=> activateTool(b.dataset.tool));
+});
+
+activateTool('age');
+
+/* ===================== AGE CALCULATOR ===================== */
+const ageBirth = document.getElementById('age-birth');
+const ageAsOf = document.getElementById('age-asof');
+(function initAgeDefaults(){
+  const today = new Date();
+  ageAsOf.value = today.toISOString().slice(0,10);
+})();
+
+document.getElementById('age-calc').addEventListener('click', ()=>{
+  if(!ageBirth.value) return;
+  const birth = new Date(ageBirth.value + 'T00:00:00');
+  const asOf = ageAsOf.value ? new Date(ageAsOf.value + 'T00:00:00') : new Date();
+
+  if(birth > asOf){
+    document.getElementById('age-main').textContent = 'Birth date is after the reference date';
+    document.getElementById('age-readout').style.display = 'block';
+    document.getElementById('age-days').textContent='—';
+    document.getElementById('age-weeks').textContent='—';
+    document.getElementById('age-next').textContent='—';
+    document.getElementById('age-dow').textContent='';
+    return;
+  }
+
+  let years = asOf.getFullYear() - birth.getFullYear();
+  let months = asOf.getMonth() - birth.getMonth();
+  let days = asOf.getDate() - birth.getDate();
+  if(days < 0){
+    months -= 1;
+    const prevMonth = new Date(asOf.getFullYear(), asOf.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+  if(months < 0){
+    years -= 1;
+    months += 12;
+  }
+
+  const msPerDay = 86400000;
+  const totalDays = Math.floor((asOf - birth)/msPerDay);
+  const totalWeeks = Math.floor(totalDays/7);
+
+  let nextBday = new Date(asOf.getFullYear(), birth.getMonth(), birth.getDate());
+  if(nextBday < asOf || (nextBday.getMonth()===asOf.getMonth() && nextBday.getDate()===asOf.getDate())){
+    if(!(nextBday.getMonth()===asOf.getMonth() && nextBday.getDate()===asOf.getDate())){
+      nextBday = new Date(asOf.getFullYear()+1, birth.getMonth(), birth.getDate());
+    }
+  }
+  const daysToNext = Math.round((nextBday - asOf)/msPerDay);
+
+  document.getElementById('age-main').innerHTML = `${years} <small>yrs</small> &nbsp;${months} <small>mo</small> &nbsp;${days} <small>days</small>`;
+  document.getElementById('age-days').textContent = totalDays.toLocaleString();
+  document.getElementById('age-weeks').textContent = totalWeeks.toLocaleString();
+  document.getElementById('age-next').textContent = daysToNext === 0 ? 'Today!' : daysToNext;
+  const dow = birth.toLocaleDateString(undefined, { weekday: 'long' });
+  document.getElementById('age-dow').textContent = `Born on a ${dow}`;
+  document.getElementById('age-readout').style.display = 'block';
+});
+
+/* ===================== UNIT CONVERTER ===================== */
+const unitDefs = {
+  length: { base:'m', units:{
+    m:1, km:1000, cm:0.01, mm:0.001, mi:1609.344, yd:0.9144, ft:0.3048, in:0.0254
+  }, labels:{ m:'Meters', km:'Kilometers', cm:'Centimeters', mm:'Millimeters', mi:'Miles', yd:'Yards', ft:'Feet', in:'Inches' } },
+  weight: { base:'kg', units:{
+    kg:1, g:0.001, mg:0.000001, lb:0.45359237, oz:0.0283495231, st:6.35029318, t:1000
+  }, labels:{ kg:'Kilograms', g:'Grams', mg:'Milligrams', lb:'Pounds', oz:'Ounces', st:'Stone', t:'Metric tons' } },
+  volume: { base:'l', units:{
+    l:1, ml:0.001, gal:3.785411784, qt:0.946352946, pt:0.473176473, cup:0.2365882365, floz:0.0295735296
+  }, labels:{ l:'Liters', ml:'Milliliters', gal:'Gallons (US)', qt:'Quarts', pt:'Pints', cup:'Cups', floz:'Fluid ounces' } },
+  temperature: { base:'c', units:{ c:1, f:1, k:1 }, labels:{ c:'Celsius', f:'Fahrenheit', k:'Kelvin' } }
+};
+
+const unitCategory = document.getElementById('unit-category');
+const unitFrom = document.getElementById('unit-from');
+const unitTo = document.getElementById('unit-to');
+const unitValue = document.getElementById('unit-value');
+const unitResult = document.getElementById('unit-result');
+
+function populateUnitSelects(){
+  const cat = unitDefs[unitCategory.value];
+  const keys = Object.keys(cat.units);
+  unitFrom.innerHTML = keys.map(k=>`<option value="${k}">${cat.labels[k]}</option>`).join('');
+  unitTo.innerHTML = keys.map(k=>`<option value="${k}">${cat.labels[k]}</option>`).join('');
+  unitFrom.value = keys[0];
+  unitTo.value = keys[1] || keys[0];
+  computeUnit();
+}
+
+function tempToCelsius(v, unit){
+  if(unit==='c') return v;
+  if(unit==='f') return (v-32)*5/9;
+  if(unit==='k') return v-273.15;
+}
+function celsiusTo(v, unit){
+  if(unit==='c') return v;
+  if(unit==='f') return v*9/5+32;
+  if(unit==='k') return v+273.15;
+}
+
+function computeUnit(){
+  const cat = unitCategory.value;
+  const v = parseFloat(unitValue.value);
+  if(isNaN(v)){ unitResult.textContent = '—'; return; }
+  let result;
+  if(cat === 'temperature'){
+    const c = tempToCelsius(v, unitFrom.value);
+    result = celsiusTo(c, unitTo.value);
+  } else {
+    const def = unitDefs[cat];
+    const baseVal = v * def.units[unitFrom.value];
+    result = baseVal / def.units[unitTo.value];
+  }
+  const rounded = Math.abs(result) >= 1000 ? result.toFixed(2) : result.toFixed(4).replace(/\.?0+$/,'');
+  unitResult.innerHTML = `${rounded} <small>${unitDefs[cat].labels[unitTo.value]}</small>`;
+}
+
+document.getElementById('unit-swap').addEventListener('click', ()=>{
+  const f = unitFrom.value;
+  unitFrom.value = unitTo.value;
+  unitTo.value = f;
+  computeUnit();
+});
+unitCategory.addEventListener('change', populateUnitSelects);
+[unitValue, unitFrom, unitTo].forEach(el=> el.addEventListener('input', computeUnit));
+populateUnitSelects();
+
+/* ===================== RANDOM NUMBER GENERATOR ===================== */
+document.getElementById('rand-generate').addEventListener('click', ()=>{
+  const min = Math.round(parseFloat(document.getElementById('rand-min').value));
+  const max = Math.round(parseFloat(document.getElementById('rand-max').value));
+  let count = Math.round(parseFloat(document.getElementById('rand-count').value)) || 1;
+  const unique = document.getElementById('rand-unique').checked;
+  const resultEl = document.getElementById('rand-result');
+
+  if(isNaN(min) || isNaN(max) || min > max){
+    resultEl.innerHTML = `<span class="chip">Set a valid min/max range</span>`;
+    return;
+  }
+  const rangeSize = max - min + 1;
+  if(unique && count > rangeSize){
+    count = rangeSize;
+  }
+  count = Math.min(count, 200);
+
+  let numbers = [];
+  if(unique){
+    const pool = Array.from({length: rangeSize}, (_,i)=> min + i);
+    for(let i=pool.length-1; i>0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    numbers = pool.slice(0, count);
+  } else {
+    for(let i=0;i<count;i++){
+      numbers.push(Math.floor(Math.random()*rangeSize)+min);
+    }
+  }
+
+  resultEl.innerHTML = numbers.map(n=>`<span class="chip">${n}</span>`).join('');
+});
+
+/* ===================== BMI CALCULATOR ===================== */
+document.querySelectorAll('[data-bmi-units]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('[data-bmi-units]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const metric = b.dataset.bmiUnits === 'metric';
+    document.getElementById('bmi-metric-fields').style.display = metric ? 'flex' : 'none';
+    document.getElementById('bmi-imperial-fields').style.display = metric ? 'none' : 'flex';
+  });
+});
+
+document.getElementById('bmi-calc').addEventListener('click', ()=>{
+  const isMetric = document.querySelector('[data-bmi-units].active').dataset.bmiUnits === 'metric';
+  let heightM, weightKg;
+  if(isMetric){
+    heightM = parseFloat(document.getElementById('bmi-height-cm').value)/100;
+    weightKg = parseFloat(document.getElementById('bmi-weight-kg').value);
+  } else {
+    const ft = parseFloat(document.getElementById('bmi-height-ft').value)||0;
+    const inch = parseFloat(document.getElementById('bmi-height-in').value)||0;
+    heightM = ((ft*12)+inch) * 0.0254;
+    weightKg = (parseFloat(document.getElementById('bmi-weight-lb').value)||0) * 0.45359237;
+  }
+  if(!heightM || !weightKg || heightM<=0 || weightKg<=0){
+    document.getElementById('bmi-value').textContent = 'Enter valid height and weight';
+    document.getElementById('bmi-category').textContent = '';
+    document.getElementById('bmi-readout').style.display='block';
+    return;
+  }
+  const bmi = weightKg / (heightM*heightM);
+  let category;
+  if(bmi < 18.5) category = 'Underweight range';
+  else if(bmi < 25) category = 'Typical range';
+  else if(bmi < 30) category = 'Above typical range';
+  else category = 'Well above typical range';
+
+  document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+  document.getElementById('bmi-category').textContent = category;
+  document.getElementById('bmi-readout').style.display='block';
+});
+
+/* ===================== TIMER ===================== */
+let timerTotal = 300, timerRemaining = 300, timerInterval = null;
+const timerDisplay = document.getElementById('timer-display');
+const timerRing = document.getElementById('timer-ring');
+const CIRC = 2 * Math.PI * 88;
+timerRing.setAttribute('stroke-dasharray', CIRC.toFixed(1));
+
+function renderTimer(){
+  const m = Math.floor(timerRemaining/60).toString().padStart(2,'0');
+  const s = Math.floor(timerRemaining%60).toString().padStart(2,'0');
+  timerDisplay.textContent = `${m}:${s}`;
+  const frac = timerTotal > 0 ? timerRemaining/timerTotal : 0;
+  timerRing.style.strokeDashoffset = (CIRC * (1-frac)).toFixed(1);
+  timerDisplay.classList.toggle('done', timerRemaining===0);
+}
+
+function readTimerInputs(){
+  const min = Math.max(0, Math.round(parseFloat(document.getElementById('timer-min').value)||0));
+  const sec = Math.max(0, Math.min(59, Math.round(parseFloat(document.getElementById('timer-sec').value)||0)));
+  timerTotal = min*60 + sec;
+  timerRemaining = timerTotal;
+  renderTimer();
+}
+readTimerInputs();
+document.getElementById('timer-min').addEventListener('input', ()=>{ if(!timerInterval) readTimerInputs(); });
+document.getElementById('timer-sec').addEventListener('input', ()=>{ if(!timerInterval) readTimerInputs(); });
+
+document.getElementById('timer-start').addEventListener('click', ()=>{
+  if(timerInterval) return;
+  if(timerRemaining<=0) readTimerInputs();
+  if(timerRemaining<=0) return;
+  timerInterval = setInterval(()=>{
+    timerRemaining -= 1;
+    if(timerRemaining<=0){
+      timerRemaining = 0;
+      renderTimer();
+      clearInterval(timerInterval);
+      timerInterval = null;
+      try{
+        const ctx = new (window.AudioContext||window.webkitAudioContext)();
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.frequency.value = 880; g.gain.value = 0.15;
+        o.start(); o.stop(ctx.currentTime + 0.4);
+      }catch(e){}
+      return;
+    }
+    renderTimer();
+  }, 1000);
+});
+document.getElementById('timer-pause').addEventListener('click', ()=>{
+  clearInterval(timerInterval); timerInterval = null;
+});
+document.getElementById('timer-reset').addEventListener('click', ()=>{
+  clearInterval(timerInterval); timerInterval = null;
+  readTimerInputs();
+});
+
+/* ===================== PERCENTAGE CALCULATOR ===================== */
+let pctMode = 'of';
+const pctX = document.getElementById('pct-x');
+const pctY = document.getElementById('pct-y');
+const pctLabelX = document.getElementById('pct-label-x');
+const pctLabelY = document.getElementById('pct-label-y');
+const pctResult = document.getElementById('pct-result');
+
+function setPctLabels(){
+  if(pctMode==='of'){ pctLabelX.textContent='Percent (%)'; pctLabelY.textContent='Of value'; }
+  else if(pctMode==='is'){ pctLabelX.textContent='Value'; pctLabelY.textContent='Out of'; }
+  else { pctLabelX.textContent='From'; pctLabelY.textContent='To'; }
+}
+
+function computePct(){
+  const x = parseFloat(pctX.value), y = parseFloat(pctY.value);
+  if(isNaN(x)||isNaN(y)){ pctResult.textContent='—'; return; }
+  if(pctMode==='of'){
+    pctResult.innerHTML = `${(x/100*y).toLocaleString(undefined,{maximumFractionDigits:4})}`;
+  } else if(pctMode==='is'){
+    if(y===0){ pctResult.textContent='Cannot divide by zero'; return; }
+    pctResult.innerHTML = `${(x/y*100).toLocaleString(undefined,{maximumFractionDigits:4})} <small>%</small>`;
+  } else {
+    if(x===0){ pctResult.textContent='Cannot divide by zero'; return; }
+    const change = (y-x)/Math.abs(x)*100;
+    const dir = change>=0 ? 'increase' : 'decrease';
+    pctResult.innerHTML = `${Math.abs(change).toLocaleString(undefined,{maximumFractionDigits:4})}% <small>${dir}</small>`;
+  }
+}
+document.querySelectorAll('[data-pct-mode]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('[data-pct-mode]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    pctMode = b.dataset.pctMode;
+    setPctLabels();
+    computePct();
+  });
+});
+[pctX,pctY].forEach(el=>el.addEventListener('input', computePct));
+setPctLabels(); computePct();
+
+/* ===================== CURRENCY CONVERTER ===================== */
+const fallbackRatesUSD = {
+  USD:1, EUR:0.93, GBP:0.79, JPY:156, INR:83.5, AUD:1.51, CAD:1.37, CHF:0.91,
+  CNY:7.25, BRL:5.4, MXN:18.2, ZAR:18.6, SGD:1.35, NZD:1.63, AED:3.67, SAR:3.75,
+  KRW:1370, SEK:10.5, NOK:10.6, HKD:7.81
+};
+const curFrom = document.getElementById('cur-from');
+const curTo = document.getElementById('cur-to');
+let liveRates = null;
+let ratesTimestamp = null;
+
+(function initCurrencySelects(){
+  const codes = Object.keys(fallbackRatesUSD);
+  curFrom.innerHTML = codes.map(c=>`<option value="${c}">${c}</option>`).join('');
+  curTo.innerHTML = codes.map(c=>`<option value="${c}">${c}</option>`).join('');
+  curFrom.value = 'USD';
+  curTo.value = 'EUR';
+})();
+
+async function fetchLiveRates(){
+  try{
+    const res = await fetch('https://open.er-api.com/v6/latest/USD');
+    const data = await res.json();
+    if(data && data.result === 'success' && data.rates){
+      liveRates = data.rates;
+      ratesTimestamp = data.time_last_update_utc || null;
+    }
+  }catch(e){ /* fall back silently */ }
+}
+fetchLiveRates();
+
+document.getElementById('cur-swap').addEventListener('click', ()=>{
+  const f = curFrom.value; curFrom.value = curTo.value; curTo.value = f;
+});
+
+document.getElementById('cur-convert').addEventListener('click', ()=>{
+  const amount = parseFloat(document.getElementById('cur-amount').value);
+  const from = curFrom.value, to = curTo.value;
+  const resultEl = document.getElementById('cur-result');
+  const metaEl = document.getElementById('cur-meta');
+  if(isNaN(amount)){ resultEl.textContent='—'; return; }
+
+  const table = (liveRates && liveRates[from] && liveRates[to]) ? liveRates : fallbackRatesUSD;
+  const usingLive = table === liveRates;
+  const fromRate = usingLive ? liveRates[from] : fallbackRatesUSD[from];
+  const toRate = usingLive ? liveRates[to] : fallbackRatesUSD[to];
+  const result = amount / fromRate * toRate;
+
+  resultEl.innerHTML = `${result.toLocaleString(undefined,{maximumFractionDigits:2})} <small>${to}</small>`;
+  metaEl.textContent = usingLive
+    ? `Live rate · 1 ${from} = ${(toRate/fromRate).toFixed(4)} ${to}${ratesTimestamp ? ' · updated ' + ratesTimestamp : ''}`
+    : `Offline approximate rate · 1 ${from} = ${(toRate/fromRate).toFixed(4)} ${to} · connect to the internet for live rates`;
+});
+
+/* ===================== DISCOUNT CALCULATOR ===================== */
+function computeDiscount(){
+  const price = parseFloat(document.getElementById('disc-price').value);
+  const pct = parseFloat(document.getElementById('disc-pct').value);
+  const qty = Math.max(1, Math.round(parseFloat(document.getElementById('disc-qty').value)||1));
+  if(isNaN(price) || isNaN(pct)){
+    document.getElementById('disc-sale').textContent='—';
+    return;
+  }
+  const savedEach = price * (pct/100);
+  const saleEach = price - savedEach;
+  document.getElementById('disc-sale').innerHTML = `$${saleEach.toFixed(2)}`;
+  document.getElementById('disc-saved-each').textContent = `$${savedEach.toFixed(2)}`;
+  document.getElementById('disc-total').textContent = `$${(saleEach*qty).toFixed(2)}`;
+  document.getElementById('disc-saved-total').textContent = `$${(savedEach*qty).toFixed(2)}`;
+}
+['disc-price','disc-pct','disc-qty'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', computeDiscount);
+});
+computeDiscount();
+
+</script>
+</body>
+</html>
