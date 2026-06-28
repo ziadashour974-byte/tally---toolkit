@@ -1,1438 +1,1272 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tally — A Toolkit of Everyday Instruments</title>
-<meta name="description" content="Tally is a free toolkit of eight everyday calculators: age calculator, unit converter, random number generator, BMI calculator, timer, percentage calculator, currency converter, and discount calculator. No sign-up required.">
-<meta property="og:title" content="Tally — A Toolkit of Everyday Instruments">
-<meta property="og:description" content="Eight free calculators in one place: age, units, random numbers, BMI, timer, percentages, currency and discounts.">
+<meta name="description" content="TechPlus - بوابتك العربية لأحدث أخبار التقنية والذكاء الاصطناعي. مراجعات، شروحات، وكل ما يخص عالم التكنولوجيا.">
+<meta name="keywords" content="ذكاء اصطناعي, تقنية, AI, ChatGPT, Gemini, مراجعات, ربح أونلاين, برمجة">
+<meta name="author" content="TechPlus">
+<meta property="og:title" content="TechPlus | تقني بلس - التقنية والذكاء الاصطناعي">
+<meta property="og:description" content="بوابتك العربية لأحدث أخبار التقنية والذكاء الاصطناعي">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tally — A Toolkit of Everyday Instruments">
-<meta name="twitter:description" content="Eight free calculators in one place: age, units, random numbers, BMI, timer, percentages, currency and discounts.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231B2430'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Georgia,serif' fill='%23D97D42' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Tally",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Any",
-  "description": "A free toolkit of eight everyday calculators: age calculator, unit converter, random number generator, BMI calculator, timer, percentage calculator, currency converter, and discount calculator.",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-}
-</script>
+<title>TechPlus | تقني بلس — التقنية والذكاء الاصطناعي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ⚡ Google AdSense: ضع Publisher ID الخاص بك هنا بعد الموافقة -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
 <style>
-  :root{
-    --ink:#1B2430;
-    --ink-deep:#141B24;
-    --ink-panel:#212B38;
-    --paper:#F6F1E7;
-    --paper-line:#E3DCC9;
-    --paper-shadow: rgba(20,27,36,0.35);
-    --accent:#D97D42;
-    --accent-soft: rgba(217,125,66,0.16);
-    --sage:#5C7A66;
-    --sage-soft: rgba(92,122,102,0.16);
-    --text-ink:#232A33;
-    --text-ink-soft:#5B6470;
-    --text-cream:#F1ECE0;
-    --text-cream-soft:#A9B3BF;
-    --radius:14px;
-  }
+:root {
+  --p:#4F46E5; --pd:#3730A3; --pl:#EEF2FF;
+  --acc:#F59E0B; --ok:#10B981; --red:#EF4444;
+  --dark:#0F172A; --d2:#1E293B; --d3:#334155;
+  --g5:#6B7280; --g3:#D1D5DB; --g1:#F3F4F6;
+  --bg:#F8FAFC; --white:#FFFFFF;
+  --sh:0 1px 3px rgba(0,0,0,.08);
+  --sh2:0 4px 16px rgba(0,0,0,.08);
+  --sh3:0 8px 32px rgba(0,0,0,.12);
+  --r:12px; --r2:8px;
+  --tr:all .25s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo','Poppins',sans-serif;background:var(--bg);color:var(--dark);line-height:1.8;direction:rtl;text-align:right;font-size:16px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+ul{list-style:none}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
 
-  *{ box-sizing:border-box; }
-  html,body{ margin:0; padding:0; }
-  body{
-    background:var(--ink);
-    background-image:
-      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 28px 28px;
-    color:var(--text-cream);
-    font-family:'Inter', sans-serif;
-    min-height:100vh;
-  }
+/* ── TICKER ── */
+.ticker{background:var(--acc);color:var(--dark);padding:7px 0;overflow:hidden}
+.ticker-inner{display:flex;align-items:center;gap:16px}
+.ticker-badge{background:var(--dark);color:var(--acc);padding:2px 12px;border-radius:4px;font-size:.75rem;font-weight:800;white-space:nowrap;flex-shrink:0}
+.ticker-track{overflow:hidden;flex:1}
+.ticker-roll{display:inline-flex;gap:40px;white-space:nowrap;animation:roll 35s linear infinite;font-weight:700;font-size:.82rem;cursor:pointer}
+@keyframes roll{0%{transform:translateX(-50%)}100%{transform:translateX(0%)}}
 
-  :focus-visible{
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+/* ── HEADER ── */
+header{background:var(--dark);position:sticky;top:0;z-index:1000;box-shadow:var(--sh3)}
+.hdr{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ico{width:36px;height:36px;background:linear-gradient(135deg,var(--p),#818CF8);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.logo-txt{color:var(--white);font-weight:900;font-size:1.2rem;line-height:1.15}
+.logo-txt span{display:block;font-size:.58rem;font-weight:400;color:#94A3B8;letter-spacing:1.5px}
+nav{display:flex;align-items:center;gap:2px}
+nav a{color:#94A3B8;padding:7px 11px;border-radius:var(--r2);font-size:.85rem;font-weight:600;transition:var(--tr);white-space:nowrap}
+nav a:hover,nav a.active{color:var(--white);background:rgba(79,70,229,.3)}
+.hdr-right{display:flex;align-items:center;gap:6px}
+.ico-btn{color:#94A3B8;padding:8px;border-radius:var(--r2);font-size:1rem;transition:var(--tr)}
+.ico-btn:hover{color:var(--white);background:rgba(255,255,255,.1)}
+.ham{display:none;flex-direction:column;gap:5px;padding:8px}
+.ham span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:var(--tr)}
+.m-nav{display:none;background:var(--d2);border-top:1px solid rgba(255,255,255,.08)}
+.m-nav.open{display:block}
+.m-nav a{display:block;color:#94A3B8;padding:12px 20px;font-size:.9rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,.05);transition:var(--tr)}
+.m-nav a:hover{color:var(--white);background:rgba(79,70,229,.2)}
 
-  /* ===== Layout shell ===== */
-  .shell{
-    display:flex;
-    min-height:100vh;
-  }
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#0F172A 0%,#1E1B4B 55%,#312E81 100%);padding:56px 0 72px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 450px at 15% 55%,rgba(79,70,229,.22) 0%,transparent 70%),radial-gradient(ellipse 450px 350px at 85% 25%,rgba(14,165,233,.15) 0%,transparent 70%)}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:30px 30px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(79,70,229,.25);border:1px solid rgba(79,70,229,.4);color:#A5B4FC;padding:5px 14px;border-radius:999px;font-size:.75rem;font-weight:800;letter-spacing:.5px;margin-bottom:18px}
+.eyebrow-dot{width:6px;height:6px;background:#A5B4FC;border-radius:50%;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero h1{font-size:2.7rem;font-weight:900;color:var(--white);line-height:1.3;margin-bottom:14px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#818CF8,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{color:#94A3B8;font-size:1rem;margin-bottom:28px;max-width:460px}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--p);color:var(--white);padding:13px 26px;border-radius:var(--r);font-weight:700;font-size:.95rem;transition:var(--tr);box-shadow:0 4px 20px rgba(79,70,229,.4)}
+.hero-cta:hover{background:var(--pd);transform:translateY(-2px);box-shadow:0 8px 30px rgba(79,70,229,.5)}
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);border-radius:18px;overflow:hidden;cursor:pointer;transition:var(--tr)}
+.hero-card:hover{transform:translateY(-5px);border-color:rgba(79,70,229,.4)}
+.hcard-img{height:195px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative}
+.hcard-body{padding:18px 20px 22px}
+.hcard-tag{display:inline-block;background:rgba(245,158,11,.22);color:var(--acc);padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:800;margin-bottom:8px}
+.hcard-title{color:var(--white);font-weight:700;font-size:1.05rem;line-height:1.55;margin-bottom:10px}
+.hcard-meta{display:flex;gap:14px;color:#64748B;font-size:.75rem}
 
-  /* ===== Sidebar ===== */
-  .sidebar{
-    width: 250px;
-    flex-shrink:0;
-    background:var(--ink-deep);
-    border-right:1px solid rgba(255,255,255,0.06);
-    padding: 28px 0 28px 0;
-    position:sticky;
-    top:0;
-    height:100vh;
-    overflow-y:auto;
-  }
+/* ── AD PLACEHOLDERS ── */
+.ad-wrap{margin:22px 0}
+.ad-lbl{font-size:.68rem;color:#9CA3AF;text-align:center;margin-bottom:3px;font-weight:500}
+.ad-box{background:var(--g1);border:2px dashed var(--g3);border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9CA3AF;font-size:.8rem;font-weight:600;gap:4px;text-align:center}
+.ad-leader{height:90px}
+.ad-sq{height:250px}
+.ad-sq2{height:200px}
+.ad-mob{height:50px;margin:14px 0}
 
-  .brand{
-    padding: 0 24px 22px 24px;
-    border-bottom:1px solid rgba(255,255,255,0.07);
-    margin-bottom: 10px;
-  }
-  .brand-mark{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:1.7rem;
-    letter-spacing:0.01em;
-    color:var(--text-cream);
-    display:flex;
-    align-items:baseline;
-    gap:6px;
-  }
-  .brand-mark span{
-    color:var(--accent);
-    font-style:italic;
-  }
-  .brand-tag{
-    font-size:0.72rem;
-    color:var(--text-cream-soft);
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    margin-top:6px;
-    font-family:'JetBrains Mono', monospace;
-  }
+/* ── LAYOUT ── */
+.main-grid{display:grid;grid-template-columns:1fr 296px;gap:28px;padding:36px 0}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.sec-title{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:900;color:var(--dark)}
+.sec-title::before{content:'';width:4px;height:22px;background:var(--p);border-radius:2px;display:block;order:1}
+.sec-title span{order:2}
+.see-all{color:var(--p);font-size:.82rem;font-weight:700;transition:var(--tr)}
+.see-all:hover{color:var(--pd);text-decoration:underline}
 
-  .nav-list{
-    list-style:none;
-    margin:0;
-    padding: 8px 10px;
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-  }
-  .nav-item button{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    background:transparent;
-    border:none;
-    border-left: 2px solid transparent;
-    color:var(--text-cream-soft);
-    font-family:'Inter', sans-serif;
-    font-size:0.92rem;
-    font-weight:500;
-    text-align:left;
-    padding:10px 12px;
-    border-radius:6px;
-    cursor:pointer;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
-  .nav-item button:hover{
-    background: rgba(255,255,255,0.04);
-    color:var(--text-cream);
-  }
-  .nav-item button.active{
-    background: var(--accent-soft);
-    color: var(--text-cream);
-    border-left-color: var(--accent);
-  }
-  .nav-item svg{
-    width:18px; height:18px;
-    flex-shrink:0;
-    stroke: currentColor;
-    fill:none;
-    stroke-width:1.6;
-  }
+/* ── ARTICLE CARDS ── */
+.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.art-card{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);transition:var(--tr);cursor:pointer;border:1px solid rgba(0,0,0,.04)}
+.art-card:hover{transform:translateY(-4px);box-shadow:var(--sh3)}
+.art-img{height:155px;display:flex;align-items:center;justify-content:center;font-size:2.4rem}
+.art-body{padding:14px 16px 16px}
+.tag{display:inline-block;padding:3px 9px;border-radius:4px;font-size:.68rem;font-weight:800;margin-bottom:7px}
+.t-ai{background:#EEF2FF;color:#4F46E5}
+.t-tech{background:#E0F2FE;color:#0369A1}
+.t-money{background:#ECFDF5;color:#065F46}
+.t-rev{background:#FEF3C7;color:#92400E}
+.t-tips{background:#FDF4FF;color:#7E22CE}
+.art-card h3{font-size:.95rem;font-weight:700;line-height:1.5;margin-bottom:7px;color:var(--dark);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.art-card p{font-size:.8rem;color:var(--g5);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px}
+.art-meta{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;color:#9CA3AF}
+.art-meta-l{display:flex;align-items:center;gap:10px}
+.art-feat{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
+.art-feat .art-img{height:auto;min-height:210px}
+.art-feat h3{font-size:1.2rem}
+.art-feat p{-webkit-line-clamp:3}
 
-  /* ===== Mobile tab bar ===== */
-  .mobile-tabs{
-    display:none;
-  }
+/* ── SIDEBAR ── */
+.widget{background:var(--white);border-radius:var(--r);padding:18px;margin-bottom:20px;box-shadow:var(--sh);border:1px solid rgba(0,0,0,.04)}
+.w-title{font-size:.95rem;font-weight:800;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--pl);color:var(--dark)}
+.pop-post{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--g1);cursor:pointer;transition:var(--tr)}
+.pop-post:last-child{border-bottom:none;padding-bottom:0}
+.pop-post:hover{transform:translateX(-3px)}
+.pop-num{font-size:1.4rem;font-weight:900;color:var(--g3);line-height:1;min-width:26px}
+.pop-post h4{font-size:.82rem;font-weight:700;line-height:1.5;color:var(--d2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pop-sub{font-size:.7rem;color:var(--g5);margin-top:2px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pill{background:var(--g1);color:#374151;padding:5px 13px;border-radius:999px;font-size:.78rem;font-weight:600;transition:var(--tr);cursor:pointer}
+.pill:hover{background:var(--p);color:var(--white)}
+.nl-desc{font-size:.82rem;color:var(--g5);margin-bottom:12px;line-height:1.6}
+.nl-input{width:100%;padding:9px 13px;border:2px solid var(--g3);border-radius:var(--r2);font-family:'Cairo',sans-serif;font-size:.87rem;direction:rtl;transition:var(--tr);outline:none;margin-bottom:9px}
+.nl-input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.nl-btn{width:100%;background:var(--p);color:var(--white);padding:9px;border-radius:var(--r2);font-family:'Cairo',sans-serif;font-size:.87rem;font-weight:700;transition:var(--tr);cursor:pointer;border:none}
+.nl-btn:hover{background:var(--pd)}
 
-  /* ===== Main ===== */
-  main{
-    flex:1;
-    padding: 56px 40px;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-  }
+/* ── CATEGORY CARDS ── */
+.cats-section{background:var(--white);padding:48px 0}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat-card{border-radius:var(--r);padding:22px 18px;text-align:center;box-shadow:var(--sh);transition:var(--tr);cursor:pointer;border:1px solid rgba(0,0,0,.04);border-top:3px solid transparent}
+.cat-card:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
+.cat-card.ai{border-top-color:#4F46E5}
+.cat-card.tech{border-top-color:#0EA5E9}
+.cat-card.money{border-top-color:#10B981}
+.cat-card.rev{border-top-color:#F59E0B}
+.cat-ico{font-size:2rem;margin-bottom:8px}
+.cat-name{font-size:.95rem;font-weight:800;margin-bottom:3px}
+.cat-count{font-size:.77rem;color:var(--g5)}
 
-  .panel-wrap{
-    width:100%;
-    max-width: 660px;
-  }
+/* ── FOOTER ── */
+footer{background:var(--dark);color:#94A3B8;padding:56px 0 0;margin-top:56px}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.ft-about p{font-size:.83rem;line-height:1.8;margin-top:14px;max-width:280px}
+.social{display:flex;gap:8px;margin-top:18px}
+.soc-btn{width:34px;height:34px;background:rgba(255,255,255,.07);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:var(--tr)}
+.soc-btn:hover{background:var(--p);color:white}
+.ft-col h4{color:var(--white);font-size:.9rem;font-weight:800;margin-bottom:14px}
+.ft-col ul{display:flex;flex-direction:column;gap:9px}
+.ft-col a{font-size:.83rem;transition:var(--tr)}
+.ft-col a:hover{color:var(--white)}
+.ft-email{width:100%;padding:8px 12px;border:none;border-radius:var(--r2);font-family:'Cairo',sans-serif;font-size:.82rem;direction:rtl;outline:none;background:rgba(255,255,255,.07);color:white;margin-bottom:7px}
+.ft-email::placeholder{color:#64748B}
+.ft-sub{width:100%;background:var(--p);color:white;padding:8px;border-radius:var(--r2);font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;border:none;transition:var(--tr)}
+.ft-sub:hover{background:var(--pd)}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.07);padding:18px 0;display:flex;align-items:center;justify-content:space-between;font-size:.77rem}
+.ft-links{display:flex;gap:14px}
+.ft-links a:hover{color:var(--white)}
 
-  .hero{
-    margin-bottom: 22px;
-    padding: 0 4px;
-  }
-  .hero h1{
-    font-family:'Fraunces', serif;
-    font-weight:700;
-    font-size: 2.1rem;
-    color: var(--text-cream);
-    margin: 0 0 8px 0;
-    line-height:1.15;
-  }
-  .hero h1 em{
-    color: var(--accent);
-    font-style:italic;
-  }
-  .hero p{
-    font-size:0.92rem;
-    color: var(--text-cream-soft);
-    line-height:1.6;
-    max-width: 520px;
-    margin: 0;
-  }
-  .hero-chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:16px;
-  }
-  .hero-chips button{
-    font-family:'Inter', sans-serif;
-    font-size:0.76rem;
-    font-weight:600;
-    background: rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
-    color: var(--text-cream-soft);
-    padding:7px 13px;
-    border-radius:20px;
-    cursor:pointer;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
-  .hero-chips button:hover{
-    background: var(--accent-soft);
-    color: var(--text-cream);
-    border-color: var(--accent);
-  }
+/* ── ARTICLE PAGE ── */
+.art-page-grid{display:grid;grid-template-columns:1fr 296px;gap:36px;padding:36px 0 72px}
+.art-pg-hdr{margin-bottom:28px}
+.art-pg-hdr h1{font-size:1.85rem;font-weight:900;line-height:1.4;margin:10px 0 14px}
+.art-hdr-meta{display:flex;align-items:center;gap:14px;color:var(--g5);font-size:.82rem;flex-wrap:wrap}
+.art-pg-body h2{font-size:1.3rem;font-weight:800;margin:28px 0 10px;color:var(--dark)}
+.art-pg-body p{color:#374151;line-height:2;margin-bottom:18px;font-size:.96rem}
+.art-pg-body ul{padding-right:22px;margin-bottom:18px;list-style:disc}
+.art-pg-body ul li{color:#374151;line-height:2;font-size:.96rem}
+.art-hl{background:var(--pl);border-right:4px solid var(--p);padding:14px 18px;border-radius:0 var(--r2) var(--r2) 0;margin:20px 0}
+.art-hl p{color:var(--pd);font-weight:700;margin:0;font-size:.93rem}
+.art-img-ph{height:280px;background:linear-gradient(135deg,var(--p),#818CF8);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:3.8rem;margin:22px 0}
+.art-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:28px;padding-top:22px;border-top:1px solid var(--g1)}
+.art-tag-item{background:var(--g1);color:#374151;padding:3px 11px;border-radius:4px;font-size:.77rem;font-weight:600;transition:var(--tr);cursor:pointer}
+.art-tag-item:hover{background:var(--pl);color:var(--p)}
+.art-share{display:flex;align-items:center;gap:10px;margin-top:22px;padding:18px;background:var(--g1);border-radius:var(--r);flex-wrap:wrap}
+.shr-lbl{font-weight:700;font-size:.88rem}
+.shr-btn{padding:7px 14px;border-radius:var(--r2);font-size:.77rem;font-weight:700;cursor:pointer;border:none;font-family:'Cairo',sans-serif;transition:var(--tr)}
+.shr-btn:hover{opacity:.85;transform:translateY(-2px)}
+.s-tw{background:#1DA1F2;color:white}
+.s-fb{background:#1877F2;color:white}
+.s-wa{background:#25D366;color:white}
+.s-cp{background:var(--d2);color:white}
 
-  .stamp{
-    position:absolute;
-    top: -16px;
-    right: -10px;
-    width:78px;
-    height:78px;
-    border-radius:50%;
-    border: 1.5px dashed var(--accent);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transform: rotate(8deg);
-    background: var(--paper);
-  }
-  .stamp span{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.56rem;
-    letter-spacing:0.04em;
-    text-align:center;
-    color:var(--accent);
-    text-transform:uppercase;
-    line-height:1.25;
-  }
+/* ── PAGE HEADERS ── */
+.pg-hdr{background:linear-gradient(135deg,var(--dark),var(--d2));padding:52px 0;margin-bottom:40px}
+.pg-hdr h1{color:var(--white);font-size:2rem;font-weight:900;margin-bottom:6px}
+.pg-hdr p{color:#64748B;font-size:.95rem}
+.pg-content{max-width:800px;margin:0 auto;padding:0 20px 72px}
+.pg-content h2{font-size:1.3rem;font-weight:800;margin:28px 0 10px;color:var(--dark)}
+.pg-content p{color:var(--g5);line-height:1.9;margin-bottom:14px}
+.pg-content ul{list-style:disc;padding-right:22px;color:var(--g5);line-height:2;margin-bottom:14px}
 
-  .card{
-    position:relative;
-    background:var(--paper);
-    color:var(--text-ink);
-    border-radius:var(--radius);
-    box-shadow: 0 24px 60px -20px var(--paper-shadow), 0 2px 0 rgba(0,0,0,0.04);
-    padding: 34px 36px 38px;
-    border: 1px solid var(--paper-line);
-  }
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;padding-bottom:72px}
+.fg{margin-bottom:18px}
+.fg label{display:block;font-size:.83rem;font-weight:700;margin-bottom:6px;color:var(--dark)}
+.fg input,.fg textarea{width:100%;padding:11px 14px;border:2px solid var(--g3);border-radius:var(--r2);font-family:'Cairo',sans-serif;font-size:.88rem;direction:rtl;outline:none;transition:var(--tr);background:var(--white)}
+.fg input:focus,.fg textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.fg textarea{resize:vertical;min-height:120px}
+.btn-send{background:var(--p);color:var(--white);padding:13px 28px;border-radius:var(--r);font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;transition:var(--tr);width:100%;cursor:pointer;border:none}
+.btn-send:hover{background:var(--pd);transform:translateY(-2px)}
+.c-info-item{display:flex;align-items:flex-start;gap:12px;padding:18px;background:var(--white);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:14px}
+.c-ico{width:42px;height:42px;background:var(--pl);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.c-info-item h4{font-weight:700;font-size:.88rem;margin-bottom:3px}
+.c-info-item p{font-size:.82rem;color:var(--g5)}
 
-  .card::before{
-    content:"";
-    position:absolute;
-    top:0; left:24px; right:24px;
-    height:0;
-    border-top: 2px dotted var(--paper-line);
-  }
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;padding-bottom:72px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.stat-card{text-align:center;padding:14px;border-radius:var(--r2)}
+.stat-card .num{font-size:1.7rem;font-weight:900;margin-bottom:2px}
+.stat-card .lbl{font-size:.75rem;color:var(--g5)}
+.team-member{display:flex;align-items:center;gap:11px;padding:14px;background:var(--white);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:10px}
+.avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:1.05rem;flex-shrink:0}
+.team-member h4{font-weight:700;font-size:.88rem;margin-bottom:2px}
+.team-member p{font-size:.77rem;color:var(--g5)}
 
-  .plate{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.7rem;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--text-ink-soft);
-    margin-bottom: 6px;
-  }
-  .plate span{ color:var(--accent); }
+/* ── UTILS ── */
+.hidden{display:none!important}
+.page{animation:fadein .3s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--dark);color:white;padding:11px 22px;border-radius:999px;font-size:.83rem;font-weight:700;z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.back-top{position:fixed;bottom:22px;left:22px;width:42px;height:42px;background:var(--p);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:var(--sh3);opacity:0;pointer-events:none;transition:var(--tr);cursor:pointer;z-index:999;border:none}
+.back-top.vis{opacity:1;pointer-events:all}
+.back-top:hover{background:var(--pd);transform:translateY(-4px)}
+.rdprog{position:fixed;top:0;right:0;width:0%;height:3px;background:var(--p);z-index:9998;transition:width .1s linear}
+.g1{background:linear-gradient(135deg,#4F46E5,#818CF8)}
+.g2{background:linear-gradient(135deg,#0EA5E9,#38BDF8)}
+.g3{background:linear-gradient(135deg,#10B981,#34D399)}
+.g4{background:linear-gradient(135deg,#F59E0B,#FCD34D)}
+.g5c{background:linear-gradient(135deg,#EF4444,#FC8181)}
+.g6{background:linear-gradient(135deg,#8B5CF6,#C4B5FD)}
+.g7{background:linear-gradient(135deg,#06B6D4,#67E8F9)}
+.g8{background:linear-gradient(135deg,#F97316,#FDBA74)}
+.mt24{margin-top:24px}
+.mt36{margin-top:36px}
 
-  h1.tool-title{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size: 1.9rem;
-    margin: 0 0 6px 0;
-    color:var(--text-ink);
-  }
-  .tool-sub{
-    font-size:0.92rem;
-    color:var(--text-ink-soft);
-    margin: 0 0 26px 0;
-    max-width: 480px;
-    line-height:1.5;
-  }
-
-  .field-row{
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
-    margin-bottom:16px;
-  }
-  .field{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    flex:1;
-    min-width:140px;
-  }
-  .field label{
-    font-size:0.78rem;
-    font-weight:600;
-    color:var(--text-ink-soft);
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-  }
-  input[type="number"], input[type="date"], input[type="text"], select{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.98rem;
-    padding: 10px 12px;
-    border-radius:8px;
-    border:1px solid var(--paper-line);
-    background:#fff;
-    color:var(--text-ink);
-    width:100%;
-  }
-  select{ font-family:'Inter', sans-serif; cursor:pointer; }
-
-  .check-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:0.86rem;
-    color:var(--text-ink-soft);
-    margin-bottom:16px;
-  }
-  .check-row input{ width:16px; height:16px; accent-color:var(--accent); }
-
-  .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin: 4px 0 22px 0; }
-  button.action{
-    font-family:'Inter', sans-serif;
-    font-weight:600;
-    font-size:0.88rem;
-    background: var(--accent);
-    color:#fff;
-    border:none;
-    padding: 11px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    transition: transform 0.1s ease, background 0.15s ease;
-  }
-  button.action:hover{ background:#C66A33; }
-  button.action:active{ transform: translateY(1px); }
-  button.ghost{
-    font-family:'Inter', sans-serif;
-    font-weight:600;
-    font-size:0.88rem;
-    background: transparent;
-    color: var(--text-ink-soft);
-    border:1px solid var(--paper-line);
-    padding: 11px 18px;
-    border-radius:8px;
-    cursor:pointer;
-  }
-  button.ghost:hover{ background: rgba(0,0,0,0.03); }
-
-  .segmented{
-    display:flex;
-    background:#fff;
-    border:1px solid var(--paper-line);
-    border-radius:8px;
-    padding:3px;
-    margin-bottom:18px;
-    gap:3px;
-    flex-wrap:wrap;
-  }
-  .segmented button{
-    flex:1;
-    min-width:120px;
-    font-family:'Inter',sans-serif;
-    font-size:0.82rem;
-    font-weight:600;
-    border:none;
-    background:transparent;
-    color:var(--text-ink-soft);
-    padding:8px 10px;
-    border-radius:6px;
-    cursor:pointer;
-  }
-  .segmented button.active{
-    background: var(--ink);
-    color: var(--text-cream);
-  }
-
-  /* readout window — the signature element */
-  .readout{
-    background: var(--ink);
-    border-radius:10px;
-    padding: 18px 20px;
-    margin-top: 4px;
-    position:relative;
-    overflow:hidden;
-  }
-  .readout::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background: repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
-    pointer-events:none;
-  }
-  .readout-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.68rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color: var(--text-cream-soft);
-    margin-bottom:8px;
-  }
-  .readout-value{
-    font-family:'JetBrains Mono', monospace;
-    font-size:1.9rem;
-    font-weight:600;
-    color: var(--text-cream);
-    line-height:1.25;
-    word-break:break-word;
-  }
-  .readout-value small{
-    font-size:0.95rem;
-    color: var(--text-cream-soft);
-    font-weight:400;
-  }
-  .readout-sub{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.82rem;
-    color: var(--accent);
-    margin-top:8px;
-  }
-
-  .copy-icon{
-    position:absolute;
-    top:14px; right:16px;
-    z-index:2;
-    background: rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.12);
-    color: var(--text-cream-soft);
-    width:30px; height:30px;
-    border-radius:7px;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-  .copy-icon:hover{ background: var(--accent); color:#fff; border-color: var(--accent); }
-  .copy-icon svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.8; }
-  .copy-icon.copied svg{ display:none; }
-  .copy-icon.copied::after{ content:"✓"; font-size:0.8rem; }
-  .readout-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px,1fr));
-    gap:14px;
-  }
-  .readout-grid .cell .num{
-    font-size:1.6rem;
-  }
-  .readout-grid .cell .lab{
-    font-size:0.66rem;
-  }
-
-  .chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-  }  .chip{
-    background: var(--ink-panel);
-    color: var(--text-cream);
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.95rem;
-    padding:6px 12px;
-    border-radius:6px;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .note{
-    font-size:0.78rem;
-    color: var(--text-ink-soft);
-    margin-top:14px;
-    line-height:1.5;
-  }
-
-  .info-block{
-    margin-top:30px;
-    padding-top:22px;
-    border-top: 1px dotted var(--paper-line);
-  }
-  .info-block h2{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:1.1rem;
-    color:var(--text-ink);
-    margin: 0 0 8px 0;
-  }
-  .info-block p{
-    font-size:0.86rem;
-    color:var(--text-ink-soft);
-    line-height:1.6;
-    margin: 0 0 10px 0;
-  }
-  .info-block p:last-child{ margin-bottom:0; }
-
-  .swap-btn{
-    align-self:flex-end;
-    margin-bottom: 16px;
-    background:#fff;
-    border:1px solid var(--paper-line);
-    width:38px; height:38px;
-    border-radius:8px;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    color:var(--text-ink-soft);
-  }
-  .swap-btn:hover{ color:var(--accent); border-color:var(--accent); }
-  .swap-btn svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.8; }
-
-  /* timer ring */
-  .timer-wrap{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:20px;
-    padding: 10px 0 4px;
-  }
-  .ring-box{ position:relative; width:200px; height:200px; }
-  .ring-box svg{ width:200px; height:200px; transform: rotate(-90deg); }
-  .ring-bg{ fill:none; stroke: var(--paper-line); stroke-width:8; }
-  .ring-fg{ fill:none; stroke: var(--accent); stroke-width:8; stroke-linecap:round; transition: stroke-dashoffset 0.25s linear; }
-  .ring-time{
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'JetBrains Mono', monospace;
-    font-size:1.7rem;
-    font-weight:600;
-    color: var(--text-ink);
-  }
-  .ring-time.done{ color: var(--accent); }
-
-  footer.page-footer{
-    text-align:center;
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.72rem;
-    color: var(--text-cream-soft);
-    padding: 0 0 10px;
-    letter-spacing:0.04em;
-  }
-  .footer-disclaimer{
-    text-align:center;
-    font-family:'Inter', sans-serif;
-    font-size:0.74rem;
-    color: var(--text-cream-soft);
-    padding: 0 24px 40px;
-    max-width:560px;
-    margin:0 auto;
-    line-height:1.6;
-  }
-
-  @media (max-width: 880px){
-    .shell{ flex-direction:column; }
-    .sidebar{ display:none; }
-    .mobile-tabs{
-      display:flex;
-      overflow-x:auto;
-      gap:6px;
-      padding: 16px 14px;
-      background: var(--ink-deep);
-      position:sticky;
-      top:0;
-      z-index:10;
-      border-bottom:1px solid rgba(255,255,255,0.07);
-    }
-    .mobile-tabs button{
-      flex-shrink:0;
-      font-family:'Inter', sans-serif;
-      font-size:0.82rem;
-      font-weight:600;
-      background: transparent;
-      border:1px solid rgba(255,255,255,0.1);
-      color: var(--text-cream-soft);
-      padding:8px 14px;
-      border-radius:20px;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .mobile-tabs button.active{
-      background: var(--accent);
-      color:#fff;
-      border-color: var(--accent);
-    }
-    main{ padding: 30px 16px 50px; }
-    .card{ padding: 26px 20px 30px; }
-    .stamp{ display:none; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ transition:none !important; animation:none !important; }
-  }
-
-  .tool-panel{ display:none; }
-  .tool-panel.active{ display:block; animation: fadeIn 0.25s ease; }
-  @keyframes fadeIn{ from{ opacity:0; transform: translateY(4px);} to{opacity:1; transform:translateY(0);} }
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .art-grid{grid-template-columns:1fr 1fr}
+  .art-feat{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{display:none}
+  .ham{display:flex}
+  .hero-grid{grid-template-columns:1fr}
+  .hero h1{font-size:2rem}
+  .hero-card{display:none}
+  .main-grid{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .art-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr}
+  .ft-bottom{flex-direction:column;gap:8px;text-align:center}
+  .contact-grid{grid-template-columns:1fr}
+  .art-page-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero{padding:36px 0}
+  .hero h1{font-size:1.7rem}
+  .cat-grid{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<div class="shell">
+<div class="rdprog" id="rdprog"></div>
+<div class="toast" id="toast"></div>
+<button class="back-top" id="btop" onclick="scrollTop()">↑</button>
 
-  <!-- Desktop sidebar -->
-  <nav class="sidebar" aria-label="Instrument selection">
-    <div class="brand">
-      <div class="brand-mark">Tally<span>.</span></div>
-      <div class="brand-tag">Eight Small Instruments</div>
-    </div>
-    <ul class="nav-list" id="navList"></ul>
-  </nav>
-
-  <!-- Mobile tabs -->
-  <div class="mobile-tabs" id="mobileTabs" aria-label="Instrument selection"></div>
-
-  <main>
-    <div class="panel-wrap" id="panelWrap">
-
-      <div class="hero" id="hero">
-        <h1>Eight small instruments,<br><em>precisely tuned.</em></h1>
-        <p>Free calculators for the everyday math you actually need — no account, no clutter, no waiting for a page to load. Pick a tool from the side, or jump straight in below.</p>
-        <div class="hero-chips" id="heroChips"></div>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="container">
+    <div class="ticker-inner">
+      <div class="ticker-badge">🔴 عاجل</div>
+      <div class="ticker-track">
+        <div class="ticker-roll">
+          <span onclick="goArt('ai-tools')">OpenAI تطلق GPT-5 بقدرات غير مسبوقة في الفهم والتحليل</span>
+          <span>•</span>
+          <span onclick="goArt('smartphones')">Apple تكشف عن iPhone 17 Pro بميزات AI متقدمة</span>
+          <span>•</span>
+          <span onclick="goArt('make-money')">Google تضيف مزايا ذكاء اصطناعي جديدة لـ Workspace مجاناً</span>
+          <span>•</span>
+          <span>تقرير: نمو سوق الذكاء الاصطناعي العربي 40% في 2024</span>
+          <span>•</span>
+          <span onclick="goArt('chatgpt-gemini')">مقارنة شاملة: ChatGPT مقابل Gemini — أيهما يتصدر 2024؟</span>
+          <span>•</span>
+          <span onclick="goArt('adsense-guide')">كيف تحصل على موافقة AdSense أول مرة — الدليل الكامل</span>
+        </div>
       </div>
-
-      <!-- panels injected below, kept as static markup for clarity -->
-
-      <!-- AGE CALCULATOR -->
-      <section class="tool-panel" data-panel="age">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 01</span></div>
-          <div class="plate">Instrument <span>—</span> Age Reckoner</div>
-          <h1 class="tool-title">Age Calculator</h1>
-          <p class="tool-sub">Enter a birth date to find an exact age, in years, months and days, measured against any reference date.</p>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="age-birth">Date of birth</label>
-              <input type="date" id="age-birth">
-            </div>
-            <div class="field">
-              <label for="age-asof">As of</label>
-              <input type="date" id="age-asof">
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="action" id="age-calc">Calculate age</button>
-          </div>
-
-          <div class="readout" id="age-readout" style="display:none">
-            <button class="copy-icon" data-copy-target="age-main" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
-            <div class="readout-label">Exact age</div>
-            <div class="readout-value" id="age-main">—</div>
-            <div class="readout-grid" style="margin-top:16px">
-              <div class="cell"><div class="num" id="age-days">—</div><div class="lab readout-label">Total days lived</div></div>
-              <div class="cell"><div class="num" id="age-weeks">—</div><div class="lab readout-label">Total weeks</div></div>
-              <div class="cell"><div class="num" id="age-next">—</div><div class="lab readout-label">Days to next birthday</div></div>
-            </div>
-            <div class="readout-sub" id="age-dow"></div>
-          </div>
-
-          <div class="info-block">
-            <h2>How age is counted</h2>
-            <p>An exact age is made up of three parts: full years, the extra months since the last birthday, and the leftover days since the last monthly anniversary. This calculator works out each part directly from the calendar, so it stays accurate even across leap years and months of different lengths.</p>
-            <p>Knowing a precise age is useful for school enrollment cut-offs, eligibility checks, legal age requirements, or simply working out how many days old someone is for a milestone celebration.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- UNIT CONVERTER -->
-      <section class="tool-panel" data-panel="unit">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 02</span></div>
-          <div class="plate">Instrument <span>—</span> Unit Converter</div>
-          <h1 class="tool-title">Unit Converter</h1>
-          <p class="tool-sub">Convert between length, weight, volume and temperature units. Results update as you type.</p>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="unit-category">Category</label>
-              <select id="unit-category">
-                <option value="length">Length</option>
-                <option value="weight">Weight / Mass</option>
-                <option value="volume">Volume</option>
-                <option value="temperature">Temperature</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="unit-value">Amount</label>
-              <input type="number" id="unit-value" value="1">
-            </div>
-            <div class="field">
-              <label for="unit-from">From</label>
-              <select id="unit-from"></select>
-            </div>
-            <button class="swap-btn" id="unit-swap" title="Swap units" aria-label="Swap units">
-              <svg viewBox="0 0 24 24"><path d="M7 7h11M14 3l4 4-4 4M17 17H6M10 21l-4-4 4-4"/></svg>
-            </button>
-            <div class="field">
-              <label for="unit-to">To</label>
-              <select id="unit-to"></select>
-            </div>
-          </div>
-
-          <div class="readout">
-            <button class="copy-icon" data-copy-target="unit-result" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
-            <div class="readout-label">Result</div>
-            <div class="readout-value" id="unit-result">—</div>
-          </div>
-
-          <div class="info-block">
-            <h2>Why unit conversion matters</h2>
-            <p>Most countries use the metric system, but plenty of everyday situations still mix in imperial units — recipes in cups, road signs in miles, or body weight in pounds. Converting between them by hand is easy to get wrong, since the multipliers aren't round numbers (a mile is 1.609 kilometers, not a clean ratio).</p>
-            <p>This converter covers the four unit families people look up most often: length, weight, volume and temperature, with results updating instantly as you type.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- RANDOM NUMBER GENERATOR -->
-      <section class="tool-panel" data-panel="random">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 03</span></div>
-          <div class="plate">Instrument <span>—</span> Random Draw</div>
-          <h1 class="tool-title">Random Number Generator</h1>
-          <p class="tool-sub">Draw one or more random whole numbers from a range you set.</p>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="rand-min">Minimum</label>
-              <input type="number" id="rand-min" value="1">
-            </div>
-            <div class="field">
-              <label for="rand-max">Maximum</label>
-              <input type="number" id="rand-max" value="100">
-            </div>
-            <div class="field">
-              <label for="rand-count">How many</label>
-              <input type="number" id="rand-count" value="1" min="1" max="200">
-            </div>
-          </div>
-          <label class="check-row"><input type="checkbox" id="rand-unique"> No repeated numbers</label>
-          <div class="btn-row">
-            <button class="action" id="rand-generate">Generate</button>
-          </div>
-
-          <div class="readout">
-            <div class="readout-label">Drawn numbers</div>
-            <div class="chips" id="rand-result"><span class="chip">—</span></div>
-          </div>
-
-          <div class="info-block">
-            <h2>Where random numbers come in handy</h2>
-            <p>A random number generator picks values with no predictable pattern, which makes it useful for raffle and giveaway draws, choosing who goes first in a game, picking a sample for quality checks, or generating test data for a spreadsheet or app.</p>
-            <p>Turning on "no repeated numbers" treats the draw like pulling names from a hat — once a number is picked, it's removed from the pool so it can't come up again.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- BMI CALCULATOR -->
-      <section class="tool-panel" data-panel="bmi">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 04</span></div>
-          <div class="plate">Instrument <span>—</span> Body Mass Index</div>
-          <h1 class="tool-title">BMI Calculator</h1>
-          <p class="tool-sub">A general screening measure based on height and weight. It does not diagnose health status.</p>
-
-          <div class="segmented">
-            <button class="active" data-bmi-units="metric">Metric (cm / kg)</button>
-            <button data-bmi-units="imperial">Imperial (ft+in / lb)</button>
-          </div>
-
-          <div id="bmi-metric-fields" class="field-row">
-            <div class="field">
-              <label for="bmi-height-cm">Height (cm)</label>
-              <input type="number" id="bmi-height-cm" value="170">
-            </div>
-            <div class="field">
-              <label for="bmi-weight-kg">Weight (kg)</label>
-              <input type="number" id="bmi-weight-kg" value="68">
-            </div>
-          </div>
-
-          <div id="bmi-imperial-fields" class="field-row" style="display:none">
-            <div class="field">
-              <label for="bmi-height-ft">Height (ft)</label>
-              <input type="number" id="bmi-height-ft" value="5">
-            </div>
-            <div class="field">
-              <label for="bmi-height-in">+ inches</label>
-              <input type="number" id="bmi-height-in" value="7">
-            </div>
-            <div class="field">
-              <label for="bmi-weight-lb">Weight (lb)</label>
-              <input type="number" id="bmi-weight-lb" value="150">
-            </div>
-          </div>
-
-          <div class="btn-row">
-            <button class="action" id="bmi-calc">Calculate BMI</button>
-          </div>
-
-          <div class="readout" id="bmi-readout" style="display:none">
-            <button class="copy-icon" data-copy-target="bmi-value" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
-            <div class="readout-label">Body Mass Index</div>
-            <div class="readout-value" id="bmi-value">—</div>
-            <div class="readout-sub" id="bmi-category"></div>
-          </div>
-          <p class="note">Categories shown follow the standard WHO reference ranges: under 18.5 underweight, 18.5–24.9 typical, 25–29.9 above typical, 30+ well above typical. For personal health guidance, talk with a doctor.</p>
-
-          <div class="info-block">
-            <h2>What BMI does and doesn't tell you</h2>
-            <p>Body Mass Index divides weight by height squared to give a quick, population-level screening number. It's widely used because it's simple to calculate, but it doesn't account for muscle mass, bone density, age, or body composition — so an athlete and a sedentary person of the same BMI can have very different health profiles.</p>
-            <p>Use this calculator for a general reference point, not a diagnosis. A doctor or dietitian can give guidance that actually fits your situation.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- TIMER -->
-      <section class="tool-panel" data-panel="timer">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 05</span></div>
-          <div class="plate">Instrument <span>—</span> Countdown</div>
-          <h1 class="tool-title">Timer</h1>
-          <p class="tool-sub">Set minutes and seconds, then start the countdown.</p>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="timer-min">Minutes</label>
-              <input type="number" id="timer-min" value="5" min="0">
-            </div>
-            <div class="field">
-              <label for="timer-sec">Seconds</label>
-              <input type="number" id="timer-sec" value="0" min="0" max="59">
-            </div>
-          </div>
-
-          <div class="timer-wrap">
-            <div class="ring-box">
-              <svg viewBox="0 0 200 200">
-                <circle class="ring-bg" cx="100" cy="100" r="88"></circle>
-                <circle class="ring-fg" id="timer-ring" cx="100" cy="100" r="88" stroke-dasharray="553" stroke-dashoffset="0"></circle>
-              </svg>
-              <div class="ring-time" id="timer-display" aria-live="polite">05:00</div>
-            </div>
-            <div class="btn-row">
-              <button class="action" id="timer-start">Start</button>
-              <button class="ghost" id="timer-pause">Pause</button>
-              <button class="ghost" id="timer-reset">Reset</button>
-            </div>
-          </div>
-
-          <div class="info-block">
-            <h2>Simple timing, no app required</h2>
-            <p>A countdown timer is handy for cooking, workouts, study sprints (like the Pomodoro technique), presentation rehearsals, or timing how long a task actually takes. Set the minutes and seconds, hit start, and the ring empties out as time runs down with a short tone when it hits zero.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- PERCENTAGE CALCULATOR -->
-      <section class="tool-panel" data-panel="percent">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 06</span></div>
-          <div class="plate">Instrument <span>—</span> Percentage</div>
-          <h1 class="tool-title">Percentage Calculator</h1>
-          <p class="tool-sub">Three common percentage questions, answered directly.</p>
-
-          <div class="segmented">
-            <button class="active" data-pct-mode="of">X% of Y</button>
-            <button data-pct-mode="is">X is what % of Y</button>
-            <button data-pct-mode="change">Change from X to Y</button>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label id="pct-label-x" for="pct-x">X</label>
-              <input type="number" id="pct-x" value="20">
-            </div>
-            <div class="field">
-              <label id="pct-label-y" for="pct-y">Y</label>
-              <input type="number" id="pct-y" value="80">
-            </div>
-          </div>
-
-          <div class="readout">
-            <button class="copy-icon" data-copy-target="pct-result" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
-            <div class="readout-label">Result</div>
-            <div class="readout-value" id="pct-result">—</div>
-          </div>
-
-          <div class="info-block">
-            <h2>Three percentage questions, one tool</h2>
-            <p>"X% of Y" answers things like a tip on a bill or a tax on a price. "X is what % of Y" is useful for grading, like working out a test score from points earned out of points possible. "Change from X to Y" shows the percentage increase or decrease between two numbers — useful for tracking a pay raise, a price hike, or a drop in sales.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- CURRENCY CONVERTER -->
-      <section class="tool-panel" data-panel="currency">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 07</span></div>
-          <div class="plate">Instrument <span>—</span> Exchange</div>
-          <h1 class="tool-title">Currency Converter</h1>
-          <p class="tool-sub">Converts using live exchange rates where a connection is available, with an offline approximate table as a fallback.</p>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="cur-amount">Amount</label>
-              <input type="number" id="cur-amount" value="100">
-            </div>
-            <div class="field">
-              <label for="cur-from">From</label>
-              <select id="cur-from"></select>
-            </div>
-            <button class="swap-btn" id="cur-swap" title="Swap currencies" aria-label="Swap currencies">
-              <svg viewBox="0 0 24 24"><path d="M7 7h11M14 3l4 4-4 4M17 17H6M10 21l-4-4 4-4"/></svg>
-            </button>
-            <div class="field">
-              <label for="cur-to">To</label>
-              <select id="cur-to"></select>
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="action" id="cur-convert">Convert</button>
-          </div>
-
-          <div class="readout">
-            <button class="copy-icon" data-copy-target="cur-result" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
-            <div class="readout-label">Converted amount</div>
-            <div class="readout-value" id="cur-result">—</div>
-            <div class="readout-sub" id="cur-meta"></div>
-          </div>
-
-          <div class="info-block">
-            <h2>About the exchange rates shown</h2>
-            <p>Exchange rates move constantly based on global markets, so this tool fetches current rates when your connection allows it. If a live rate can't be reached, it falls back to an approximate offline table so the converter still gives a usable estimate.</p>
-            <p>For an actual money transfer or currency exchange, your bank or transfer provider will apply their own rate and fees, which can differ from the market rate shown here.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- DISCOUNT CALCULATOR -->
-      <section class="tool-panel" data-panel="discount">
-        <div class="card">
-          <div class="stamp"><span>TALLY<br>NO. 08</span></div>
-          <div class="plate">Instrument <span>—</span> Markdown</div>
-          <h1 class="tool-title">Discount Calculator</h1>
-          <p class="tool-sub">Find the sale price and total savings on one item, or a whole quantity of them.</p>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="disc-price">Original price</label>
-              <input type="number" id="disc-price" value="80">
-            </div>
-            <div class="field">
-              <label for="disc-pct">Discount (%)</label>
-              <input type="number" id="disc-pct" value="25">
-            </div>
-            <div class="field">
-              <label for="disc-qty">Quantity</label>
-              <input type="number" id="disc-qty" value="1" min="1">
-            </div>
-          </div>
-
-          <div class="readout">
-            <button class="copy-icon" data-copy-target="disc-sale" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
-            <div class="readout-label">Sale price (each)</div>
-            <div class="readout-value" id="disc-sale">—</div>
-            <div class="readout-grid" style="margin-top:16px">
-              <div class="cell"><div class="num" id="disc-saved-each">—</div><div class="lab readout-label">Saved (each)</div></div>
-              <div class="cell"><div class="num" id="disc-total">—</div><div class="lab readout-label">Total for order</div></div>
-              <div class="cell"><div class="num" id="disc-saved-total">—</div><div class="lab readout-label">Total saved</div></div>
-            </div>
-          </div>
-
-          <div class="info-block">
-            <h2>Checking a sale price before you buy</h2>
-            <p>Stores sometimes round discounts in their favor, or stack a percentage off an already-marked-up price. Running the numbers yourself confirms the real sale price and shows exactly how much a multi-item order would save, which is handy when comparing deals across different stores.</p>
-          </div>
-        </div>
-      </section>
-
     </div>
-  </main>
+  </div>
 </div>
 
-<footer class="page-footer">TALLY — eight instruments, precisely tuned</footer>
-<p class="footer-disclaimer">Results are estimates for everyday convenience and aren't a substitute for professional medical, financial, or legal advice.</p>
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="hdr">
+      <a href="#" class="logo" onclick="goPage('home')">
+        <div class="logo-ico">⚡</div>
+        <div class="logo-txt">TechPlus<span>تقني بلس</span></div>
+      </a>
+      <nav id="dnav">
+        <a href="#" onclick="goPage('home')" class="active" data-pg="home">الرئيسية</a>
+        <a href="#" onclick="goCat('ai')" data-pg="ai">🤖 ذكاء اصطناعي</a>
+        <a href="#" onclick="goCat('tech')" data-pg="tech">💻 تقنية</a>
+        <a href="#" onclick="goCat('money')" data-pg="money">💰 ربح أونلاين</a>
+        <a href="#" onclick="goCat('reviews')" data-pg="reviews">⭐ مراجعات</a>
+        <a href="#" onclick="goPage('about')" data-pg="about">من نحن</a>
+      </nav>
+      <div class="hdr-right">
+        <button class="ico-btn" onclick="toast('🔍 البحث قادم!')">🔍</button>
+        <button class="ham" id="ham" onclick="toggleNav()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="m-nav" id="mnav">
+    <div class="container">
+      <a href="#" onclick="goPage('home');toggleNav()">🏠 الرئيسية</a>
+      <a href="#" onclick="goCat('ai');toggleNav()">🤖 ذكاء اصطناعي</a>
+      <a href="#" onclick="goCat('tech');toggleNav()">💻 تقنية</a>
+      <a href="#" onclick="goCat('money');toggleNav()">💰 ربح أونلاين</a>
+      <a href="#" onclick="goCat('reviews');toggleNav()">⭐ مراجعات</a>
+      <a href="#" onclick="goPage('about');toggleNav()">ℹ️ من نحن</a>
+      <a href="#" onclick="goPage('contact');toggleNav()">📧 تواصل معنا</a>
+      <a href="#" onclick="goPage('privacy');toggleNav()">🔒 سياسة الخصوصية</a>
+    </div>
+  </div>
+</header>
+
+<!-- =========== HOME =========== -->
+<div id="pg-home" class="page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-dots"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span>TRENDING NOW | الأكثر تداولاً</div>
+          <h1>بوابتك لعالم<br><em>الذكاء الاصطناعي</em><br>والتقنية الحديثة</h1>
+          <p class="hero-desc">أحدث الأخبار والمراجعات والشروحات باللغة العربية — كل ما تحتاجه في مكان واحد</p>
+          <a href="#" class="hero-cta" onclick="goCat('ai')">استكشف الذكاء الاصطناعي ←</a>
+        </div>
+        <div class="hero-card" onclick="goArt('ai-tools')">
+          <div class="hcard-img g1">🤖</div>
+          <div class="hcard-body">
+            <div class="hcard-tag">مقال مميز</div>
+            <div class="hcard-title">أفضل 10 أدوات ذكاء اصطناعي مجانية يجب أن تجربها الآن</div>
+            <div class="hcard-meta">
+              <span>✍️ سارة محمود</span>
+              <span>⏱️ 8 دقائق</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Ad Leaderboard -->
+    <div class="ad-wrap">
+      <p class="ad-lbl">إعلان</p>
+      <!--
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"
+           data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <div class="ad-box ad-leader">📢 &nbsp;مساحة إعلانية — Google AdSense 728×90 Leaderboard</div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <main>
+        <div class="sec-hdr">
+          <h2 class="sec-title"><span>أحدث المقالات</span></h2>
+          <a href="#" class="see-all" onclick="goCat('all')">عرض الكل ←</a>
+        </div>
+
+        <div class="art-grid">
+          <!-- Featured -->
+          <div class="art-card art-feat" onclick="goArt('chatgpt-gemini')">
+            <div class="art-img g6">⚔️</div>
+            <div class="art-body">
+              <span class="tag t-ai">مقارنة</span>
+              <h3>ChatGPT مقابل Gemini 2024: المقارنة الشاملة التي تحسم الجدل نهائياً</h3>
+              <p>نختبر العملاقين في أكثر من 200 مهمة لنصل إلى إجابة واضحة — من يتصدر الذكاء الاصطناعي هذا العام؟</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ أحمد الشامي</span><span>⏱️ 12 دقيقة</span></div>
+                <span>📅 ١٥ يونيو</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="goArt('ai-tools')">
+            <div class="art-img g1">🛠️</div>
+            <div class="art-body">
+              <span class="tag t-ai">أدوات AI</span>
+              <h3>أفضل 10 أدوات ذكاء اصطناعي مجانية لعام 2024</h3>
+              <p>قائمة بأقوى الأدوات المجانية التي ستغير طريقة عملك للأبد.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ سارة محمود</span><span>⏱️ 8 دقائق</span></div>
+                <span>📅 ١٠ يونيو</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="goArt('make-money')">
+            <div class="art-img g3">💰</div>
+            <div class="art-body">
+              <span class="tag t-money">ربح أونلاين</span>
+              <h3>كيف تربح 500$ شهرياً من الإنترنت باستخدام AI</h3>
+              <p>استراتيجيات مجربة لتحقيق دخل ثابت بمساعدة الذكاء الاصطناعي.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ محمد عبدالله</span><span>⏱️ 10 دقائق</span></div>
+                <span>📅 ٨ يونيو</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="goArt('smartphones')">
+            <div class="art-img g4">📱</div>
+            <div class="art-body">
+              <span class="tag t-rev">مراجعة</span>
+              <h3>أفضل 5 هواتف ذكية لعام 2024: المواصفات والأسعار</h3>
+              <p>دليلك الشامل لاختيار الهاتف المثالي حسب ميزانيتك.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ خالد إبراهيم</span><span>⏱️ 7 دقائق</span></div>
+                <span>📅 ٥ يونيو</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="goArt('coding')">
+            <div class="art-img g2">💻</div>
+            <div class="art-body">
+              <span class="tag t-tech">تطوير</span>
+              <h3>تعلم البرمجة مجاناً: المسار الكامل من الصفر للاحتراف</h3>
+              <p>أفضل المصادر والخطة الزمنية الواقعية لتصبح مطوراً محترفاً.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ ريم العتيبي</span><span>⏱️ 9 دقائق</span></div>
+                <span>📅 ٣ يونيو</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="goArt('seo-guide')">
+            <div class="art-img g8">📈</div>
+            <div class="art-body">
+              <span class="tag t-money">SEO</span>
+              <h3>دليل SEO 2024: كيف تصدر Google وتجذب زوار مجانيين</h3>
+              <p>أسرار تحسين محركات البحث وجذب آلاف الزوار لموقعك.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ عمر حسن</span><span>⏱️ 11 دقيقة</span></div>
+                <span>📅 ١ يونيو</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- More Articles -->
+        <div class="sec-hdr mt36">
+          <h2 class="sec-title"><span>ربح أونلاين</span></h2>
+          <a href="#" class="see-all" onclick="goCat('money')">عرض الكل ←</a>
+        </div>
+
+        <div class="art-grid">
+          <div class="art-card" onclick="goArt('adsense-guide')">
+            <div class="art-img g3">📊</div>
+            <div class="art-body">
+              <span class="tag t-money">AdSense</span>
+              <h3>كيف تقبل في Google AdSense وتبدأ بكسب المال</h3>
+              <p>الدليل الكامل للحصول على موافقة AdSense من أول طلب.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ نورة السالم</span><span>⏱️ 8 دقائق</span></div>
+                <span>📅 ٢٨ مايو</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="goArt('freelancing')">
+            <div class="art-img g5c">🎨</div>
+            <div class="art-body">
+              <span class="tag t-money">فريلانس</span>
+              <h3>الفريلانسينج في 2024: كيف تبدأ وأين تجد أول عميل</h3>
+              <p>دليلك العملي لبدء مسيرة مستقلة ناجحة والعمل من أي مكان.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ أحمد الشامي</span><span>⏱️ 6 دقائق</span></div>
+                <span>📅 ٢٥ مايو</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="goArt('youtube-adsense')">
+            <div class="art-img g5c">▶️</div>
+            <div class="art-body">
+              <span class="tag t-money">يوتيوب</span>
+              <h3>كيف تربح من يوتيوب في 2024: من الصفر لأول شيك</h3>
+              <p>كل ما تحتاجه لبناء قناة يوتيوب ناجحة وتحقيق دخل ثابت.</p>
+              <div class="art-meta">
+                <div class="art-meta-l"><span>✍️ محمد عبدالله</span><span>⏱️ 9 دقائق</span></div>
+                <span>📅 ٢٠ مايو</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="widget">
+          <p class="ad-lbl">إعلان</p>
+          <!--
+          <ins class="adsbygoogle" style="display:block"
+               data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          -->
+          <div class="ad-box ad-sq">📢<br>Google AdSense<br>300 × 250</div>
+        </div>
+
+        <div class="widget">
+          <h3 class="w-title">🔥 الأكثر قراءة</h3>
+          <div class="pop-post" onclick="goArt('ai-tools')">
+            <div class="pop-num">01</div>
+            <div><h4>أفضل 10 أدوات ذكاء اصطناعي مجانية</h4><p class="pop-sub">👁️ 24,500 مشاهدة</p></div>
+          </div>
+          <div class="pop-post" onclick="goArt('make-money')">
+            <div class="pop-num">02</div>
+            <div><h4>اربح 500$ شهرياً من الإنترنت</h4><p class="pop-sub">👁️ 19,200 مشاهدة</p></div>
+          </div>
+          <div class="pop-post" onclick="goArt('chatgpt-gemini')">
+            <div class="pop-num">03</div>
+            <div><h4>ChatGPT مقابل Gemini 2024</h4><p class="pop-sub">👁️ 18,700 مشاهدة</p></div>
+          </div>
+          <div class="pop-post" onclick="goArt('adsense-guide')">
+            <div class="pop-num">04</div>
+            <div><h4>دليل Google AdSense الكامل</h4><p class="pop-sub">👁️ 15,400 مشاهدة</p></div>
+          </div>
+          <div class="pop-post" onclick="goArt('coding')">
+            <div class="pop-num">05</div>
+            <div><h4>تعلم البرمجة مجاناً: المسار الكامل</h4><p class="pop-sub">👁️ 12,800 مشاهدة</p></div>
+          </div>
+        </div>
+
+        <div class="widget">
+          <h3 class="w-title">📂 التصنيفات</h3>
+          <div class="pills">
+            <span class="pill" onclick="goCat('ai')">🤖 ذكاء اصطناعي</span>
+            <span class="pill" onclick="goCat('tech')">💻 تقنية</span>
+            <span class="pill" onclick="goCat('money')">💰 ربح أونلاين</span>
+            <span class="pill" onclick="goCat('reviews')">⭐ مراجعات</span>
+            <span class="pill">💡 نصائح</span>
+            <span class="pill">📱 هواتف</span>
+            <span class="pill">🔐 أمن معلومات</span>
+            <span class="pill">🎮 ألعاب</span>
+          </div>
+        </div>
+
+        <div class="widget">
+          <h3 class="w-title">📧 النشرة البريدية</h3>
+          <p class="nl-desc">أحدث المقالات مباشرة في بريدك الإلكتروني، كل أسبوع</p>
+          <input type="email" class="nl-input" id="nl-input" placeholder="بريدك الإلكتروني...">
+          <button class="nl-btn" onclick="doSubscribe('nl-input')">اشتراك مجاني ✓</button>
+        </div>
+
+        <div class="widget">
+          <p class="ad-lbl">إعلان</p>
+          <div class="ad-box ad-sq2">📢<br>Google AdSense<br>300 × 200</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Category Blocks -->
+  <div class="cats-section">
+    <div class="container">
+      <div class="sec-hdr" style="margin-bottom:22px">
+        <h2 class="sec-title"><span>استكشف التصنيفات</span></h2>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card ai" onclick="goCat('ai')">
+          <div class="cat-ico">🤖</div>
+          <div class="cat-name">ذكاء اصطناعي</div>
+          <div class="cat-count">48 مقال</div>
+        </div>
+        <div class="cat-card tech" onclick="goCat('tech')">
+          <div class="cat-ico">💻</div>
+          <div class="cat-name">تقنية وتطوير</div>
+          <div class="cat-count">36 مقال</div>
+        </div>
+        <div class="cat-card money" onclick="goCat('money')">
+          <div class="cat-ico">💰</div>
+          <div class="cat-name">ربح أونلاين</div>
+          <div class="cat-count">29 مقال</div>
+        </div>
+        <div class="cat-card rev" onclick="goCat('reviews')">
+          <div class="cat-ico">⭐</div>
+          <div class="cat-name">مراجعات</div>
+          <div class="cat-count">22 مقال</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== ARTICLE PAGE =========== -->
+<div id="pg-article" class="page hidden">
+  <div class="container">
+    <div class="art-page-grid">
+      <article id="art-main"></article>
+      <aside class="sidebar" id="art-sidebar">
+        <div class="widget">
+          <p class="ad-lbl">إعلان</p>
+          <div class="ad-box ad-sq">📢<br>Google AdSense<br>300 × 250</div>
+        </div>
+        <div class="widget">
+          <h3 class="w-title">🔥 الأكثر قراءة</h3>
+          <div class="pop-post" onclick="goArt('ai-tools')">
+            <div class="pop-num">01</div>
+            <div><h4>أفضل 10 أدوات AI مجانية</h4><p class="pop-sub">24,500 مشاهدة</p></div>
+          </div>
+          <div class="pop-post" onclick="goArt('make-money')">
+            <div class="pop-num">02</div>
+            <div><h4>اربح 500$ شهرياً من الإنترنت</h4><p class="pop-sub">19,200 مشاهدة</p></div>
+          </div>
+          <div class="pop-post" onclick="goArt('chatgpt-gemini')">
+            <div class="pop-num">03</div>
+            <div><h4>ChatGPT مقابل Gemini 2024</h4><p class="pop-sub">18,700 مشاهدة</p></div>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="w-title">📧 النشرة البريدية</h3>
+          <p class="nl-desc">مقالات حصرية في بريدك</p>
+          <input type="email" class="nl-input" id="nl-art" placeholder="بريدك الإلكتروني...">
+          <button class="nl-btn" onclick="doSubscribe('nl-art')">اشتراك مجاني</button>
+        </div>
+        <div class="widget">
+          <p class="ad-lbl">إعلان</p>
+          <div class="ad-box ad-sq2">📢<br>Google AdSense<br>300 × 200</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- =========== CATEGORY PAGE =========== -->
+<div id="pg-cat" class="page hidden">
+  <div class="pg-hdr">
+    <div class="container">
+      <h1 id="cat-title">التصنيف</h1>
+      <p>استكشف أحدث المقالات</p>
+    </div>
+  </div>
+  <div class="container" style="padding-bottom:60px">
+    <div class="art-grid" id="cat-grid"></div>
+  </div>
+</div>
+
+<!-- =========== ABOUT =========== -->
+<div id="pg-about" class="page hidden">
+  <div class="pg-hdr">
+    <div class="container">
+      <h1>من نحن | About Us</h1>
+      <p>تعرف على TechPlus وفريقه</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="about-grid">
+      <div class="pg-content" style="padding-right:0">
+        <h2>🚀 ما هو TechPlus؟</h2>
+        <p>TechPlus (تقني بلس) موقع متخصص في أخبار التقنية والذكاء الاصطناعي باللغة العربية، تأسس لتوفير محتوى احترافي محدث لملايين العرب المهتمين بعالم التكنولوجيا.</p>
+        <p>نؤمن أن المحتوى التقني العربي يجب أن يكون في متناول الجميع — من المبتدئ حتى المحترف — لذلك نحرص على تقديم مقالات بسيطة، عملية، ودقيقة.</p>
+        <h2>🎯 رسالتنا</h2>
+        <p>نهدف أن نكون المرجع الأول للمستخدم العربي في كل ما يتعلق بالتقنية، الذكاء الاصطناعي، والفرص الرقمية، من خلال محتوى موثوق ومحدث يومياً.</p>
+        <h2>📝 ما نغطيه</h2>
+        <ul>
+          <li>أخبار الذكاء الاصطناعي والتطورات التقنية</li>
+          <li>مراجعات الأدوات والتطبيقات والأجهزة</li>
+          <li>استراتيجيات الربح من الإنترنت والفريلانس</li>
+          <li>دروس وشروحات برمجية للمبتدئين</li>
+          <li>مقارنات تقنية شاملة وموضوعية</li>
+        </ul>
+        <h2>✉️ للإعلان والتواصل</h2>
+        <p>للإعلانات والشراكات وطلبات المحتوى، يرجى التواصل عبر <a href="#" onclick="goPage('contact')" style="color:var(--p);font-weight:700">صفحة التواصل</a>.</p>
+      </div>
+
+      <div>
+        <div style="background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--sh);margin-bottom:16px">
+          <h3 style="font-size:.95rem;font-weight:800;margin-bottom:14px">📊 أرقامنا</h3>
+          <div class="stats-grid">
+            <div class="stat-card" style="background:var(--pl)">
+              <div class="num" style="color:var(--p)">+135</div>
+              <div class="lbl">مقال منشور</div>
+            </div>
+            <div class="stat-card" style="background:#ECFDF5">
+              <div class="num" style="color:#10B981">50K+</div>
+              <div class="lbl">قارئ شهري</div>
+            </div>
+            <div class="stat-card" style="background:#FEF3C7">
+              <div class="num" style="color:var(--acc)">4.8★</div>
+              <div class="lbl">تقييم القراء</div>
+            </div>
+            <div class="stat-card" style="background:#FDF4FF">
+              <div class="num" style="color:#8B5CF6">12K+</div>
+              <div class="lbl">مشترك</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--sh)">
+          <h3 style="font-size:.95rem;font-weight:800;margin-bottom:14px">👥 فريق العمل</h3>
+          <div class="team-member">
+            <div class="avatar" style="background:var(--p)">أ</div>
+            <div><h4>أحمد الشامي</h4><p>محرر التقنية والذكاء الاصطناعي</p></div>
+          </div>
+          <div class="team-member">
+            <div class="avatar" style="background:#10B981">س</div>
+            <div><h4>سارة محمود</h4><p>كاتبة محتوى تقني متخصصة</p></div>
+          </div>
+          <div class="team-member">
+            <div class="avatar" style="background:var(--acc)">م</div>
+            <div><h4>محمد عبدالله</h4><p>خبير الربح أونلاين والتسويق</p></div>
+          </div>
+          <div class="team-member">
+            <div class="avatar" style="background:#8B5CF6">ر</div>
+            <div><h4>ريم العتيبي</h4><p>مطورة ويب ومحررة تقنية</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== CONTACT =========== -->
+<div id="pg-contact" class="page hidden">
+  <div class="pg-hdr">
+    <div class="container">
+      <h1>تواصل معنا | Contact Us</h1>
+      <p>نحن هنا للمساعدة — تواصل في أي وقت</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="fg"><label>الاسم الكامل *</label><input type="text" id="c-name" placeholder="أدخل اسمك..."></div>
+        <div class="fg"><label>البريد الإلكتروني *</label><input type="email" id="c-email" placeholder="example@email.com"></div>
+        <div class="fg"><label>الموضوع</label><input type="text" id="c-sub" placeholder="موضوع رسالتك..."></div>
+        <div class="fg"><label>الرسالة *</label><textarea id="c-msg" placeholder="اكتب رسالتك هنا..."></textarea></div>
+        <button class="btn-send" onclick="sendMsg()">إرسال الرسالة 📩</button>
+      </div>
+      <div>
+        <div class="c-info-item">
+          <div class="c-ico">📧</div>
+          <div><h4>البريد الإلكتروني</h4><p>info@techplus-ar.com</p><p>للإعلانات: ads@techplus-ar.com</p></div>
+        </div>
+        <div class="c-info-item">
+          <div class="c-ico">🌐</div>
+          <div><h4>منصات التواصل</h4><p>@TechPlusAR على تويتر وإنستغرام</p></div>
+        </div>
+        <div class="c-info-item">
+          <div class="c-ico">⏰</div>
+          <div><h4>ساعات العمل</h4><p>السبت — الخميس، 9ص–6م</p></div>
+        </div>
+        <div class="c-info-item">
+          <div class="c-ico">✍️</div>
+          <div><h4>اكتب معنا</h4><p>نرحب بالكتّاب المميزين للنشر معنا</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== PRIVACY POLICY =========== -->
+<div id="pg-privacy" class="page hidden">
+  <div class="pg-hdr">
+    <div class="container">
+      <h1>سياسة الخصوصية | Privacy Policy</h1>
+      <p>آخر تحديث: يونيو 2024</p>
+    </div>
+  </div>
+  <div class="pg-content">
+    <h2>مقدمة</h2>
+    <p>يلتزم موقع TechPlus بحماية خصوصية زواره. توضح هذه الصفحة البيانات التي نجمعها وكيفية استخدامها وحمايتها.</p>
+    <h2>البيانات التي نجمعها</h2>
+    <ul>
+      <li>عنوان IP وبيانات الجهاز والمتصفح</li>
+      <li>الصفحات التي تزورها ومدة الزيارة</li>
+      <li>الموقع الجغرافي التقريبي</li>
+      <li>الصفحة المحيلة (Referrer)</li>
+    </ul>
+    <h2>Google AdSense والإعلانات</h2>
+    <p>يستخدم الموقع Google AdSense لعرض الإعلانات. قد تستخدم Google ملفات كوكيز لتقديم إعلانات مناسبة بناءً على تاريخ تصفحك. يمكنك إلغاء هذا من إعدادات الإعلانات في Google على: g.co/adsettings</p>
+    <h2>Google Analytics</h2>
+    <p>نستخدم Google Analytics لفهم كيفية استخدام الزوار للموقع وتحسين المحتوى. البيانات مجهولة الهوية ولا تُربط بمعلوماتك الشخصية.</p>
+    <h2>ملفات الكوكيز</h2>
+    <p>يستخدم الموقع ملفات كوكيز ضرورية لعمله، وأخرى تحليلية وإعلانية. يمكنك تعطيلها من إعدادات متصفحك في أي وقت.</p>
+    <h2>كيف نستخدم بياناتك</h2>
+    <ul>
+      <li>تحسين تجربة المستخدم وتطوير المحتوى</li>
+      <li>تحليل حركة الزوار وفهم الاهتمامات</li>
+      <li>عرض إعلانات ملائمة عبر Google AdSense</li>
+      <li>إرسال النشرة البريدية للمشتركين فقط</li>
+    </ul>
+    <h2>مشاركة البيانات</h2>
+    <p>لا نبيع أو نؤجر بياناتك لأطراف ثالثة. نشارك بيانات مجهولة فقط مع شركاء التحليل مثل Google وفق سياساتهم.</p>
+    <h2>حقوقك</h2>
+    <ul>
+      <li>الاطلاع على بياناتك المجمعة</li>
+      <li>طلب حذف بياناتك</li>
+      <li>إلغاء الاشتراك في النشرة البريدية</li>
+      <li>تعطيل ملفات الكوكيز من المتصفح</li>
+    </ul>
+    <h2>Privacy Policy (English Summary)</h2>
+    <p>TechPlus collects standard usage data (IP, browser, pages visited) via Google Analytics and displays ads via Google AdSense. We do not sell personal data to third parties. Users can opt out of cookies via browser settings. For questions: privacy@techplus-ar.com</p>
+    <h2>تواصل معنا</h2>
+    <p>أي استفسار حول الخصوصية: <strong style="color:var(--p)">privacy@techplus-ar.com</strong></p>
+  </div>
+</div>
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-about">
+        <a href="#" class="logo" onclick="goPage('home')">
+          <div class="logo-ico">⚡</div>
+          <div class="logo-txt" style="color:white">TechPlus<span>تقني بلس</span></div>
+        </a>
+        <p>بوابتك العربية لأحدث أخبار التقنية والذكاء الاصطناعي. محتوى موثوق ومحدث يومياً لجمهور عربي واسع.</p>
+        <div class="social">
+          <a class="soc-btn" href="#">𝕏</a>
+          <a class="soc-btn" href="#">f</a>
+          <a class="soc-btn" href="#">📷</a>
+          <a class="soc-btn" href="#">▶</a>
+          <a class="soc-btn" href="#">✈️</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>أقسام الموقع</h4>
+        <ul>
+          <li><a href="#" onclick="goCat('ai')">🤖 ذكاء اصطناعي</a></li>
+          <li><a href="#" onclick="goCat('tech')">💻 تقنية</a></li>
+          <li><a href="#" onclick="goCat('money')">💰 ربح أونلاين</a></li>
+          <li><a href="#" onclick="goCat('reviews')">⭐ مراجعات</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>روابط مهمة</h4>
+        <ul>
+          <li><a href="#" onclick="goPage('about')">من نحن</a></li>
+          <li><a href="#" onclick="goPage('contact')">تواصل معنا</a></li>
+          <li><a href="#" onclick="goPage('privacy')">سياسة الخصوصية</a></li>
+          <li><a href="#" onclick="toast('قادم قريباً!')">شروط الاستخدام</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>النشرة البريدية</h4>
+        <p style="font-size:.8rem;line-height:1.7;margin-bottom:10px">احصل على أحدث المقالات في بريدك</p>
+        <input type="email" id="ft-email" class="ft-email" placeholder="بريدك الإلكتروني...">
+        <button class="ft-sub" onclick="doSubscribe('ft-email')">اشتراك →</button>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2024 TechPlus | تقني بلس — جميع الحقوق محفوظة</span>
+      <div class="ft-links">
+        <a href="#" onclick="goPage('privacy')">سياسة الخصوصية</a>
+        <a href="#" onclick="goPage('contact')">تواصل معنا</a>
+        <a href="#" onclick="goPage('about')">من نحن</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
-/* ===================== NAVIGATION ===================== */
-const tools = [
-  { id:'age', label:'Age Calculator', icon:'<path d="M8 7V3M16 7V3M4 11h16M5 5h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/>' },
-  { id:'unit', label:'Unit Converter', icon:'<path d="M7 7h11M14 3l4 4-4 4M17 17H6M10 21l-4-4 4-4"/>' },
-  { id:'random', label:'Random Number', icon:'<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="15" cy="9" r="1"/><circle cx="9" cy="15" r="1"/>' },
-  { id:'bmi', label:'BMI Calculator', icon:'<path d="M12 3v18M7 7l-3 3 3 3M17 7l3 3-3 3"/>' },
-  { id:'timer', label:'Timer', icon:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/>' },
-  { id:'percent', label:'Percentage', icon:'<circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M19 5L5 19"/>' },
-  { id:'currency', label:'Currency Converter', icon:'<circle cx="12" cy="12" r="9"/><path d="M9 9.5c0-1 1-2 3-2s3 .8 3 1.8-1 1.5-3 1.7-3 .9-3 2 1.2 1.8 3 1.8 3-1 3-2"/>' },
-  { id:'discount', label:'Discount Calculator', icon:'<path d="M20 12L12 4 4 12v8h8z" transform="rotate(45 12 12)"/><circle cx="9" cy="9" r="1.4"/>' }
-];
-
-const navList = document.getElementById('navList');
-const mobileTabs = document.getElementById('mobileTabs');
-
-tools.forEach(t=>{
-  const li = document.createElement('li');
-  li.className = 'nav-item';
-  li.innerHTML = `<button data-tool="${t.id}"><svg viewBox="0 0 24 24">${t.icon}</svg><span>${t.label}</span></button>`;
-  navList.appendChild(li);
-
-  const mb = document.createElement('button');
-  mb.dataset.tool = t.id;
-  mb.textContent = t.label;
-  mobileTabs.appendChild(mb);
-
-  const chip = document.createElement('button');
-  chip.dataset.tool = t.id;
-  chip.textContent = t.label;
-  document.getElementById('heroChips').appendChild(chip);
-});
-
-function activateTool(id){
-  document.querySelectorAll('.nav-item button, .mobile-tabs button, .hero-chips button').forEach(b=>{
-    b.classList.toggle('active', b.dataset.tool === id);
-  });
-  document.querySelectorAll('.tool-panel').forEach(p=>{
-    p.classList.toggle('active', p.dataset.panel === id);
-  });
-  document.getElementById('hero').style.display = 'none';
-  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
-}
-
-document.querySelectorAll('.nav-item button, .mobile-tabs button, .hero-chips button').forEach(b=>{
-  b.addEventListener('click', ()=> activateTool(b.dataset.tool));
-});
-
-// No tool is pre-selected — the hero greets the visitor until they choose one.
-
-/* ===================== COPY RESULT BUTTONS ===================== */
-document.querySelectorAll('.copy-icon').forEach(btn=>{
-  btn.addEventListener('click', async ()=>{
-    const target = document.getElementById(btn.dataset.copyTarget);
-    if(!target) return;
-    const text = target.textContent.trim().replace(/\s+/g,' ');
-    try{
-      await navigator.clipboard.writeText(text);
-    }catch(e){
-      const ta = document.createElement('textarea');
-      ta.value = text; document.body.appendChild(ta); ta.select();
-      try{ document.execCommand('copy'); }catch(e2){}
-      ta.remove();
-    }
-    btn.classList.add('copied');
-    setTimeout(()=> btn.classList.remove('copied'), 1400);
-  });
-});
-
-
-const ageBirth = document.getElementById('age-birth');
-const ageAsOf = document.getElementById('age-asof');
-(function initAgeDefaults(){
-  const today = new Date();
-  ageAsOf.value = today.toISOString().slice(0,10);
-})();
-
-document.getElementById('age-calc').addEventListener('click', ()=>{
-  if(!ageBirth.value) return;
-  const birth = new Date(ageBirth.value + 'T00:00:00');
-  const asOf = ageAsOf.value ? new Date(ageAsOf.value + 'T00:00:00') : new Date();
-
-  if(birth > asOf){
-    document.getElementById('age-main').textContent = 'Birth date is after the reference date';
-    document.getElementById('age-readout').style.display = 'block';
-    document.getElementById('age-days').textContent='—';
-    document.getElementById('age-weeks').textContent='—';
-    document.getElementById('age-next').textContent='—';
-    document.getElementById('age-dow').textContent='';
-    return;
+/* ────────────────── DATA ────────────────── */
+const ARTS = {
+  'ai-tools':{
+    title:'أفضل 10 أدوات ذكاء اصطناعي مجانية يجب أن تجربها في 2024',
+    tag:'أدوات AI',tc:'t-ai',author:'سارة محمود',date:'١٠ يونيو ٢٠٢٤',rt:'8 دقائق',
+    gr:'g1',em:'🛠️',
+    intro:'الذكاء الاصطناعي لم يعد حكراً على الشركات الكبرى — أقوى الأدوات في متناول يدك مجاناً تماماً. إليك أفضل 10 ستغير طريقة عملك للأبد.',
+    body:`<h2>1. ChatGPT من OpenAI</h2>
+<p>لا يزال ChatGPT في مقدمة القائمة، والنسخة المجانية (GPT-4o mini) توفر قدرات رائعة للكتابة، البرمجة، البحث، والترجمة. النسخة Plus بـ20 دولار شهرياً تمنحك GPT-4o كاملاً.</p>
+<div class="art-hl"><p>💡 نصيحة: استخدم ChatGPT لكتابة محتوى موقعك الأولي، ثم راجعه وأضف صوتك الشخصي — هذا ما يميز المواقع الناجحة.</p></div>
+<h2>2. Google Gemini</h2>
+<p>يتميز بالتكامل مع Google Workspace والوصول الفعلي للإنترنت. النسخة المجانية قوية وتدعم العربية بشكل ممتاز.</p>
+<h2>3. Claude من Anthropic</h2>
+<p>يتفوق في التحليل والكتابة الطويلة. نافذة سياق ضخمة تتيح معالجة مستندات كاملة. مثالي للمقالات الطويلة.</p>
+<h2>4. Perplexity AI</h2>
+<p>محرك بحث ذكي يجمع قوة الـLLM مع نتائج الإنترنت الحية. مثالي للبحث والتحقق من المعلومات بمصادر.</p>
+<h2>5. Microsoft Copilot</h2>
+<p>مدمج في Windows وEdge ومنتجات Office. مجاني لمستخدمي مايكروسوفت ويعمل مع GPT-4.</p>
+<h2>6. Midjourney (محدود مجاناً)</h2>
+<p>الأشهر في توليد الصور. جرّبه عبر Discord لعدد محدود من الصور، ثم اشترك إذا أعجبك.</p>
+<h2>7. ElevenLabs — تحويل نص لصوت</h2>
+<p>أداة رائعة لتحويل النصوص لأصوات بشرية واقعية. مثالية لليوتيوبرز. النسخة المجانية: 10,000 حرف/شهر.</p>
+<h2>8. Gamma — عروض تقديمية</h2>
+<p>أنشئ عروض تقديمية احترافية في ثوانٍ. اكتب الموضوع ودع Gamma يبني العرض بالكامل.</p>
+<h2>9. Runway ML</h2>
+<p>لتوليد الفيديوهات وتحرير الصور بالذكاء الاصطناعي. مثالي للمصممين وصانعي المحتوى.</p>
+<h2>10. Canva AI</h2>
+<p>إذا كنت تستخدم Canva أصلاً، فمزايا AI المدمجة فيه (Magic Design, Magic Write) لا تحتاج أي اشتراك إضافي.</p>`,
+    tags:['ChatGPT','Gemini','Claude','أدوات AI','مجانية','2024','ذكاء اصطناعي']
+  },
+  'make-money':{
+    title:'كيف تربح 500 دولار شهرياً من الإنترنت باستخدام الذكاء الاصطناعي',
+    tag:'ربح أونلاين',tc:'t-money',author:'محمد عبدالله',date:'٨ يونيو ٢٠٢٤',rt:'10 دقائق',
+    gr:'g3',em:'💰',
+    intro:'الإنترنت غيّر معادلة الربح، والذكاء الاصطناعي جعلها أسهل من أي وقت. نكشف الطرق الأكثر فعالية للبدء من الصفر بدون رأس مال.',
+    body:`<h2>1. مدونة + Google AdSense</h2>
+<p>الطريقة الكلاسيكية والأكثر استدامة. أنشئ موقعاً في مجال محدد، اكتب محتوى عالي الجودة بمساعدة AI، ثم قدم لـ Google AdSense. مع 10,000-50,000 زيارة شهرية يمكن تحقيق 200-1,000 دولار/شهر.</p>
+<div class="art-hl"><p>💡 سر النجاح: اختر مجالاً لديك فيه بعض المعرفة. AI يكتب، أنت تراجع وتضيف الخبرة الحقيقية — هذا المزيج لا يُهزم.</p></div>
+<h2>2. الفريلانس + AI = إنتاجية مضاعفة</h2>
+<p>إذا كنت مستقلاً (كاتب، مصمم، مطور)، يمكنك مضاعفة إنتاجيتك 3-5 أضعاف بالـAI. كاتب يكتب مقالتين يومياً بدون AI يكتب 10 معه. الفرق في الدخل واضح.</p>
+<h2>3. يوتيوب بدون وجه (Faceless YouTube)</h2>
+<p>قناة يوتيوب كاملة بالـAI: ChatGPT للسكريبت، ElevenLabs للصوت، Runway/Canva للمرئيات. مئات القنوات تجني 300-2,000 دولار/شهر بهذه الطريقة.</p>
+<h2>4. بيع خدمات AI على Fiverr</h2>
+<p>قدم خدمات: كتابة محتوى، تصميم بـMidjourney، تحرير مقاطع بـRunway. الزبائن يريدون النتيجة، لا يهمهم الأداة المستخدمة.</p>
+<h2>5. المنتجات الرقمية</h2>
+<p>قوالب Notion، ملفات Prompts، كتب رقمية، دورات. أنشئها مرة واحدة بمساعدة AI وبعها لا نهائياً على Gumroad أو Etsy.</p>`,
+    tags:['ربح أونلاين','AdSense','فريلانس','يوتيوب','AI','دخل سلبي']
+  },
+  'chatgpt-gemini':{
+    title:'ChatGPT مقابل Gemini 2024: المقارنة الشاملة التي تحسم الجدل',
+    tag:'مقارنة',tc:'t-ai',author:'أحمد الشامي',date:'١٥ يونيو ٢٠٢٤',rt:'12 دقيقة',
+    gr:'g6',em:'⚔️',
+    intro:'OpenAI وGoogle في مواجهة مباشرة. اختبرنا الاثنين على أكثر من 200 مهمة مختلفة على مدى أسبوعين لنصل إلى إجابة واضحة ونهائية.',
+    body:`<h2>مقارنة الأداء العام</h2>
+<p>تفوق ChatGPT-4o في الكتابة الإبداعية والبرمجة، بينما أبدع Gemini 1.5 Pro في التحليل متعدد الوسائط والتكامل مع خدمات Google.</p>
+<h2>الكتابة والمحتوى</h2>
+<p>ChatGPT يكتب بأسلوب أكثر سلاسة وإبداعاً — الخيار الأفضل للمدونين وكتّاب المحتوى. Gemini يميل للدقة والتنظيم، مثالي للتقارير والتحليلات.</p>
+<div class="art-hl"><p>⚡ النتيجة: ChatGPT للمحتوى الإبداعي، Gemini للبحث والتحليل — الأذكياء يستخدمون الاثنين.</p></div>
+<h2>البرمجة والكود</h2>
+<p>ChatGPT لا يزال متفوقاً في البرمجة بفارق واضح. أكواده أنظف وأخطاؤه أقل. Gemini يلحق بسرعة مع النماذج الجديدة.</p>
+<h2>اللغة العربية</h2>
+<p>Gemini تحسّن كثيراً بالعربية وفاجأنا. لكن ChatGPT لا يزال يتقدم خطوة في فهم السياق والمحادثات الطويلة.</p>
+<h2>الأسعار</h2>
+<p>كلاهما مجاني بقدرات جيدة. ChatGPT Plus = 20$/شهر. Gemini Advanced = 20$/شهر (ضمن Google One AI Premium). السعر متساوٍ.</p>
+<h2>الحكم النهائي</h2>
+<p>إذا كنت تعمل مع Google Workspace → Gemini. إذا كنت مدوناً أو مبرمجاً → ChatGPT. والأذكى يستخدم الاثنين!</p>`,
+    tags:['ChatGPT','Gemini','مقارنة','OpenAI','Google','2024']
+  },
+  'smartphones':{
+    title:'أفضل 5 هواتف ذكية لعام 2024: المواصفات والأسعار',
+    tag:'مراجعة',tc:'t-rev',author:'خالد إبراهيم',date:'٥ يونيو ٢٠٢٤',rt:'7 دقائق',
+    gr:'g4',em:'📱',
+    intro:'سوق الهواتف 2024 مليء بالخيارات، لكن ليس كلها يستحق أموالك. اخترنا أفضل 5 هواتف لمختلف الميزانيات بناءً على اختبارات حقيقية.',
+    body:`<h2>1. Samsung Galaxy S25 Ultra — الأفضل بلا منازع</h2>
+<p>Snapdragon 8 Elite، شاشة AMOLED 6.9 بوصة 120Hz، كاميرا 200MP، بطارية 5,000mAh، وGalaxy AI المتطور. السعر يبدأ من 1,299 دولار.</p>
+<h2>2. iPhone 16 Pro Max — تجربة Apple كاملة</h2>
+<p>A18 Pro الأقوى في السوق، Camera Control جديد، Apple Intelligence AI، وتصوير 4K/120fps. 1,199 دولار.</p>
+<div class="art-hl"><p>💡 إذا كنت في النظام البيئي لـApple → iPhone. إذا كنت تحب الحرية والتخصيص → Samsung.</p></div>
+<h2>3. Google Pixel 9 Pro — ملك التصوير الليلي</h2>
+<p>Google Tensor G4، مزايا AI رائعة (Magic Eraser, Best Take)، وضمان تحديثات 7 سنوات. 1,099 دولار.</p>
+<h2>4. OnePlus 13 — قيمة لا تُضاهى</h2>
+<p>Snapdragon 8 Elite، شاشة 120Hz، شحن 100W خارق السرعة. أفضل في فئة الميد-هاي بـ899 دولار.</p>
+<h2>5. Xiaomi 15 — مواصفات فلاجشيب بسعر أقل</h2>
+<p>Snapdragon 8 Elite، كاميرا Leica مبهرة، شاشة رائعة. خيار ذكي بـ799 دولار.</p>`,
+    tags:['هواتف','Samsung','iPhone','مراجعة','2024','Pixel']
+  },
+  'coding':{
+    title:'تعلم البرمجة مجاناً في 2024: المسار الكامل من الصفر للاحتراف',
+    tag:'تطوير',tc:'t-tech',author:'ريم العتيبي',date:'٣ يونيو ٢٠٢٤',rt:'9 دقائق',
+    gr:'g2',em:'💻',
+    intro:'مع المصادر المجانية المتاحة اليوم والذكاء الاصطناعي كمعلم شخصي، يمكنك أن تصبح مطوراً محترفاً في 6-12 شهراً دون دفع فلس واحد.',
+    body:`<h2>لماذا البرمجة في 2024؟</h2>
+<p>متوسط راتب مطور الويب الجديد في الشرق الأوسط يبدأ من 3,000-6,000 دولار شهرياً. وإمكانية العمل عن بعد مع شركات عالمية تجعلها من أفضل المجالات.</p>
+<h2>المسار المقترح</h2>
+<p><strong>الشهر 1-2:</strong> HTML وCSS. مصدر: freeCodeCamp.org</p>
+<p><strong>الشهر 3-4:</strong> JavaScript. مصدر: The Odin Project</p>
+<p><strong>الشهر 5-6:</strong> React أو Vue.js. مصدر: التوثيق الرسمي</p>
+<p><strong>الشهر 7-8:</strong> Node.js أو Python. اختر حسب هدفك.</p>
+<div class="art-hl"><p>🚀 استخدم ChatGPT كمعلم مجاني: "اشرح مفهوم Closures في JavaScript بأسلوب بسيط مع مثال عملي"</p></div>
+<h2>أفضل المصادر المجانية</h2>
+<ul>
+<li>freeCodeCamp.org — أفضل منصة مجانية شاملة</li>
+<li>The Odin Project — مسار كامل 100% مجاني</li>
+<li>CS50 Harvard — للأسس العلمية القوية</li>
+<li>MDN Web Docs — المرجع الأشمل للويب</li>
+</ul>`,
+    tags:['برمجة','JavaScript','Python','تعلم','ويب','مجاني']
+  },
+  'seo-guide':{
+    title:'دليل SEO الشامل 2024: كيف تصدر Google وتجذب آلاف الزوار',
+    tag:'SEO',tc:'t-money',author:'عمر حسن',date:'١ يونيو ٢٠٢٤',rt:'11 دقيقة',
+    gr:'g8',em:'📈',
+    intro:'SEO هو الفرق بين موقع يجذب 100 زائر وآخر يجذب 100,000 — بنفس المحتوى تقريباً. الدليل الذي لا يخبرك به أحد.',
+    body:`<h2>الأسس الثلاثة لـ SEO الناجح</h2>
+<p><strong>1. المحتوى:</strong> اكتب محتوى شاملاً يجيب على أسئلة المستخدمين بشكل أفضل من أي موقع آخر.</p>
+<p><strong>2. التقنية:</strong> موقعك يجب أن يكون سريعاً (أقل من 3 ثوانٍ)، متوافقاً مع الموبايل، وآمناً (HTTPS).</p>
+<p><strong>3. الروابط الخارجية:</strong> ابحث عن مواقع أخرى لتضع رابطاً لك — هذا "تصويت ثقة" في عيون Google.</p>
+<div class="art-hl"><p>🎯 استراتيجية 2024: استهدف Long-tail Keywords — "أدوات AI مجانية للمدونين العرب" أسهل في الترتيب من "أدوات AI".</p></div>
+<h2>أدوات SEO المجانية</h2>
+<ul>
+<li>Google Search Console — أساسي ومجاني</li>
+<li>Google Analytics — لفهم سلوك زوارك</li>
+<li>Ubersuggest — بحث كلمات مفتاحية</li>
+<li>Ahrefs Webmaster Tools — مجاني للروابط</li>
+</ul>
+<h2>دور AI في SEO</h2>
+<p>استخدم ChatGPT لـ: توليد قائمة كلمات مفتاحية، كتابة ميتا ديسكريبشن، تحسين عناوين المقالات. AI يسرّع التنفيذ لكنه لا يُغني عن الاستراتيجية.</p>`,
+    tags:['SEO','Google','بحث','مواقع','ترافيك','كلمات مفتاحية']
+  },
+  'adsense-guide':{
+    title:'كيف تقبل في Google AdSense وتبدأ بكسب المال من موقعك',
+    tag:'AdSense',tc:'t-money',author:'نورة السالم',date:'٢٨ مايو ٢٠٢٤',rt:'8 دقائق',
+    gr:'g3',em:'📊',
+    intro:'AdSense هو الطريق الأسهل لتحقيق دخل من موقعك. لكن الرفض هو تجربة كثيرين. هنا بالضبط ما تحتاجه للقبول من أول طلب.',
+    body:`<h2>متطلبات القبول في AdSense</h2>
+<ul>
+<li>15-30 مقالاً على الأقل بمحتوى أصيل وعميق (700+ كلمة)</li>
+<li>الموقع عمره أكثر من 3 أشهر (مهم جداً)</li>
+<li>صفحات: عن الموقع، تواصل، سياسة الخصوصية</li>
+<li>تصميم احترافي وسهل التنقل</li>
+<li>لا روابط مكسورة ولا محتوى مكرر</li>
+</ul>
+<div class="art-hl"><p>⚠️ تحذير: المحتوى المكتوب 100% بـAI دون مراجعة بشرية سبب رفض كثير من المواقع. راجع دائماً وأضف قيمة حقيقية.</p></div>
+<h2>خطوات التقديم</h2>
+<p>1. اذهب إلى adsense.google.com وسجل الدخول</p>
+<p>2. أدخل عنوان موقعك وبلدك</p>
+<p>3. ضع كود AdSense في رأس موقعك</p>
+<p>4. انتظر المراجعة (يوم إلى أسبوعين)</p>
+<p>5. بعد القبول، أنشئ وحدات الإعلانات وضعها</p>
+<h2>كيف تزيد أرباحك؟</h2>
+<ul>
+<li>زد الزوار عبر SEO — هو المصدر الرئيسي للدخل</li>
+<li>اختر مواضيع عالية CPC: تقنية، مال، صحة</li>
+<li>ضع إعلانات داخل المحتوى لا في الهامش فقط</li>
+<li>استخدم حجم 300×250 و728×90 — الأعلى CTR</li>
+</ul>`,
+    tags:['AdSense','ربح','Google','مواقع','دخل أونلاين']
+  },
+  'freelancing':{
+    title:'الفريلانسينج في 2024: كيف تبدأ وأين تجد أول عميل',
+    tag:'فريلانس',tc:'t-money',author:'أحمد الشامي',date:'٢٥ مايو ٢٠٢٤',rt:'6 دقائق',
+    gr:'g5c',em:'🎨',
+    intro:'أكثر من 1.5 مليار فريلانسر حول العالم. النجاح لا يأتي بالصدفة — هناك استراتيجيات محددة تميز المستقلين الناجحين.',
+    body:`<h2>أفضل مهارات الفريلانس في 2024</h2>
+<p>الأكثر طلباً: تطوير الويب، كتابة المحتوى، التصميم الجرافيكي، التسويق الرقمي، إدارة الإعلانات. اختر ما تجيده أو تستطيع تعلمه بسرعة.</p>
+<h2>أفضل منصات الفريلانس</h2>
+<ul>
+<li>Fiverr — الأسهل للبدء، يبدأ السعر من 5 دولار</li>
+<li>Upwork — مشاريع أكبر وعملاء أكثر جدية</li>
+<li>Mostaql — الخيار الأفضل للعالم العربي</li>
+<li>Freelancer.com — منافسة عالية لكن فرص كثيرة</li>
+</ul>
+<div class="art-hl"><p>💡 سر النجاح: اعمل أول 5-10 مشاريع بسعر منخفض مقابل تقييمات ممتازة. التقييمات = الثقة = عملاء أكثر وأسعار أعلى.</p></div>
+<h2>كيف يساعدك AI في الفريلانس؟</h2>
+<p>ChatGPT لكتابة المقترحات (Proposals)، Midjourney للتصميمات، GitHub Copilot للبرمجة. المستقلون الذين يدمجون AI يكسبون 2-3 أضعاف نظرائهم.</p>`,
+    tags:['فريلانس','Fiverr','Upwork','مهارات','عمل حر']
+  },
+  'youtube-adsense':{
+    title:'كيف تربح من يوتيوب في 2024: من الصفر حتى أول شيك',
+    tag:'يوتيوب',tc:'t-money',author:'محمد عبدالله',date:'٢٠ مايو ٢٠٢٤',rt:'9 دقائق',
+    gr:'g5c',em:'▶️',
+    intro:'يوتيوب دفع أكثر من 70 مليار دولار للمنشئين في 3 سنوات. الفرصة العربية لا تزال ضخمة لمن يبدأ الآن بالاستراتيجية الصحيحة.',
+    body:`<h2>متطلبات برنامج الشراكة</h2>
+<p>1,000 مشترك + 4,000 ساعة مشاهدة خلال 12 شهراً. أو 1,000 مشترك + 10 مليون مشاهدة Shorts.</p>
+<h2>قنوات بدون وجه — الاتجاه الأكبر</h2>
+<p>لا تريد الظهور أمام الكاميرا؟ لا مشكلة. ChatGPT للسكريبت، ElevenLabs للصوت، Canva/Runway للمرئيات. مئات القنوات تجني آلاف الدولارات شهرياً بهذه الطريقة.</p>
+<div class="art-hl"><p>🎯 أفضل مجالات يوتيوب العربي: شرح أدوات AI، ربح أونلاين، تعليم ومهارات، صحة ولياقة.</p></div>
+<h2>مصادر الدخل من يوتيوب</h2>
+<ul>
+<li>AdSense — إعلانات يوتيوب</li>
+<li>Sponsorships — رعاية من شركات</li>
+<li>Affiliate Marketing — عمولات المنتجات</li>
+<li>Super Thanks / Channel Memberships</li>
+</ul>
+<h2>قاعدة الـ90 يوم</h2>
+<p>انشر 3 فيديوهات أسبوعياً لمدة 90 يوماً. معظم القنوات الناجحة اخترقت الخوارزمية في هذه الفترة.</p>`,
+    tags:['يوتيوب','Shorts','AdSense','قناة','ربح']
   }
-
-  let years = asOf.getFullYear() - birth.getFullYear();
-  let months = asOf.getMonth() - birth.getMonth();
-  let days = asOf.getDate() - birth.getDate();
-  if(days < 0){
-    months -= 1;
-    const prevMonth = new Date(asOf.getFullYear(), asOf.getMonth(), 0);
-    days += prevMonth.getDate();
-  }
-  if(months < 0){
-    years -= 1;
-    months += 12;
-  }
-
-  const msPerDay = 86400000;
-  const totalDays = Math.floor((asOf - birth)/msPerDay);
-  const totalWeeks = Math.floor(totalDays/7);
-
-  let nextBday = new Date(asOf.getFullYear(), birth.getMonth(), birth.getDate());
-  if(nextBday < asOf || (nextBday.getMonth()===asOf.getMonth() && nextBday.getDate()===asOf.getDate())){
-    if(!(nextBday.getMonth()===asOf.getMonth() && nextBday.getDate()===asOf.getDate())){
-      nextBday = new Date(asOf.getFullYear()+1, birth.getMonth(), birth.getDate());
-    }
-  }
-  const daysToNext = Math.round((nextBday - asOf)/msPerDay);
-
-  document.getElementById('age-main').innerHTML = `${years} <small>yrs</small> &nbsp;${months} <small>mo</small> &nbsp;${days} <small>days</small>`;
-  document.getElementById('age-days').textContent = totalDays.toLocaleString();
-  document.getElementById('age-weeks').textContent = totalWeeks.toLocaleString();
-  document.getElementById('age-next').textContent = daysToNext === 0 ? 'Today!' : daysToNext;
-  const dow = birth.toLocaleDateString(undefined, { weekday: 'long' });
-  document.getElementById('age-dow').textContent = `Born on a ${dow}`;
-  document.getElementById('age-readout').style.display = 'block';
-});
-
-/* ===================== UNIT CONVERTER ===================== */
-const unitDefs = {
-  length: { base:'m', units:{
-    m:1, km:1000, cm:0.01, mm:0.001, mi:1609.344, yd:0.9144, ft:0.3048, in:0.0254
-  }, labels:{ m:'Meters', km:'Kilometers', cm:'Centimeters', mm:'Millimeters', mi:'Miles', yd:'Yards', ft:'Feet', in:'Inches' } },
-  weight: { base:'kg', units:{
-    kg:1, g:0.001, mg:0.000001, lb:0.45359237, oz:0.0283495231, st:6.35029318, t:1000
-  }, labels:{ kg:'Kilograms', g:'Grams', mg:'Milligrams', lb:'Pounds', oz:'Ounces', st:'Stone', t:'Metric tons' } },
-  volume: { base:'l', units:{
-    l:1, ml:0.001, gal:3.785411784, qt:0.946352946, pt:0.473176473, cup:0.2365882365, floz:0.0295735296
-  }, labels:{ l:'Liters', ml:'Milliliters', gal:'Gallons (US)', qt:'Quarts', pt:'Pints', cup:'Cups', floz:'Fluid ounces' } },
-  temperature: { base:'c', units:{ c:1, f:1, k:1 }, labels:{ c:'Celsius', f:'Fahrenheit', k:'Kelvin' } }
 };
 
-const unitCategory = document.getElementById('unit-category');
-const unitFrom = document.getElementById('unit-from');
-const unitTo = document.getElementById('unit-to');
-const unitValue = document.getElementById('unit-value');
-const unitResult = document.getElementById('unit-result');
-
-function populateUnitSelects(){
-  const cat = unitDefs[unitCategory.value];
-  const keys = Object.keys(cat.units);
-  unitFrom.innerHTML = keys.map(k=>`<option value="${k}">${cat.labels[k]}</option>`).join('');
-  unitTo.innerHTML = keys.map(k=>`<option value="${k}">${cat.labels[k]}</option>`).join('');
-  unitFrom.value = keys[0];
-  unitTo.value = keys[1] || keys[0];
-  computeUnit();
-}
-
-function tempToCelsius(v, unit){
-  if(unit==='c') return v;
-  if(unit==='f') return (v-32)*5/9;
-  if(unit==='k') return v-273.15;
-}
-function celsiusTo(v, unit){
-  if(unit==='c') return v;
-  if(unit==='f') return v*9/5+32;
-  if(unit==='k') return v+273.15;
-}
-
-function computeUnit(){
-  const cat = unitCategory.value;
-  const v = parseFloat(unitValue.value);
-  if(isNaN(v)){ unitResult.textContent = '—'; return; }
-  let result;
-  if(cat === 'temperature'){
-    const c = tempToCelsius(v, unitFrom.value);
-    result = celsiusTo(c, unitTo.value);
-  } else {
-    const def = unitDefs[cat];
-    const baseVal = v * def.units[unitFrom.value];
-    result = baseVal / def.units[unitTo.value];
-  }
-  const rounded = Math.abs(result) >= 1000 ? result.toFixed(2) : result.toFixed(4).replace(/\.?0+$/,'');
-  unitResult.innerHTML = `${rounded} <small>${unitDefs[cat].labels[unitTo.value]}</small>`;
-}
-
-document.getElementById('unit-swap').addEventListener('click', ()=>{
-  const f = unitFrom.value;
-  unitFrom.value = unitTo.value;
-  unitTo.value = f;
-  computeUnit();
-});
-unitCategory.addEventListener('change', populateUnitSelects);
-[unitValue, unitFrom, unitTo].forEach(el=> el.addEventListener('input', computeUnit));
-populateUnitSelects();
-
-/* ===================== RANDOM NUMBER GENERATOR ===================== */
-document.getElementById('rand-generate').addEventListener('click', ()=>{
-  const min = Math.round(parseFloat(document.getElementById('rand-min').value));
-  const max = Math.round(parseFloat(document.getElementById('rand-max').value));
-  let count = Math.round(parseFloat(document.getElementById('rand-count').value)) || 1;
-  const unique = document.getElementById('rand-unique').checked;
-  const resultEl = document.getElementById('rand-result');
-
-  if(isNaN(min) || isNaN(max) || min > max){
-    resultEl.innerHTML = `<span class="chip">Set a valid min/max range</span>`;
-    return;
-  }
-  const rangeSize = max - min + 1;
-  if(unique && count > rangeSize){
-    count = rangeSize;
-  }
-  count = Math.min(count, 200);
-
-  let numbers = [];
-  if(unique){
-    const pool = Array.from({length: rangeSize}, (_,i)=> min + i);
-    for(let i=pool.length-1; i>0; i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
-    }
-    numbers = pool.slice(0, count);
-  } else {
-    for(let i=0;i<count;i++){
-      numbers.push(Math.floor(Math.random()*rangeSize)+min);
-    }
-  }
-
-  resultEl.innerHTML = numbers.map(n=>`<span class="chip">${n}</span>`).join('');
-});
-
-/* ===================== BMI CALCULATOR ===================== */
-document.querySelectorAll('[data-bmi-units]').forEach(b=>{
-  b.addEventListener('click', ()=>{
-    document.querySelectorAll('[data-bmi-units]').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    const metric = b.dataset.bmiUnits === 'metric';
-    document.getElementById('bmi-metric-fields').style.display = metric ? 'flex' : 'none';
-    document.getElementById('bmi-imperial-fields').style.display = metric ? 'none' : 'flex';
-  });
-});
-
-document.getElementById('bmi-calc').addEventListener('click', ()=>{
-  const isMetric = document.querySelector('[data-bmi-units].active').dataset.bmiUnits === 'metric';
-  let heightM, weightKg;
-  if(isMetric){
-    heightM = parseFloat(document.getElementById('bmi-height-cm').value)/100;
-    weightKg = parseFloat(document.getElementById('bmi-weight-kg').value);
-  } else {
-    const ft = parseFloat(document.getElementById('bmi-height-ft').value)||0;
-    const inch = parseFloat(document.getElementById('bmi-height-in').value)||0;
-    heightM = ((ft*12)+inch) * 0.0254;
-    weightKg = (parseFloat(document.getElementById('bmi-weight-lb').value)||0) * 0.45359237;
-  }
-  if(!heightM || !weightKg || heightM<=0 || weightKg<=0){
-    document.getElementById('bmi-value').textContent = 'Enter valid height and weight';
-    document.getElementById('bmi-category').textContent = '';
-    document.getElementById('bmi-readout').style.display='block';
-    return;
-  }
-  const bmi = weightKg / (heightM*heightM);
-  let category;
-  if(bmi < 18.5) category = 'Underweight range';
-  else if(bmi < 25) category = 'Typical range';
-  else if(bmi < 30) category = 'Above typical range';
-  else category = 'Well above typical range';
-
-  document.getElementById('bmi-value').textContent = bmi.toFixed(1);
-  document.getElementById('bmi-category').textContent = category;
-  document.getElementById('bmi-readout').style.display='block';
-});
-
-/* ===================== TIMER ===================== */
-let timerTotal = 300, timerRemaining = 300, timerInterval = null;
-const timerDisplay = document.getElementById('timer-display');
-const timerRing = document.getElementById('timer-ring');
-const CIRC = 2 * Math.PI * 88;
-timerRing.setAttribute('stroke-dasharray', CIRC.toFixed(1));
-
-function renderTimer(){
-  const m = Math.floor(timerRemaining/60).toString().padStart(2,'0');
-  const s = Math.floor(timerRemaining%60).toString().padStart(2,'0');
-  timerDisplay.textContent = `${m}:${s}`;
-  const frac = timerTotal > 0 ? timerRemaining/timerTotal : 0;
-  timerRing.style.strokeDashoffset = (CIRC * (1-frac)).toFixed(1);
-  timerDisplay.classList.toggle('done', timerRemaining===0);
-}
-
-function readTimerInputs(){
-  const min = Math.max(0, Math.round(parseFloat(document.getElementById('timer-min').value)||0));
-  const sec = Math.max(0, Math.min(59, Math.round(parseFloat(document.getElementById('timer-sec').value)||0)));
-  timerTotal = min*60 + sec;
-  timerRemaining = timerTotal;
-  renderTimer();
-}
-readTimerInputs();
-document.getElementById('timer-min').addEventListener('input', ()=>{ if(!timerInterval) readTimerInputs(); });
-document.getElementById('timer-sec').addEventListener('input', ()=>{ if(!timerInterval) readTimerInputs(); });
-
-document.getElementById('timer-start').addEventListener('click', ()=>{
-  if(timerInterval) return;
-  if(timerRemaining<=0) readTimerInputs();
-  if(timerRemaining<=0) return;
-  timerInterval = setInterval(()=>{
-    timerRemaining -= 1;
-    if(timerRemaining<=0){
-      timerRemaining = 0;
-      renderTimer();
-      clearInterval(timerInterval);
-      timerInterval = null;
-      try{
-        const ctx = new (window.AudioContext||window.webkitAudioContext)();
-        const o = ctx.createOscillator(); const g = ctx.createGain();
-        o.connect(g); g.connect(ctx.destination);
-        o.frequency.value = 880; g.gain.value = 0.15;
-        o.start(); o.stop(ctx.currentTime + 0.4);
-      }catch(e){}
-      return;
-    }
-    renderTimer();
-  }, 1000);
-});
-document.getElementById('timer-pause').addEventListener('click', ()=>{
-  clearInterval(timerInterval); timerInterval = null;
-});
-document.getElementById('timer-reset').addEventListener('click', ()=>{
-  clearInterval(timerInterval); timerInterval = null;
-  readTimerInputs();
-});
-
-/* ===================== PERCENTAGE CALCULATOR ===================== */
-let pctMode = 'of';
-const pctX = document.getElementById('pct-x');
-const pctY = document.getElementById('pct-y');
-const pctLabelX = document.getElementById('pct-label-x');
-const pctLabelY = document.getElementById('pct-label-y');
-const pctResult = document.getElementById('pct-result');
-
-function setPctLabels(){
-  if(pctMode==='of'){ pctLabelX.textContent='Percent (%)'; pctLabelY.textContent='Of value'; }
-  else if(pctMode==='is'){ pctLabelX.textContent='Value'; pctLabelY.textContent='Out of'; }
-  else { pctLabelX.textContent='From'; pctLabelY.textContent='To'; }
-}
-
-function computePct(){
-  const x = parseFloat(pctX.value), y = parseFloat(pctY.value);
-  if(isNaN(x)||isNaN(y)){ pctResult.textContent='—'; return; }
-  if(pctMode==='of'){
-    pctResult.innerHTML = `${(x/100*y).toLocaleString(undefined,{maximumFractionDigits:4})}`;
-  } else if(pctMode==='is'){
-    if(y===0){ pctResult.textContent='Cannot divide by zero'; return; }
-    pctResult.innerHTML = `${(x/y*100).toLocaleString(undefined,{maximumFractionDigits:4})} <small>%</small>`;
-  } else {
-    if(x===0){ pctResult.textContent='Cannot divide by zero'; return; }
-    const change = (y-x)/Math.abs(x)*100;
-    const dir = change>=0 ? 'increase' : 'decrease';
-    pctResult.innerHTML = `${Math.abs(change).toLocaleString(undefined,{maximumFractionDigits:4})}% <small>${dir}</small>`;
-  }
-}
-document.querySelectorAll('[data-pct-mode]').forEach(b=>{
-  b.addEventListener('click', ()=>{
-    document.querySelectorAll('[data-pct-mode]').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    pctMode = b.dataset.pctMode;
-    setPctLabels();
-    computePct();
-  });
-});
-[pctX,pctY].forEach(el=>el.addEventListener('input', computePct));
-setPctLabels(); computePct();
-
-/* ===================== CURRENCY CONVERTER ===================== */
-const fallbackRatesUSD = {
-  USD:1, EUR:0.93, GBP:0.79, JPY:156, INR:83.5, AUD:1.51, CAD:1.37, CHF:0.91,
-  CNY:7.25, BRL:5.4, MXN:18.2, ZAR:18.6, SGD:1.35, NZD:1.63, AED:3.67, SAR:3.75,
-  KRW:1370, SEK:10.5, NOK:10.6, HKD:7.81
+const CATS = {
+  ai:{title:'🤖 ذكاء اصطناعي',keys:['ai-tools','chatgpt-gemini']},
+  tech:{title:'💻 تقنية وتطوير',keys:['coding','smartphones']},
+  money:{title:'💰 ربح أونلاين',keys:['make-money','adsense-guide','freelancing','youtube-adsense','seo-guide']},
+  reviews:{title:'⭐ مراجعات',keys:['smartphones','chatgpt-gemini']},
+  all:{title:'📰 جميع المقالات',keys:Object.keys(ARTS)}
 };
-const curFrom = document.getElementById('cur-from');
-const curTo = document.getElementById('cur-to');
-let liveRates = null;
-let ratesTimestamp = null;
 
-(function initCurrencySelects(){
-  const codes = Object.keys(fallbackRatesUSD);
-  curFrom.innerHTML = codes.map(c=>`<option value="${c}">${c}</option>`).join('');
-  curTo.innerHTML = codes.map(c=>`<option value="${c}">${c}</option>`).join('');
-  curFrom.value = 'USD';
-  curTo.value = 'EUR';
-})();
-
-async function fetchLiveRates(){
-  try{
-    const res = await fetch('https://open.er-api.com/v6/latest/USD');
-    const data = await res.json();
-    if(data && data.result === 'success' && data.rates){
-      liveRates = data.rates;
-      ratesTimestamp = data.time_last_update_utc || null;
-    }
-  }catch(e){ /* fall back silently */ }
+/* ────────────────── ROUTING ────────────────── */
+function showOnly(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+  document.getElementById(id)?.classList.remove('hidden');
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-fetchLiveRates();
 
-document.getElementById('cur-swap').addEventListener('click', ()=>{
-  const f = curFrom.value; curFrom.value = curTo.value; curTo.value = f;
-});
-
-document.getElementById('cur-convert').addEventListener('click', ()=>{
-  const amount = parseFloat(document.getElementById('cur-amount').value);
-  const from = curFrom.value, to = curTo.value;
-  const resultEl = document.getElementById('cur-result');
-  const metaEl = document.getElementById('cur-meta');
-  if(isNaN(amount)){ resultEl.textContent='—'; return; }
-
-  const table = (liveRates && liveRates[from] && liveRates[to]) ? liveRates : fallbackRatesUSD;
-  const usingLive = table === liveRates;
-  const fromRate = usingLive ? liveRates[from] : fallbackRatesUSD[from];
-  const toRate = usingLive ? liveRates[to] : fallbackRatesUSD[to];
-  const result = amount / fromRate * toRate;
-
-  resultEl.innerHTML = `${result.toLocaleString(undefined,{maximumFractionDigits:2})} <small>${to}</small>`;
-  metaEl.textContent = usingLive
-    ? `Live rate · 1 ${from} = ${(toRate/fromRate).toFixed(4)} ${to}${ratesTimestamp ? ' · updated ' + ratesTimestamp : ''}`
-    : `Offline approximate rate · 1 ${from} = ${(toRate/fromRate).toFixed(4)} ${to} · connect to the internet for live rates`;
-});
-
-/* ===================== DISCOUNT CALCULATOR ===================== */
-function computeDiscount(){
-  const price = parseFloat(document.getElementById('disc-price').value);
-  const pct = parseFloat(document.getElementById('disc-pct').value);
-  const qty = Math.max(1, Math.round(parseFloat(document.getElementById('disc-qty').value)||1));
-  if(isNaN(price) || isNaN(pct)){
-    document.getElementById('disc-sale').textContent='—';
-    return;
-  }
-  const savedEach = price * (pct/100);
-  const saleEach = price - savedEach;
-  document.getElementById('disc-sale').innerHTML = `$${saleEach.toFixed(2)}`;
-  document.getElementById('disc-saved-each').textContent = `$${savedEach.toFixed(2)}`;
-  document.getElementById('disc-total').textContent = `$${(saleEach*qty).toFixed(2)}`;
-  document.getElementById('disc-saved-total').textContent = `$${(savedEach*qty).toFixed(2)}`;
+function goPage(pg,e){
+  e?.preventDefault();
+  if(pg==='home'){showOnly('pg-home');document.querySelector('nav a[data-pg="home"]')?.classList.add('active')}
+  else if(pg==='about'){showOnly('pg-about');document.querySelector('nav a[data-pg="about"]')?.classList.add('active')}
+  else if(pg==='contact')showOnly('pg-contact');
+  else if(pg==='privacy')showOnly('pg-privacy');
 }
-['disc-price','disc-pct','disc-qty'].forEach(id=>{
-  document.getElementById(id).addEventListener('input', computeDiscount);
-});
-computeDiscount();
 
+function goArt(id,e){
+  e?.preventDefault();
+  const a=ARTS[id];if(!a)return;
+  document.getElementById('art-main').innerHTML=buildArt(id,a);
+  showOnly('pg-article');
+}
+
+function goCat(id,e){
+  e?.preventDefault();
+  const c=CATS[id]||CATS.all;
+  document.getElementById('cat-title').textContent=c.title;
+  const keys=c.keys.filter(k=>ARTS[k]);
+  document.getElementById('cat-grid').innerHTML=keys.map(k=>{
+    const a=ARTS[k];
+    return `<div class="art-card" onclick="goArt('${k}')">
+      <div class="art-img ${a.gr}">${a.em}</div>
+      <div class="art-body">
+        <span class="tag ${a.tc}">${a.tag}</span>
+        <h3>${a.title}</h3>
+        <p>${a.intro.substring(0,90)}...</p>
+        <div class="art-meta">
+          <div class="art-meta-l"><span>✍️ ${a.author}</span><span>⏱️ ${a.rt}</span></div>
+          <span>📅 ${a.date}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  const navMap={ai:'ai',tech:'tech',money:'money',reviews:'reviews'};
+  if(navMap[id])document.querySelector(`nav a[data-pg="${navMap[id]}"]`)?.classList.add('active');
+  showOnly('pg-cat');
+}
+
+function buildArt(id,a){
+  const related=Object.keys(ARTS).filter(k=>k!==id).slice(0,3).map(k=>{
+    const r=ARTS[k];
+    return `<div class="art-card" onclick="goArt('${k}')">
+      <div class="art-img ${r.gr}">${r.em}</div>
+      <div class="art-body">
+        <span class="tag ${r.tc}">${r.tag}</span>
+        <h3>${r.title}</h3>
+        <div class="art-meta"><div class="art-meta-l"><span>✍️ ${r.author}</span><span>⏱️ ${r.rt}</span></div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+    <div class="art-pg-hdr">
+      <span class="tag ${a.tc}">${a.tag}</span>
+      <h1>${a.title}</h1>
+      <div class="art-hdr-meta">
+        <span>✍️ ${a.author}</span>
+        <span>📅 ${a.date}</span>
+        <span>⏱️ ${a.rt} للقراءة</span>
+      </div>
+    </div>
+
+    <!-- In-article Ad -->
+    <div class="ad-wrap">
+      <p class="ad-lbl">إعلان</p>
+      <!--
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"
+           data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>
+      -->
+      <div class="ad-box ad-leader">📢 &nbsp;إعلان داخل المحتوى — Google AdSense 728×90</div>
+    </div>
+
+    <div class="art-img-ph">${a.em}</div>
+
+    <div class="art-pg-body">
+      <p style="font-size:1.03rem;font-weight:600;color:var(--dark);border-right:4px solid var(--p);padding-right:14px;margin-bottom:24px">${a.intro}</p>
+      ${a.body}
+    </div>
+
+    <!-- End-article Ad -->
+    <div class="ad-wrap" style="margin-top:28px">
+      <p class="ad-lbl">إعلان</p>
+      <div class="ad-box ad-leader">📢 &nbsp;إعلان نهاية المقال — Google AdSense 728×90</div>
+    </div>
+
+    <div class="art-tags">
+      ${a.tags.map(t=>`<span class="art-tag-item">${t}</span>`).join('')}
+    </div>
+
+    <div class="art-share">
+      <span class="shr-lbl">📤 شارك:</span>
+      <button class="shr-btn s-tw" onclick="toast('تم النسخ! شارك على تويتر 🐦')">𝕏 تويتر</button>
+      <button class="shr-btn s-fb" onclick="toast('شارك على فيسبوك!')">Facebook</button>
+      <button class="shr-btn s-wa" onclick="toast('شارك على واتساب! 💬')">WhatsApp</button>
+      <button class="shr-btn s-cp" onclick="copyLink()">📋 نسخ الرابط</button>
+    </div>
+
+    <div style="margin-top:36px">
+      <div class="sec-hdr"><h2 class="sec-title"><span>مقالات ذات صلة</span></h2></div>
+      <div class="art-grid">${related}</div>
+    </div>
+  `;
+}
+
+/* ────────────────── HELPERS ────────────────── */
+function toggleNav(){document.getElementById('mnav').classList.toggle('open')}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function doSubscribe(inputId){
+  const v=document.getElementById(inputId)?.value||'';
+  if(v.includes('@'))toast('✅ تم الاشتراك بنجاح! شكراً لك 🎉');
+  else toast('⚠️ أدخل بريداً إلكترونياً صحيحاً');
+}
+
+function sendMsg(){
+  const n=document.getElementById('c-name')?.value;
+  const e=document.getElementById('c-email')?.value;
+  const m=document.getElementById('c-msg')?.value;
+  if(n&&e&&m){
+    toast('✅ تم إرسال رسالتك بنجاح!');
+    ['c-name','c-email','c-sub','c-msg'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  }else toast('⚠️ يرجى ملء الحقول المطلوبة');
+}
+
+function copyLink(){
+  navigator.clipboard?.writeText(window.location.href).then(()=>toast('✅ تم نسخ الرابط!')).catch(()=>toast('📋 انسخ الرابط من شريط العنوان'));
+}
+
+function scrollTop(){window.scrollTo({top:0,behavior:'smooth'})}
+
+/* ────────────────── SCROLL ────────────────── */
+window.addEventListener('scroll',()=>{
+  const btn=document.getElementById('btop');
+  window.scrollY>400?btn.classList.add('vis'):btn.classList.remove('vis');
+  const prog=document.getElementById('rdprog');
+  const docH=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(window.scrollY/docH*100)+'%';
+});
+
+/* ────────────────── LINK INTERCEPT ────────────────── */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href="#"]');
+  if(a){e.preventDefault();}
+});
 </script>
 </body>
 </html>
