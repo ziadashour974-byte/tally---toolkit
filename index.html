@@ -4,6 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tally — A Toolkit of Everyday Instruments</title>
+<meta name="description" content="Tally is a free toolkit of eight everyday calculators: age calculator, unit converter, random number generator, BMI calculator, timer, percentage calculator, currency converter, and discount calculator. No sign-up required.">
+<meta property="og:title" content="Tally — A Toolkit of Everyday Instruments">
+<meta property="og:description" content="Eight free calculators in one place: age, units, random numbers, BMI, timer, percentages, currency and discounts.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tally — A Toolkit of Everyday Instruments">
+<meta name="twitter:description" content="Eight free calculators in one place: age, units, random numbers, BMI, timer, percentages, currency and discounts.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231B2430'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Georgia,serif' fill='%23D97D42' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Tally",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "A free toolkit of eight everyday calculators: age calculator, unit converter, random number generator, BMI calculator, timer, percentage calculator, currency converter, and discount calculator.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -150,6 +169,53 @@
   .panel-wrap{
     width:100%;
     max-width: 660px;
+  }
+
+  .hero{
+    margin-bottom: 22px;
+    padding: 0 4px;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size: 2.1rem;
+    color: var(--text-cream);
+    margin: 0 0 8px 0;
+    line-height:1.15;
+  }
+  .hero h1 em{
+    color: var(--accent);
+    font-style:italic;
+  }
+  .hero p{
+    font-size:0.92rem;
+    color: var(--text-cream-soft);
+    line-height:1.6;
+    max-width: 520px;
+    margin: 0;
+  }
+  .hero-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:16px;
+  }
+  .hero-chips button{
+    font-family:'Inter', sans-serif;
+    font-size:0.76rem;
+    font-weight:600;
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    color: var(--text-cream-soft);
+    padding:7px 13px;
+    border-radius:20px;
+    cursor:pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .hero-chips button:hover{
+    background: var(--accent-soft);
+    color: var(--text-cream);
+    border-color: var(--accent);
   }
 
   .stamp{
@@ -360,6 +426,24 @@
     color: var(--accent);
     margin-top:8px;
   }
+
+  .copy-icon{
+    position:absolute;
+    top:14px; right:16px;
+    z-index:2;
+    background: rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    color: var(--text-cream-soft);
+    width:30px; height:30px;
+    border-radius:7px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .copy-icon:hover{ background: var(--accent); color:#fff; border-color: var(--accent); }
+  .copy-icon svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.8; }
+  .copy-icon.copied svg{ display:none; }
+  .copy-icon.copied::after{ content:"✓"; font-size:0.8rem; }
   .readout-grid{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(110px,1fr));
@@ -376,8 +460,7 @@
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-  }
-  .chip{
+  }  .chip{
     background: var(--ink-panel);
     color: var(--text-cream);
     font-family:'JetBrains Mono', monospace;
@@ -393,6 +476,26 @@
     margin-top:14px;
     line-height:1.5;
   }
+
+  .info-block{
+    margin-top:30px;
+    padding-top:22px;
+    border-top: 1px dotted var(--paper-line);
+  }
+  .info-block h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.1rem;
+    color:var(--text-ink);
+    margin: 0 0 8px 0;
+  }
+  .info-block p{
+    font-size:0.86rem;
+    color:var(--text-ink-soft);
+    line-height:1.6;
+    margin: 0 0 10px 0;
+  }
+  .info-block p:last-child{ margin-bottom:0; }
 
   .swap-btn{
     align-self:flex-end;
@@ -435,8 +538,18 @@
     font-family:'JetBrains Mono', monospace;
     font-size:0.72rem;
     color: var(--text-cream-soft);
-    padding: 0 0 36px;
+    padding: 0 0 10px;
     letter-spacing:0.04em;
+  }
+  .footer-disclaimer{
+    text-align:center;
+    font-family:'Inter', sans-serif;
+    font-size:0.74rem;
+    color: var(--text-cream-soft);
+    padding: 0 24px 40px;
+    max-width:560px;
+    margin:0 auto;
+    line-height:1.6;
   }
 
   @media (max-width: 880px){
@@ -503,6 +616,13 @@
 
   <main>
     <div class="panel-wrap" id="panelWrap">
+
+      <div class="hero" id="hero">
+        <h1>Eight small instruments,<br><em>precisely tuned.</em></h1>
+        <p>Free calculators for the everyday math you actually need — no account, no clutter, no waiting for a page to load. Pick a tool from the side, or jump straight in below.</p>
+        <div class="hero-chips" id="heroChips"></div>
+      </div>
+
       <!-- panels injected below, kept as static markup for clarity -->
 
       <!-- AGE CALCULATOR -->
@@ -528,6 +648,7 @@
           </div>
 
           <div class="readout" id="age-readout" style="display:none">
+            <button class="copy-icon" data-copy-target="age-main" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
             <div class="readout-label">Exact age</div>
             <div class="readout-value" id="age-main">—</div>
             <div class="readout-grid" style="margin-top:16px">
@@ -536,6 +657,12 @@
               <div class="cell"><div class="num" id="age-next">—</div><div class="lab readout-label">Days to next birthday</div></div>
             </div>
             <div class="readout-sub" id="age-dow"></div>
+          </div>
+
+          <div class="info-block">
+            <h2>How age is counted</h2>
+            <p>An exact age is made up of three parts: full years, the extra months since the last birthday, and the leftover days since the last monthly anniversary. This calculator works out each part directly from the calendar, so it stays accurate even across leap years and months of different lengths.</p>
+            <p>Knowing a precise age is useful for school enrollment cut-offs, eligibility checks, legal age requirements, or simply working out how many days old someone is for a milestone celebration.</p>
           </div>
         </div>
       </section>
@@ -579,8 +706,15 @@
           </div>
 
           <div class="readout">
+            <button class="copy-icon" data-copy-target="unit-result" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
             <div class="readout-label">Result</div>
             <div class="readout-value" id="unit-result">—</div>
+          </div>
+
+          <div class="info-block">
+            <h2>Why unit conversion matters</h2>
+            <p>Most countries use the metric system, but plenty of everyday situations still mix in imperial units — recipes in cups, road signs in miles, or body weight in pounds. Converting between them by hand is easy to get wrong, since the multipliers aren't round numbers (a mile is 1.609 kilometers, not a clean ratio).</p>
+            <p>This converter covers the four unit families people look up most often: length, weight, volume and temperature, with results updating instantly as you type.</p>
           </div>
         </div>
       </section>
@@ -615,6 +749,12 @@
           <div class="readout">
             <div class="readout-label">Drawn numbers</div>
             <div class="chips" id="rand-result"><span class="chip">—</span></div>
+          </div>
+
+          <div class="info-block">
+            <h2>Where random numbers come in handy</h2>
+            <p>A random number generator picks values with no predictable pattern, which makes it useful for raffle and giveaway draws, choosing who goes first in a game, picking a sample for quality checks, or generating test data for a spreadsheet or app.</p>
+            <p>Turning on "no repeated numbers" treats the draw like pulling names from a hat — once a number is picked, it's removed from the pool so it can't come up again.</p>
           </div>
         </div>
       </section>
@@ -663,11 +803,18 @@
           </div>
 
           <div class="readout" id="bmi-readout" style="display:none">
+            <button class="copy-icon" data-copy-target="bmi-value" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
             <div class="readout-label">Body Mass Index</div>
             <div class="readout-value" id="bmi-value">—</div>
             <div class="readout-sub" id="bmi-category"></div>
           </div>
           <p class="note">Categories shown follow the standard WHO reference ranges: under 18.5 underweight, 18.5–24.9 typical, 25–29.9 above typical, 30+ well above typical. For personal health guidance, talk with a doctor.</p>
+
+          <div class="info-block">
+            <h2>What BMI does and doesn't tell you</h2>
+            <p>Body Mass Index divides weight by height squared to give a quick, population-level screening number. It's widely used because it's simple to calculate, but it doesn't account for muscle mass, bone density, age, or body composition — so an athlete and a sedentary person of the same BMI can have very different health profiles.</p>
+            <p>Use this calculator for a general reference point, not a diagnosis. A doctor or dietitian can give guidance that actually fits your situation.</p>
+          </div>
         </div>
       </section>
 
@@ -704,6 +851,11 @@
               <button class="ghost" id="timer-reset">Reset</button>
             </div>
           </div>
+
+          <div class="info-block">
+            <h2>Simple timing, no app required</h2>
+            <p>A countdown timer is handy for cooking, workouts, study sprints (like the Pomodoro technique), presentation rehearsals, or timing how long a task actually takes. Set the minutes and seconds, hit start, and the ring empties out as time runs down with a short tone when it hits zero.</p>
+          </div>
         </div>
       </section>
 
@@ -733,8 +885,14 @@
           </div>
 
           <div class="readout">
+            <button class="copy-icon" data-copy-target="pct-result" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
             <div class="readout-label">Result</div>
             <div class="readout-value" id="pct-result">—</div>
+          </div>
+
+          <div class="info-block">
+            <h2>Three percentage questions, one tool</h2>
+            <p>"X% of Y" answers things like a tip on a bill or a tax on a price. "X is what % of Y" is useful for grading, like working out a test score from points earned out of points possible. "Change from X to Y" shows the percentage increase or decrease between two numbers — useful for tracking a pay raise, a price hike, or a drop in sales.</p>
           </div>
         </div>
       </section>
@@ -769,9 +927,16 @@
           </div>
 
           <div class="readout">
+            <button class="copy-icon" data-copy-target="cur-result" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
             <div class="readout-label">Converted amount</div>
             <div class="readout-value" id="cur-result">—</div>
             <div class="readout-sub" id="cur-meta"></div>
+          </div>
+
+          <div class="info-block">
+            <h2>About the exchange rates shown</h2>
+            <p>Exchange rates move constantly based on global markets, so this tool fetches current rates when your connection allows it. If a live rate can't be reached, it falls back to an approximate offline table so the converter still gives a usable estimate.</p>
+            <p>For an actual money transfer or currency exchange, your bank or transfer provider will apply their own rate and fees, which can differ from the market rate shown here.</p>
           </div>
         </div>
       </section>
@@ -800,6 +965,7 @@
           </div>
 
           <div class="readout">
+            <button class="copy-icon" data-copy-target="disc-sale" title="Copy result" aria-label="Copy result"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
             <div class="readout-label">Sale price (each)</div>
             <div class="readout-value" id="disc-sale">—</div>
             <div class="readout-grid" style="margin-top:16px">
@@ -807,6 +973,11 @@
               <div class="cell"><div class="num" id="disc-total">—</div><div class="lab readout-label">Total for order</div></div>
               <div class="cell"><div class="num" id="disc-saved-total">—</div><div class="lab readout-label">Total saved</div></div>
             </div>
+          </div>
+
+          <div class="info-block">
+            <h2>Checking a sale price before you buy</h2>
+            <p>Stores sometimes round discounts in their favor, or stack a percentage off an already-marked-up price. Running the numbers yourself confirms the real sale price and shows exactly how much a multi-item order would save, which is handy when comparing deals across different stores.</p>
           </div>
         </div>
       </section>
@@ -816,6 +987,7 @@
 </div>
 
 <footer class="page-footer">TALLY — eight instruments, precisely tuned</footer>
+<p class="footer-disclaimer">Results are estimates for everyday convenience and aren't a substitute for professional medical, financial, or legal advice.</p>
 
 <script>
 /* ===================== NAVIGATION ===================== */
@@ -843,25 +1015,50 @@ tools.forEach(t=>{
   mb.dataset.tool = t.id;
   mb.textContent = t.label;
   mobileTabs.appendChild(mb);
+
+  const chip = document.createElement('button');
+  chip.dataset.tool = t.id;
+  chip.textContent = t.label;
+  document.getElementById('heroChips').appendChild(chip);
 });
 
 function activateTool(id){
-  document.querySelectorAll('.nav-item button, .mobile-tabs button').forEach(b=>{
+  document.querySelectorAll('.nav-item button, .mobile-tabs button, .hero-chips button').forEach(b=>{
     b.classList.toggle('active', b.dataset.tool === id);
   });
   document.querySelectorAll('.tool-panel').forEach(p=>{
     p.classList.toggle('active', p.dataset.panel === id);
   });
+  document.getElementById('hero').style.display = 'none';
   window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
 }
 
-document.querySelectorAll('.nav-item button, .mobile-tabs button').forEach(b=>{
+document.querySelectorAll('.nav-item button, .mobile-tabs button, .hero-chips button').forEach(b=>{
   b.addEventListener('click', ()=> activateTool(b.dataset.tool));
 });
 
-activateTool('age');
+// No tool is pre-selected — the hero greets the visitor until they choose one.
 
-/* ===================== AGE CALCULATOR ===================== */
+/* ===================== COPY RESULT BUTTONS ===================== */
+document.querySelectorAll('.copy-icon').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const target = document.getElementById(btn.dataset.copyTarget);
+    if(!target) return;
+    const text = target.textContent.trim().replace(/\s+/g,' ');
+    try{
+      await navigator.clipboard.writeText(text);
+    }catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(e2){}
+      ta.remove();
+    }
+    btn.classList.add('copied');
+    setTimeout(()=> btn.classList.remove('copied'), 1400);
+  });
+});
+
+
 const ageBirth = document.getElementById('age-birth');
 const ageAsOf = document.getElementById('age-asof');
 (function initAgeDefaults(){
