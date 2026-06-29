@@ -22,6 +22,7 @@
   --p:#4F46E5; --pd:#3730A3; --pl:#EEF2FF;
   --acc:#F59E0B; --ok:#10B981; --red:#EF4444;
   --dark:#0F172A; --d2:#1E293B; --d3:#334155;
+  --ink:#0F172A; --ink2:#1E293B;
   --g5:#6B7280; --g3:#D1D5DB; --g1:#F3F4F6;
   --bg:#F8FAFC; --white:#FFFFFF;
   --sh:0 1px 3px rgba(0,0,0,.08);
@@ -42,13 +43,13 @@ ul{list-style:none}
 /* ── TICKER ── */
 .ticker{background:var(--acc);color:var(--dark);padding:7px 0;overflow:hidden}
 .ticker-inner{display:flex;align-items:center;gap:16px}
-.ticker-badge{background:var(--dark);color:var(--acc);padding:2px 12px;border-radius:4px;font-size:.75rem;font-weight:800;white-space:nowrap;flex-shrink:0}
+.ticker-badge{background:var(--ink);color:var(--acc);padding:2px 12px;border-radius:4px;font-size:.75rem;font-weight:800;white-space:nowrap;flex-shrink:0}
 .ticker-track{overflow:hidden;flex:1}
 .ticker-roll{display:inline-flex;gap:40px;white-space:nowrap;animation:roll 35s linear infinite;font-weight:700;font-size:.82rem;cursor:pointer}
 @keyframes roll{0%{transform:translateX(-50%)}100%{transform:translateX(0%)}}
 
 /* ── HEADER ── */
-header{background:var(--dark);position:sticky;top:0;z-index:1000;box-shadow:var(--sh3)}
+header{background:var(--ink);position:sticky;top:0;z-index:1000;box-shadow:var(--sh3)}
 .hdr{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-ico{width:36px;height:36px;background:linear-gradient(135deg,var(--p),#818CF8);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
@@ -159,7 +160,7 @@ nav a:hover,nav a.active{color:var(--white);background:rgba(79,70,229,.3)}
 .cat-count{font-size:.77rem;color:var(--g5)}
 
 /* ── FOOTER ── */
-footer{background:var(--dark);color:#94A3B8;padding:56px 0 0;margin-top:56px}
+footer{background:var(--ink);color:#94A3B8;padding:56px 0 0;margin-top:56px}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
 .ft-about p{font-size:.83rem;line-height:1.8;margin-top:14px;max-width:280px}
 .social{display:flex;gap:8px;margin-top:18px}
@@ -202,7 +203,7 @@ footer{background:var(--dark);color:#94A3B8;padding:56px 0 0;margin-top:56px}
 .s-cp{background:var(--d2);color:white}
 
 /* ── PAGE HEADERS ── */
-.pg-hdr{background:linear-gradient(135deg,var(--dark),var(--d2));padding:52px 0;margin-bottom:40px}
+.pg-hdr{background:linear-gradient(135deg,var(--ink),var(--ink2));padding:52px 0;margin-bottom:40px}
 .pg-hdr h1{color:var(--white);font-size:2rem;font-weight:900;margin-bottom:6px}
 .pg-hdr p{color:#64748B;font-size:.95rem}
 .pg-content{max-width:800px;margin:0 auto;padding:0 20px 72px}
@@ -239,7 +240,7 @@ footer{background:var(--dark);color:#94A3B8;padding:56px 0 0;margin-top:56px}
 .hidden{display:none!important}
 .page{animation:fadein .3s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--dark);color:white;padding:11px 22px;border-radius:999px;font-size:.83rem;font-weight:700;z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--ink);color:white;padding:11px 22px;border-radius:999px;font-size:.83rem;font-weight:700;z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .back-top{position:fixed;bottom:22px;left:22px;width:42px;height:42px;background:var(--p);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:var(--sh3);opacity:0;pointer-events:none;transition:var(--tr);cursor:pointer;z-index:999;border:none}
 .back-top.vis{opacity:1;pointer-events:all}
@@ -291,6 +292,8 @@ html[data-theme="dark"]{
   --dark:#E6EDF3;
   --d2:#CDD9E5;
   --d3:#ADBAC7;
+  --ink:#0D1117;
+  --ink2:#161B22;
   --g5:#768390;
   --g3:#3D444D;
   --g1:#21262D;
@@ -300,6 +303,7 @@ html[data-theme="dark"]{
   --sh3:0 8px 32px rgba(0,0,0,.6);
 }
 html[data-theme="dark"] body{background:var(--bg);color:var(--dark)}
+html[data-theme="dark"] .m-nav{background:var(--ink2)}
 html[data-theme="dark"] .nl-input,
 html[data-theme="dark"] .fg input,
 html[data-theme="dark"] .fg textarea{background:#21262D;color:#E6EDF3;border-color:#3D444D}
@@ -307,7 +311,11 @@ html[data-theme="dark"] .nl-input::placeholder,
 html[data-theme="dark"] .fg input::placeholder,
 html[data-theme="dark"] .fg textarea::placeholder{color:#768390}
 html[data-theme="dark"] .cats-section{background:#161B22}
-html[data-theme="dark"] .pg-hdr{background:linear-gradient(135deg,#020409,#0D1117)}
+html[data-theme="dark"] .pg-hdr{background:linear-gradient(135deg,#010409,#0D1117)}
+html[data-theme="dark"] .faq-section{background:var(--bg)}
+html[data-theme="dark"] .faq-item{background:var(--white);border-color:var(--g3)}
+html[data-theme="dark"] .faq-q:hover{background:var(--g1)}
+html[data-theme="dark"] .faq-a{border-top-color:var(--g3);color:var(--g5)}
 html[data-theme="dark"] .art-hl{background:rgba(79,70,229,.18)}
 html[data-theme="dark"] .art-hl p{color:#A5B4FC}
 html[data-theme="dark"] .ad-box{background:#21262D;border-color:#3D444D;color:#768390}
@@ -319,7 +327,11 @@ html[data-theme="dark"] .tag.t-money{background:rgba(16,185,129,.25);color:#6EE7
 html[data-theme="dark"] .tag.t-rev{background:rgba(245,158,11,.25);color:#FCD34D}
 html[data-theme="dark"] .tag.t-tips{background:rgba(139,92,246,.25);color:#C4B5FD}
 html[data-theme="dark"] .art-share{background:#21262D}
-html[data-theme="dark"] .ft-email{background:rgba(255,255,255,.05);color:#E6EDF3}
+html[data-theme="dark"] .ft-email{background:rgba(255,255,255,.08);color:#E6EDF3;border:1px solid rgba(255,255,255,.12)}
+html[data-theme="dark"] .ft-email::placeholder{color:#768390}
+html[data-theme="dark"] .srch-box{background:var(--white)}
+html[data-theme="dark"] .srch-hdr{border-bottom-color:var(--g3)}
+html[data-theme="dark"] .srch-item{border-bottom-color:var(--g1)}
 /* Smooth toggle transitions */
 body,.art-card,.widget,.cat-card,.c-info-item,.team-member,
 .nl-input,.fg input,.fg textarea,.ad-box,.cats-section,
@@ -332,6 +344,14 @@ body,.art-card,.widget,.cat-card,.c-info-item,.team-member,
   font-size:1rem;transition:var(--tr);line-height:1
 }
 .dm-btn:hover{color:var(--white);background:rgba(255,255,255,.1)}
+.lang-btn{font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.5px;min-width:34px;text-align:center}
+html[dir="ltr"] body{direction:ltr;text-align:left}
+html[dir="ltr"] .sec-title::before{order:0}
+html[dir="ltr"] .sec-title span{order:1}
+html[dir="ltr"] .nl-input,html[dir="ltr"] .fg input,html[dir="ltr"] .fg textarea,html[dir="ltr"] .ft-email,html[dir="ltr"] .srch-input{direction:ltr}
+html[dir="ltr"] .art-hl{border-right:none;border-left:4px solid var(--p);border-radius:var(--r2) 0 0 var(--r2);padding-right:18px;padding-left:14px}
+html[dir="ltr"] .pg-content ul,html[dir="ltr"] .art-pg-body ul{padding-right:0;padding-left:22px}
+html[dir="ltr"] .pop-post:hover{transform:translateX(3px)}
 
 /* ── TRENDING BADGE ── */
 .badge-new{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#EF4444,#F97316);color:white;padding:2px 7px;border-radius:4px;font-size:.62rem;font-weight:800;margin-right:5px;vertical-align:middle;animation:pulse-b 2s ease-in-out infinite}
@@ -357,7 +377,6 @@ body,.art-card,.widget,.cat-card,.c-info-item,.team-member,
 .srch-item p{font-size:.75rem;color:var(--g5)}
 .srch-empty{padding:32px;text-align:center;color:var(--g5);font-size:.9rem}
 .srch-hint{padding:10px 18px;font-size:.75rem;color:var(--g5);text-align:center;background:var(--g1)}
-html[data-theme="dark"] .srch-box{background:var(--white)}
 html[data-theme="dark"] .srch-item:hover{background:var(--g1)}
 html[data-theme="dark"] .srch-hint{background:var(--g1)}
 
@@ -370,12 +389,18 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
 .faq-q.open{color:var(--p)}
 .faq-arrow{font-size:.8rem;transition:transform .3s ease;flex-shrink:0}
 .faq-q.open .faq-arrow{transform:rotate(180deg)}
-.faq-a{display:none;padding:0 20px 16px;color:var(--g5);font-size:.88rem;line-height:1.9;border-top:1px solid var(--g1)}
-.faq-a.open{display:block}
+.faq-a{max-height:0;overflow:hidden;padding:0 20px;color:var(--g5);font-size:.88rem;line-height:1.9;border-top:1px solid transparent;transition:max-height .35s ease,padding .35s ease,border-color .2s ease}
+.faq-a.open{max-height:400px;padding:0 20px 16px;border-top-color:var(--g1)}
+.ft-email{border:1px solid transparent}
 </style>
-<!-- Anti-flash: apply saved theme before paint -->
+<!-- Anti-flash: apply saved theme & lang before paint -->
 <script>
-(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
+(function(){try{
+  var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);
+  var l=localStorage.getItem('lang')||'ar';
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+}catch(e){}})();
 </script>
 </head>
 <body>
@@ -389,11 +414,11 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
   <div class="srch-box" onclick="event.stopPropagation()">
     <div class="srch-hdr">
       <span class="srch-ico">🔍</span>
-      <input class="srch-input" id="srch-in" placeholder="ابحث في المقالات..." oninput="doSearch(this.value)" autofocus>
+      <input class="srch-input" id="srch-in" placeholder="ابحث في المقالات..." data-i18n-placeholder="search.placeholder" oninput="doSearch(this.value)" autofocus>
       <button class="srch-close" onclick="closeSrch()">✕</button>
     </div>
     <div class="srch-results" id="srch-res"></div>
-    <div class="srch-hint">اضغط ESC للإغلاق · انقر على مقال للقراءة</div>
+    <div class="srch-hint" data-i18n="search.hint">اضغط ESC للإغلاق · انقر على مقال للقراءة</div>
   </div>
 </div>
 
@@ -438,7 +463,8 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
         <a href="#" onclick="goPage('about')" data-pg="about">من نحن</a>
       </nav>
       <div class="hdr-right">
-        <button class="ico-btn" onclick="openSrch()" title="بحث">🔍</button>
+        <button class="ico-btn" onclick="openSrch()" title="بحث" data-i18n-title="search.title">🔍</button>
+        <button class="dm-btn lang-btn" id="lang-btn" onclick="toggleLang()" title="English">EN</button>
         <button class="dm-btn" id="dm-btn" onclick="toggleDark()" title="وضع ليلي / نهاري">🌙</button>
         <button class="ham" id="ham" onclick="toggleNav()">
           <span></span><span></span><span></span>
@@ -469,10 +495,10 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow"><span class="eyebrow-dot"></span>TRENDING NOW | الأكثر تداولاً</div>
-          <h1>بوابتك لعالم<br><em>الذكاء الاصطناعي</em><br>والتقنية الحديثة</h1>
-          <p class="hero-desc">أحدث الأخبار والمراجعات والشروحات باللغة العربية — كل ما تحتاجه في مكان واحد</p>
-          <a href="#" class="hero-cta" onclick="goCat('ai')">استكشف الذكاء الاصطناعي ←</a>
+          <div class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="hero.eyebrow">TRENDING NOW | الأكثر تداولاً</span></div>
+          <h1 data-i18n="hero.title">بوابتك لعالم<br><em>الذكاء الاصطناعي</em><br>والتقنية الحديثة</h1>
+          <p class="hero-desc" data-i18n="hero.desc">أحدث الأخبار والمراجعات والشروحات باللغة العربية — كل ما تحتاجه في مكان واحد</p>
+          <a href="#" class="hero-cta" onclick="goCat('ai')" data-i18n="hero.cta">استكشف الذكاء الاصطناعي ←</a>
         </div>
         <div class="hero-card" onclick="goArt('ai-tools')">
           <div class="hcard-img g1">🤖</div>
@@ -506,8 +532,8 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
     <div class="main-grid">
       <main>
         <div class="sec-hdr">
-          <h2 class="sec-title"><span>أحدث المقالات</span></h2>
-          <a href="#" class="see-all" onclick="goCat('all')">عرض الكل ←</a>
+          <h2 class="sec-title"><span data-i18n="sec.latest">أحدث المقالات</span></h2>
+          <a href="#" class="see-all" onclick="goCat('all')" data-i18n="see.all">عرض الكل ←</a>
         </div>
 
         <div class="art-grid">
@@ -593,8 +619,8 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
 
         <!-- More Articles -->
         <div class="sec-hdr mt36">
-          <h2 class="sec-title"><span>ربح أونلاين</span></h2>
-          <a href="#" class="see-all" onclick="goCat('money')">عرض الكل ←</a>
+          <h2 class="sec-title"><span data-i18n="sec.money">ربح أونلاين</span></h2>
+          <a href="#" class="see-all" onclick="goCat('money')" data-i18n="see.all">عرض الكل ←</a>
         </div>
 
         <div class="art-grid">
@@ -640,8 +666,8 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
 
         <!-- 🔥 TRENDING - Content Gaps -->
         <div class="sec-hdr mt36">
-          <h2 class="sec-title"><span>🔥 الأكثر بحثاً الآن</span></h2>
-          <a href="#" class="see-all" onclick="goCat('trending')">عرض الكل ←</a>
+          <h2 class="sec-title"><span data-i18n="sec.trending">🔥 الأكثر بحثاً الآن</span></h2>
+          <a href="#" class="see-all" onclick="goCat('trending')" data-i18n="see.all">عرض الكل ←</a>
         </div>
         <div class="art-grid">
 
@@ -765,9 +791,9 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
 
         <div class="widget">
           <h3 class="w-title">📧 النشرة البريدية</h3>
-          <p class="nl-desc">أحدث المقالات مباشرة في بريدك الإلكتروني، كل أسبوع</p>
-          <input type="email" class="nl-input" id="nl-input" placeholder="بريدك الإلكتروني...">
-          <button class="nl-btn" onclick="doSubscribe('nl-input')">اشتراك مجاني ✓</button>
+          <p class="nl-desc" data-i18n="nl.desc">أحدث المقالات مباشرة في بريدك الإلكتروني، كل أسبوع</p>
+          <input type="email" class="nl-input" id="nl-input" placeholder="بريدك الإلكتروني..." data-i18n-placeholder="nl.placeholder">
+          <button class="nl-btn" onclick="doSubscribe('nl-input')" data-i18n="nl.btn">اشتراك مجاني ✓</button>
         </div>
 
         <div class="widget">
@@ -782,7 +808,7 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
   <div class="cats-section">
     <div class="container">
       <div class="sec-hdr" style="margin-bottom:22px">
-        <h2 class="sec-title"><span>استكشف التصنيفات</span></h2>
+        <h2 class="sec-title"><span data-i18n="sec.cats">استكشف التصنيفات</span></h2>
       </div>
       <div class="cat-grid">
         <div class="cat-card ai" onclick="goCat('ai')">
@@ -813,7 +839,7 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
   <div class="faq-section">
     <div class="container">
       <div class="sec-hdr" style="margin-bottom:22px">
-        <h2 class="sec-title"><span>أسئلة شائعة</span></h2>
+        <h2 class="sec-title"><span data-i18n="sec.faq">أسئلة شائعة</span></h2>
       </div>
       <div class="faq-list">
         <div class="faq-item">
@@ -1106,13 +1132,13 @@ html[data-theme="dark"] .srch-hint{background:var(--g1)}
       </div>
       <div class="ft-col">
         <h4>النشرة البريدية</h4>
-        <p style="font-size:.8rem;line-height:1.7;margin-bottom:10px">احصل على أحدث المقالات في بريدك</p>
-        <input type="email" id="ft-email" class="ft-email" placeholder="بريدك الإلكتروني...">
-        <button class="ft-sub" onclick="doSubscribe('ft-email')">اشتراك →</button>
+        <p style="font-size:.8rem;line-height:1.7;margin-bottom:10px" data-i18n="ft.nl.desc">احصل على أحدث المقالات في بريدك</p>
+        <input type="email" id="ft-email" class="ft-email" placeholder="بريدك الإلكتروني..." data-i18n-placeholder="nl.placeholder">
+        <button class="ft-sub" onclick="doSubscribe('ft-email')" data-i18n="ft.nl.btn">اشتراك →</button>
       </div>
     </div>
     <div class="ft-bottom">
-      <span>© 2024 TechPlus | تقني بلس — جميع الحقوق محفوظة</span>
+      <span data-i18n="ft.copyright">© 2024 TechPlus | تقني بلس — جميع الحقوق محفوظة</span>
       <div class="ft-links">
         <a href="#" onclick="goPage('privacy')">سياسة الخصوصية</a>
         <a href="#" onclick="goPage('contact')">تواصل معنا</a>
@@ -1576,8 +1602,8 @@ function toast(msg){
 
 function doSubscribe(inputId){
   const v=document.getElementById(inputId)?.value||'';
-  if(v.includes('@'))toast('✅ تم الاشتراك بنجاح! شكراً لك 🎉');
-  else toast('⚠️ أدخل بريداً إلكترونياً صحيحاً');
+  if(v.includes('@'))toast(t('toast.sub.ok'));
+  else toast(t('toast.sub.bad'));
 }
 
 function sendMsg(){
@@ -1585,9 +1611,9 @@ function sendMsg(){
   const e=document.getElementById('c-email')?.value;
   const m=document.getElementById('c-msg')?.value;
   if(n&&e&&m){
-    toast('✅ تم إرسال رسالتك بنجاح!');
+    toast(t('toast.msg.ok'));
     ['c-name','c-email','c-sub','c-msg'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  }else toast('⚠️ يرجى ملء الحقول المطلوبة');
+  }else toast(t('toast.msg.bad'));
 }
 
 function copyLink(){
@@ -1624,11 +1650,207 @@ window.addEventListener('scroll',()=>{
   prog.style.width=(window.scrollY/docH*100)+'%';
 });
 
+/* ────────────────── FAQ ────────────────── */
+const FAQ_DATA=[
+  {q:{ar:'ما هو أفضل نموذج ذكاء اصطناعي مجاني في 2025؟',en:'What is the best free AI model in 2025?'},
+   a:{ar:'يعتمد على الاستخدام: ChatGPT-4o mini مجاني وممتاز للكتابة، Google Gemini مجاني ومتكامل مع Google Drive، DeepSeek مجاني كلياً وقوي جداً، وClaude متميز في التحليل العميق. للاستخدام اليومي العام، Gemini أو ChatGPT هما الأنسب مجاناً.',
+      en:'It depends on use: ChatGPT-4o mini is free and great for writing, Google Gemini is free and integrates with Google Drive, DeepSeek is fully free and very powerful, and Claude excels at deep analysis. For everyday use, Gemini or ChatGPT are the best free options.'}},
+  {q:{ar:'كيف أربح من موقعي الإلكتروني عبر Google AdSense؟',en:'How do I earn from my website with Google AdSense?'},
+   a:{ar:'أنشئ موقعاً بمحتوى أصيل ومفيد، انتظر 3 أشهر على الأقل، أضف صفحات "من نحن" و"تواصل معنا" و"سياسة الخصوصية"، ثم قدّم طلب عبر adsense.google.com. بعد الموافقة، أضف كود الإعلانات لصفحاتك. الدخل يبدأ صغيراً ويكبر مع زيادة الزيارات.',
+      en:'Build a site with original, useful content, wait at least 3 months, add About, Contact, and Privacy pages, then apply at adsense.google.com. After approval, add ad code to your pages. Income starts small and grows with traffic.'}},
+  {q:{ar:'ما هو Vibe Coding وكيف أبدأ فيه؟',en:'What is Vibe Coding and how do I start?'},
+   a:{ar:'Vibe Coding هو أسلوب برمجة جديد تصف فيه ما تريد بالكلام العادي، والذكاء الاصطناعي يكتب الكود كله. الأدوات الأشهر: Cursor، v0 من Vercel، Replit AI. لا تحتاج خبرة مسبقة بالبرمجة، فقط تعرّف على الأدوات وابدأ بمشاريع صغيرة.',
+      en:'Vibe Coding is a new approach where you describe what you want in plain language and AI writes all the code. Top tools: Cursor, v0 by Vercel, Replit AI. No prior coding experience needed — learn the tools and start with small projects.'}},
+  {q:{ar:'هل DeepSeek آمن للاستخدام؟',en:'Is DeepSeek safe to use?'},
+   a:{ar:'DeepSeek أداة قوية لكن يُنصح بعدم مشاركة بيانات شخصية أو حساسة مع أي نموذج AI. النموذج صيني المنشأ وله سياسة خصوصية خاصة. للاستخدام العام في الكتابة والبحث هو آمن، لكن تجنب إدخال معلومات سرية أو مالية فيه.',
+      en:'DeepSeek is powerful but avoid sharing personal or sensitive data with any AI model. It is China-based with its own privacy policy. Safe for general writing and research, but do not enter confidential or financial information.'}},
+  {q:{ar:'كم يمكن الربح من مدونة عربية؟',en:'How much can you earn from an Arabic blog?'},
+   a:{ar:'يتفاوت كثيراً: مدونة بـ 10,000 زيارة شهرية تجني 50-200 دولار، بـ 50,000 زيارة 300-800 دولار، وبـ 100,000+ زيارة 1,000-3,000+ دولار. المحتوى العربي في التقنية والمال له CPC أعلى من الأقسام الأخرية. الطريق يستغرق 6-12 شهراً لنتائج حقيقية.',
+      en:'It varies: 10,000 monthly visits earns $50–200, 50,000 visits $300–800, and 100,000+ visits $1,000–3,000+. Arabic tech and finance content has higher CPC. Expect 6–12 months for real results.'}}
+];
+
+function renderFaq(){
+  const lang=currentLang();
+  const el=document.querySelector('.faq-list');
+  if(!el)return;
+  el.innerHTML=FAQ_DATA.map(item=>`
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>${item.q[lang]}</span>
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">${item.a[lang]}</div>
+    </div>`).join('');
+}
+
+function toggleFaq(el){
+  const ans=el.nextElementSibling;
+  const opening=!el.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q=>{
+    q.classList.remove('open');
+    q.nextElementSibling?.classList.remove('open');
+  });
+  if(opening){
+    el.classList.add('open');
+    ans?.classList.add('open');
+  }
+}
+
+/* ────────────────── SEARCH ────────────────── */
+function openSrch(){
+  const m=document.getElementById('srch-modal');
+  m.classList.remove('hidden');
+  const inp=document.getElementById('srch-in');
+  inp.value='';
+  document.getElementById('srch-res').innerHTML='';
+  setTimeout(()=>inp.focus(),80);
+}
+
+function closeSrch(e){
+  if(e&&e.target!==e.currentTarget)return;
+  document.getElementById('srch-modal').classList.add('hidden');
+}
+
+function normAr(s){
+  return s.toLowerCase()
+    .replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه')
+    .replace(/[^\w\s\u0600-\u06FF]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function scoreArticle(id,a,terms){
+  const title=normAr(a.title);
+  const tag=normAr(a.tag);
+  const intro=normAr(a.intro);
+  const tags=(a.tags||[]).map(normAr).join(' ');
+  const blob=title+' '+tag+' '+intro+' '+tags;
+  let score=0;
+  terms.forEach(term=>{
+    if(!term)return;
+    if(title.includes(term))score+=20;
+    if(tag.includes(term))score+=12;
+    if(intro.includes(term))score+=8;
+    if(tags.includes(term))score+=6;
+    if(blob.includes(term))score+=3;
+    title.split(/\s+/).forEach(w=>{if(w.startsWith(term)||term.startsWith(w))score+=4});
+  });
+  if(id.includes(terms.join('').replace(/\s/g,'')))score+=5;
+  return score;
+}
+
+function doSearch(q){
+  const res=document.getElementById('srch-res');
+  const raw=q.trim();
+  if(!raw){res.innerHTML='';return;}
+  const terms=normAr(raw).split(/\s+/).filter(Boolean);
+  const lang=currentLang();
+  const empty=lang==='ar'?'لا توجد نتائج — جرّب كلمات مختلفة':'No results — try different keywords';
+  const results=Object.entries(ARTS)
+    .map(([id,a])=>({id,a,score:scoreArticle(id,a,terms)}))
+    .filter(r=>r.score>0)
+    .sort((x,y)=>y.score-x.score)
+    .slice(0,8);
+  if(!results.length){res.innerHTML=`<div class="srch-empty">${empty}</div>`;return;}
+  res.innerHTML=results.map(({id,a})=>`
+    <div class="srch-item" onclick="goArt('${id}');closeSrch()">
+      <div class="srch-item-ico ${a.gr}">${a.em}</div>
+      <div><h4>${a.title}</h4><p>${a.tag} · ${a.rt}</p></div>
+    </div>`).join('');
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeSrch();
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSrch();}
+});
+
+/* ────────────────── LANGUAGE ────────────────── */
+const I18N={
+  ar:{
+    'nav.home':'الرئيسية','nav.ai':'🤖 ذكاء اصطناعي','nav.tech':'💻 تقنية','nav.money':'💰 ربح أونلاين',
+    'nav.reviews':'⭐ مراجعات','nav.about':'من نحن','nav.contact':'📧 تواصل معنا','nav.privacy':'🔒 سياسة الخصوصية',
+    'search.title':'بحث','search.placeholder':'ابحث في المقالات...','search.hint':'اضغط ESC للإغلاق · انقر على مقال للقراءة',
+    'hero.eyebrow':'TRENDING NOW | الأكثر تداولاً','hero.title':'بوابتك لعالم<br><em>الذكاء الاصطناعي</em><br>والتقنية الحديثة',
+    'hero.desc':'أحدث الأخبار والمراجعات والشروحات باللغة العربية — كل ما تحتاجه في مكان واحد',
+    'hero.cta':'استكشف الذكاء الاصطناعي ←','sec.latest':'أحدث المقالات','sec.money':'ربح أونلاين','sec.trending':'🔥 الأكثر بحثاً الآن',
+    'sec.cats':'استكشف التصنيفات','sec.faq':'أسئلة شائعة','see.all':'عرض الكل ←',
+    'nl.desc':'أحدث المقالات مباشرة في بريدك الإلكتروني، كل أسبوع','nl.btn':'اشتراك مجاني ✓','nl.placeholder':'بريدك الإلكتروني...',
+    'ft.nl.desc':'احصل على أحدث المقالات في بريدك','ft.nl.btn':'اشتراك →','ft.copyright':'© 2024 TechPlus | تقني بلس — جميع الحقوق محفوظة',
+    'toast.sub.ok':'✅ تم الاشتراك بنجاح! شكراً لك 🎉','toast.sub.bad':'⚠️ أدخل بريداً إلكترونياً صحيحاً',
+    'toast.msg.ok':'✅ تم إرسال رسالتك بنجاح!','toast.msg.bad':'⚠️ يرجى ملء الحقول المطلوبة',
+    'lang.btn':'EN','lang.title':'English'
+  },
+  en:{
+    'nav.home':'Home','nav.ai':'🤖 AI','nav.tech':'💻 Tech','nav.money':'💰 Make Money Online',
+    'nav.reviews':'⭐ Reviews','nav.about':'About Us','nav.contact':'📧 Contact','nav.privacy':'🔒 Privacy Policy',
+    'search.title':'Search','search.placeholder':'Search articles...','search.hint':'Press ESC to close · Click an article to read',
+    'hero.eyebrow':'TRENDING NOW','hero.title':'Your gateway to<br><em>Artificial Intelligence</em><br>& Modern Tech',
+    'hero.desc':'Latest news, reviews, and tutorials — everything you need in one place',
+    'hero.cta':'Explore AI →','sec.latest':'Latest Articles','sec.money':'Make Money Online','sec.trending':'🔥 Trending Now',
+    'sec.cats':'Browse Categories','sec.faq':'FAQ','see.all':'View all →',
+    'nl.desc':'Get the latest articles in your inbox, every week','nl.btn':'Subscribe free ✓','nl.placeholder':'Your email...',
+    'ft.nl.desc':'Get the latest articles in your inbox','ft.nl.btn':'Subscribe →','ft.copyright':'© 2024 TechPlus — All rights reserved',
+    'toast.sub.ok':'✅ Subscribed successfully! Thank you 🎉','toast.sub.bad':'⚠️ Please enter a valid email',
+    'toast.msg.ok':'✅ Message sent successfully!','toast.msg.bad':'⚠️ Please fill in required fields',
+    'lang.btn':'عربي','lang.title':'العربية'
+  }
+};
+
+const NAV_KEYS=['home','ai','tech','money','reviews','about'];
+const NAV_SEL=['nav a[data-pg="home"]','nav a[data-pg="ai"]','nav a[data-pg="tech"]','nav a[data-pg="money"]','nav a[data-pg="reviews"]','nav a[data-pg="about"]'];
+
+function currentLang(){
+  return document.documentElement.lang==='en'?'en':'ar';
+}
+
+function t(key){
+  return I18N[currentLang()][key]||I18N.ar[key]||key;
+}
+
+function applyLang(lang){
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  const dict=I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(dict[k])el.innerHTML=dict[k];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-placeholder');
+    if(dict[k])el.placeholder=dict[k];
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-title');
+    if(dict[k])el.title=dict[k];
+  });
+  NAV_SEL.forEach((sel,i)=>{
+    const el=document.querySelector(sel);
+    if(el&&dict['nav.'+NAV_KEYS[i]])el.textContent=dict['nav.'+NAV_KEYS[i]];
+  });
+  const mnav=document.querySelectorAll('#mnav .container a');
+  const mKeys=['home','ai','tech','money','reviews','about','contact','privacy'];
+  mnav.forEach((a,i)=>{if(dict['nav.'+mKeys[i]])a.textContent=(mKeys[i]==='home'?'🏠 ':mKeys[i]==='about'?'ℹ️ ':'')+dict['nav.'+mKeys[i]];});
+  const lb=document.getElementById('lang-btn');
+  if(lb){lb.textContent=dict['lang.btn'];lb.title=dict['lang.title'];}
+  const si=document.getElementById('srch-in');
+  if(si)si.placeholder=dict['search.placeholder'];
+  const sh=document.querySelector('.srch-hint');
+  if(sh)sh.textContent=dict['search.hint'];
+  renderFaq();
+  try{localStorage.setItem('lang',lang)}catch(e){}
+}
+
+function toggleLang(){
+  applyLang(currentLang()==='ar'?'en':'ar');
+}
+
 /* ────────────────── LINK INTERCEPT ────────────────── */
 document.addEventListener('click',e=>{
   const a=e.target.closest('a[href="#"]');
   if(a){e.preventDefault();}
 });
+
+/* init */
+renderFaq();
+applyLang(currentLang());
 </script>
 </body>
 </html>
